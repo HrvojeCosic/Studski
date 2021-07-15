@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,uBAAuB,CAAC;EACvB,WAAW,EAAE,uBAAuB;CACpC",
+    "sources": [
+        "FacultyList.scss"
+    ],
+    "names": [],
+    "file": "FacultyList.css"
+}

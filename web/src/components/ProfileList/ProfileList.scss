@@ -1,0 +1,23 @@
+.profile-list-container {
+	font-family: var(--main-font-family);
+	color: var(--contrast-text-color);
+	h1 {
+		margin: 0;
+	}
+	.featured-profile {
+		display: grid;
+		grid-template-columns: auto auto;
+		width: 40%;
+		background-color: var(--secondary-bg-color);
+		border-radius: 5px;
+	}
+	p {
+		margin: 0;
+		padding: 10px;
+		min-width: 0;
+		min-height: 0;
+	}
+	.points {
+		text-align: right;
+	}
+}

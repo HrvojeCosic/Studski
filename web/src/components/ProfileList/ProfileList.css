@@ -1,0 +1,30 @@
+.profile-list-container {
+  font-family: var(--main-font-family);
+  color: var(--contrast-text-color);
+}
+
+.profile-list-container h1 {
+  margin: 0;
+}
+
+.profile-list-container .featured-profile {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  width: 40%;
+  background-color: var(--secondary-bg-color);
+  border-radius: 5px;
+}
+
+.profile-list-container p {
+  margin: 0;
+  padding: 10px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.profile-list-container .points {
+  text-align: right;
+}
+/*# sourceMappingURL=ProfileList.css.map */
