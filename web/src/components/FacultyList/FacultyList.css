@@ -1,4 +1,8 @@
 .faculty-list-container {
+  -webkit-box-flex: 0.7;
+      -ms-flex-positive: 0.7;
+          flex-grow: 0.7;
   font-family: var(--main-font-family);
+  color: var(--contrast-text-color);
 }
 /*# sourceMappingURL=FacultyList.css.map */

@@ -1,7 +1,4 @@
 .logged-user-info-container {
-  -webkit-box-flex: 2;
-      -ms-flex-positive: 2;
-          flex-grow: 2;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,6 +7,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   font-family: var(--main-font-family);
+  color: var(--contrast-text-color);
 }
 
 .logged-user-info-container .logged-user-main {

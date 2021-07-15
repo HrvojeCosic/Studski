@@ -1,6 +1,12 @@
 .profile-list-container {
   font-family: var(--main-font-family);
   color: var(--contrast-text-color);
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  min-width: 400px;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
 }
 
 .profile-list-container h1 {
@@ -12,7 +18,7 @@
   display: grid;
   -ms-grid-columns: auto auto;
       grid-template-columns: auto auto;
-  width: 40%;
+  width: 100%;
   background-color: var(--secondary-bg-color);
   border-radius: 5px;
 }

@@ -4,7 +4,7 @@ import './ProfileList.scss';
 export const ProfileList: React.FC = () => {
 	return (
 		<div className='profile-list-container'>
-			<h1>Ljudi</h1>
+			<h1>Kolege</h1>
 			{/* TODO: foreach... */}
 			<div className='featured-profile'>
 				<p className='name'>Ime</p>

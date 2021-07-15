@@ -1,8 +1,8 @@
 .logged-user-info-container {
-	flex-grow: 2;
 	display: flex;
 	flex-direction: column;
 	font-family: var(--main-font-family);
+	color: var(--contrast-text-color);
 	.logged-user-main {
 		display: grid;
 		grid-template-columns: auto auto;

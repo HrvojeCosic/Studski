@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,uBAAuB,CAAC;EACvB,WAAW,EAAE,uBAAuB;CACpC",
+    "mappings": "AAAA,AAAA,uBAAuB,CAAC;EACvB,SAAS,EAAE,GAAG;EACd,WAAW,EAAE,uBAAuB;EACpC,KAAK,EAAE,0BAA0B;CACjC",
     "sources": [
         "FacultyList.scss"
     ],
