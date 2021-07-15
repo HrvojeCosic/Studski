@@ -1,0 +1,55 @@
+.header {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+	color: var(--primary-text-color);
+	background-color: var(--primary-bg-color);
+	img {
+		width: 90px;
+		height: auto;
+		cursor: pointer;
+	}
+	.search {
+		padding: 0 30px;
+		height: 35px;
+		width: 500px;
+		border: 1px solid var(--border-color);
+		border-radius: 4px;
+		color: var(--primary-text-color);
+		outline: none;
+		font-size: 16px;
+		background-color: var(--searchbar-bg-color);
+		background-image: url('../../design-tokens/images/search-icon-black.png');
+		background-size: 25px;
+		background-position-y: 5px;
+		background-position-x: 3px;
+		background-repeat: no-repeat;
+		&:focus {
+			border: 0.5px solid white;
+		}
+	}
+}
+
+.header-btns {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	font-size: 13px;
+	font-family: var(--main-font-family);
+
+	.sign-up-btn,
+	.log-in-btn {
+		padding: 0 15px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.mode-toggle-btn {
+		background: url('../../design-tokens/images/toggle-mode-icon.png') no-repeat;
+		background-size: 40px;
+		height: 40px;
+		width: 40px;
+		cursor: pointer;
+	}
+}

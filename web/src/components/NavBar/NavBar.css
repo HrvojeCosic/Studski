@@ -1,0 +1,30 @@
+.header {
+	color: var(--primary-text-color);
+	background-color: var(--primary-bg-color);
+}
+
+.header img {
+	width: 90px;
+	height: auto;
+	cursor: pointer;
+}
+
+.header .search {
+	position: relative;
+	padding: 0 35px;
+	margin: 0 2% 0 7%;
+	max-width: 740px;
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+	height: 33px;
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
+	color: var(--primary-text-color);
+	font-size: 14px;
+	background-color: var(--searchbar-bg-color);
+	background-image: url('https://www.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png');
+	background-size: 30px;
+	background-repeat: no-repeat;
+}
+/*# sourceMappingURL=Branding.css.map */
