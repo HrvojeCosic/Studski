@@ -1,0 +1,17 @@
+[
+	{
+		"ime": "Farmaceutsko-biokemijski fakultet",
+		"grad": "Zagreb",
+		"id": 1
+	},
+	{
+		"ime": "Stomatološki fakultet",
+		"grad": "Zagreb",
+		"id": 2
+	},
+	{
+		"ime": "Medicinski fakultet",
+		"grad": "Zagreb",
+		"id": 3
+	}
+]
