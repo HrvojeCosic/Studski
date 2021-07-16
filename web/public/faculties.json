@@ -13,5 +13,555 @@
 		"ime": "Medicinski fakultet",
 		"grad": "Zagreb",
 		"id": 3
+	},
+	{
+		"ime": "Kemijsko-tehnološki fakultet",
+		"grad": "Zagreb",
+		"id": 4
+	},
+	{
+		"ime": "Medicinski fakultet",
+		"grad": "Split",
+		"id": 5
+	},
+	{
+		"ime": "Edukacijsko-rehabilitacijski fakultet",
+		"grad": "Zagreb",
+		"id": 6
+	},
+	{
+		"ime": "Prehrambeno-biotehnološki fakultet",
+		"grad": "Zagreb",
+		"id": 7
+	},
+	{
+		"ime": "Sveučilište u Rijeci",
+		"grad": "Rijeka",
+		"id": 8
+	},
+	{
+		"ime": "Medicinski fakultet",
+		"grad": "Rijeka",
+		"id": 9
+	},
+	{
+		"ime": "Fakultet elektrotehnike i računarstva",
+		"grad": "Zagreb",
+		"id": 10
+	},
+	{
+		"ime": "Fakultet kemijskog inženjerstva i tehnologije",
+		"grad": "Zagreb",
+		"id": 11
+	},
+	{
+		"ime": "Sveučilište u Splitu",
+		"grad": "Split",
+		"id": 12
+	},
+	{
+		"ime": "Prirodoslovno-matematički fakultet",
+		"grad": "Zagreb",
+		"id": 13
+	},
+	{
+		"ime": "Sveučilište u Zadru",
+		"grad": "Zadar",
+		"id": 14
+	},
+	{
+		"ime": "Veterinarski fakultet",
+		"grad": "Zagreb",
+		"id": 15
+	},
+	{
+		"ime": "Geodetski fakultet",
+		"grad": "Zagreb",
+		"id": 16
+	},
+	{
+		"ime": "Fakultet strojarstva i brodogradnje",
+		"grad": "Zagreb",
+		"id": 17
+	},
+	{
+		"ime": "Arhitektonski fakultet",
+		"grad": "Zagreb",
+		"id": 18
+	},
+	{
+		"ime": "Medicinski fakultet",
+		"grad": "Osijek",
+		"id": 19
+	},
+	{
+		"ime": "Rudarsko-geološko-naftni fakultet",
+		"grad": "Zagreb",
+		"id": 20
+	},
+	{
+		"ime": "Građevinski fakultet",
+		"grad": "Zagreb",
+		"id": 21
+	},
+	{
+		"ime": "Filozofski fakultet",
+		"grad": "Split",
+		"id": 22
+	},
+	{
+		"ime": "Muzička akademija",
+		"grad": "Zagreb",
+		"id": 23
+	},
+	{
+		"ime": "Prirodoslovno-matematički fakultet",
+		"grad": "Split",
+		"id": 24
+	},
+	{
+		"ime": "Zdravstveno veleučilište",
+		"grad": "Zagreb",
+		"id": 25
+	},
+	{
+		"ime": "Fakultet političkih znanosti",
+		"grad": "Zagreb",
+		"id": 26
+	},
+	{
+		"ime": "Kemijsko-tehnološki fakultet",
+		"grad": "Split",
+		"id": 27
+	},
+	{
+		"ime": "Visoka tehničko-poslovna škola s pravom javnosti",
+		"grad": "Pula",
+		"id": 28
+	},
+	{
+		"ime": "Sveučilište u Osijek",
+		"grad": "Osijek",
+		"id": 29
+	},
+	{
+		"ime": "Visoka škola za ekonomiju, poduzetništvo i upravljanje Nikola Šubić Zrinski",
+		"grad": "Zagreb",
+		"id": 30
+	},
+	{
+		"ime": "Filozofski fakultet",
+		"grad": "Zagreb",
+		"id": 31
+	},
+	{
+		"ime": "Pravni fakultet",
+		"grad": "Zagreb",
+		"id": 32
+	},
+	{
+		"ime": "Fakultet organizacije i informatike",
+		"grad": "Zagreb",
+		"id": 33
+	},
+	{
+		"ime": "Ekonomski fakultet",
+		"grad": "Zagreb",
+		"id": 34
+	},
+	{
+		"ime": "Filozofski fakultet",
+		"grad": "Rijeka",
+		"id": 35
+	},
+	{
+		"ime": "Fakultet organizacije i informatike Sveučilišta u Zagrebu",
+		"grad": "Zagreb",
+		"id": 36
+	},
+	{
+		"ime": "Fakultet prometnih znanosti",
+		"grad": "Zagreb",
+		"id": 37
+	},
+	{
+		"ime": "Fakultet za odgojne i obrazovne znanosti",
+		"grad": "Osijek",
+		"id": 38
+	},
+	{
+		"ime": "Učiteljski fakultet",
+		"grad": "Rijeka",
+		"id": 39
+	},
+	{
+		"ime": "Učiteljski fakultet",
+		"grad": "Zagreb",
+		"id": 40
+	},
+	{
+		"ime": "Prehrambeno tehnološki fakultet",
+		"grad": "Osijek",
+		"id": 41
+	},
+	{
+		"ime": "Fakultet građevinarstva, arhitekture i geodezije",
+		"grad": "Split",
+		"id": 42
+	},
+	{
+		"ime": "Akademija likovnih umjetnosti",
+		"grad": "Zagreb",
+		"id": 43
+	},
+	{
+		"ime": "Filozofski fakultet",
+		"grad": "Osijek",
+		"id": 44
+	},
+	{
+		"ime": "Fakultet elektrotehnike, strojarstva i brodogradnje",
+		"grad": "Split",
+		"id": 45
+	},
+	{
+		"ime": "Hrvatsko katoličko sveučilište",
+		"grad": "Zagreb",
+		"id": 46
+	},
+	{
+		"ime": "Hrvatski studiji",
+		"grad": "Zagreb",
+		"id": 47
+	},
+	{
+		"ime": "Sveučilišni studijski centar za studije mora",
+		"grad": "Split",
+		"id": 48
+	},
+	{
+		"ime": "Umjetnička akademija",
+		"grad": "Osijek",
+		"id": 49
+	},
+	{
+		"ime": "Muzička akademija",
+		"grad": "Pula",
+		"id": 50
+	},
+	{
+		"ime": "Agronomski fakultet",
+		"grad": "Zagreb",
+		"id": 51
+	},
+	{
+		"ime": "Fakultet zdravstvenih studija",
+		"grad": "Rijeka",
+		"id": 52
+	},
+	{
+		"ime": "Tehničko veleučilište",
+		"grad": "Zagreb ",
+		"id": 53
+	},
+	{
+		"ime": "Akademija dramske umjetnosti",
+		"grad": "Zagreb",
+		"id": 54
+	},
+	{
+		"ime": "Građevinski fakultet",
+		"grad": "Rijeka",
+		"id": 55
+	},
+	{
+		"ime": "Odjel za nastavničke studije",
+		"grad": "Gospić",
+		"id": 56
+	},
+	{
+		"ime": "Ekonomski fakultet",
+		"grad": "Split ",
+		"id": 57
+	},
+	{
+		"ime": "Akademija primijenjenih umjetnosti",
+		"grad": "Rijeka",
+		"id": 58
+	},
+	{
+		"ime": "Tehnički fakultet",
+		"grad": "Rijeka",
+		"id": 59
+	},
+	{
+		"ime": "Umjetnička akademija",
+		"grad": "Split",
+		"id": 60
+	},
+	{
+		"ime": "Prirodoslovno-matematički fakultet",
+		"grad": "Split",
+		"id": 61
+	},
+	{
+		"ime": "Pravni fakultet",
+		"grad": "Rijeka",
+		"id": 62
+	},
+	{
+		"ime": "Fakultet elektrotehnike, računarstva i informacijskih tehnologija",
+		"grad": "Osijek",
+		"id": 63
+	},
+	{
+		"ime": "Fakultet organizacije i informatike",
+		"grad": "Varaždin",
+		"id": 64
+	},
+	{
+		"ime": "Građevinski fakultet",
+		"grad": "Osijek",
+		"id": 65
+	},
+	{
+		"ime": "RIT Croatia",
+		"grad": "Zagreb",
+		"id": 66
+	},
+	{
+		"ime": "Katolički bogoslovni fakultet",
+		"grad": "Đakovo",
+		"id": 67
+	},
+	{
+		"ime": "Zagrebačka škola ekonomije i managementa",
+		"grad": "Zagreb",
+		"id": 68
+	},
+	{
+		"ime": "Sveučilište Sjever",
+		"grad": "Koprivnica",
+		"id": 69
+	},
+	{
+		"ime": "Sveučilište u Dubrovniku",
+		"grad": "Dubrovnik",
+		"id": 70
+	},
+	{
+		"ime": "Filozofski fakultet Družbe Isusove",
+		"grad": "Zagreb",
+		"id": 71
+	},
+	{
+		"ime": "Šumarski fakultet",
+		"grad": "Zagreb",
+		"id": 72
+	},
+	{
+		"ime": "Međimursko veleučilište",
+		"grad": "Čakovec",
+		"id": 73
+	},
+	{
+		"ime": "Katolički bogoslovni fakultet",
+		"grad": "Zagreb",
+		"id": 74
+	},
+	{
+		"ime": "Fakultet za menadžment u turizmu i ugostiteljstvu",
+		"grad": "Rijeka",
+		"id": 75
+	},
+	{
+		"ime": "Visoka škola za menadžment u turizmu i informatici",
+		"grad": "Virovitica",
+		"id": 76
+	},
+	{
+		"ime": "Fakultet prometnih znanosti",
+		"grad": "Zagreb",
+		"id": 77
+	},
+	{
+		"ime": "Geotehnički fakultet",
+		"grad": "Varaždin",
+		"id": 78
+	},
+	{
+		"ime": "Ekonomski fakultet",
+		"grad": "Osijek",
+		"id": 79
+	},
+	{
+		"ime": "Ekonomski fakultet",
+		"grad": "Rijeka",
+		"id": 80
+	},
+	{
+		"ime": "Strojarski fakultet",
+		"grad": "Slavonski Brod",
+		"id": 81
+	},
+	{
+		"ime": "Visoka tehnička škola",
+		"grad": "Bjelovar",
+		"id": 82
+	},
+	{
+		"ime": "Umjetnička akademija",
+		"grad": "Split",
+		"id": 83
+	},
+	{
+		"ime": "Grafički fakultet",
+		"grad": "Zagreb",
+		"id": 84
+	},
+	{
+		"ime": "Veleučilište “Lavoslav Ružička”",
+		"grad": "Vukovar",
+		"id": 85
+	},
+	{
+		"ime": "Sveučilište Jurja Dobrile u Puli",
+		"grad": "Pula",
+		"id": 86
+	},
+	{
+		"ime": "Fakultet ekonomije i turizma Dr. Mijo Mirković",
+		"grad": "Pula",
+		"id": 87
+	},
+	{
+		"ime": "Pomorski fakultet",
+		"grad": "Split",
+		"id": 88
+	},
+	{
+		"ime": "Pravni fakultet",
+		"grad": "Osijek",
+		"id": 89
+	},
+	{
+		"ime": "Metalurški fakultet",
+		"grad": "Zagreb",
+		"id": 90
+	},
+	{
+		"ime": "Visoka škola međunarodnih odnosa i diplomacije",
+		"grad": "Zagreb",
+		"id": 91
+	},
+	{
+		"ime": "Edward Bernays Visoka škola za komunikacijski menadžment i Odjel za komunikologiju Sveučilišta u Dubrovniku",
+		"grad": "Dubrovnik",
+		"id": 92
+	},
+	{
+		"ime": "Pravni fakultet",
+		"grad": "Split",
+		"id": 93
+	},
+	{
+		"ime": "Tekstilno-tehnološki fakultet",
+		"grad": "Zagreb",
+		"id": 94
+	},
+	{
+		"ime": "Kineziološki fakultet",
+		"grad": "Zagreb",
+		"id": 95
+	},
+	{
+		"ime": "Kineziološki fakultet",
+		"grad": "Osijek",
+		"id": 96
+	},
+	{
+		"ime": "Visoko gospodarsko učilište",
+		"grad": "Križevci",
+		"id": 97
+	},
+	{
+		"ime": "Katolički bogoslovni fakultet",
+		"grad": "Split",
+		"id": 98
+	},
+	{
+		"ime": "Poljoprivredni fakultet",
+		"grad": "Osijek",
+		"id": 99
+	},
+	{
+		"ime": "Pomorski fakultet",
+		"grad": "Rijeka",
+		"id": 100
+	},
+	{
+		"ime": "Sveučilišni odjel za stručne studije",
+		"grad": "Split",
+		"id": 101
+	},
+	{
+		"ime": "Veleučilište u Karlovcu",
+		"grad": "Karlovac",
+		"id": 102
+	},
+	{
+		"ime": "Visoko učilište Algebra",
+		"grad": "Zagreb",
+		"id": 103
+	},
+	{
+		"ime": "Veleučilište “Nikola Tesla” ",
+		"grad": "Gospić",
+		"id": 104
+	},
+	{
+		"ime": "DIU Libertas Međunarodno sveučilište",
+		"grad": "Dubrovnik",
+		"id": 105
+	},
+	{
+		"ime": "Visoka škola tržišnih komunikacija “Agora” s pravom javnosti",
+		"grad": "Zagreb",
+		"id": 106
+	},
+	{
+		"ime": "Veleučilište VERN",
+		"grad": "Zagreb",
+		"id": 107
+	},
+	{
+		"ime": "Veleučilište u Slavonskom Brodu",
+		"grad": "Slavonski Brod",
+		"id": 108
+	},
+	{
+		"ime": "Veleučilište u Šibeniku",
+		"grad": "Šibenik",
+		"id": 109
+	},
+	{
+		"ime": "Kineziološki fakultet",
+		"grad": "Split",
+		"id": 110
+	},
+	{
+		"ime": "Visoka škola za menadžment i dizajn “Aspira”",
+		"grad": "Split",
+		"id": 111
+	},
+	{
+		"ime": "Visoka škola za informacijske tehnologije",
+		"grad": "Zagreb",
+		"id": 112
+	},
+	{
+		"ime": "TV Akademija Visoka škola multimedijalnih i komunikacijskih tehnologija",
+		"grad": "Split",
+		"id": 113
 	}
 ]
