@@ -32,7 +32,7 @@ export const FacultyList: React.FC = () => {
 	});
 
 	//FOR EACH AREA(GRAD), MAKE AN OBJECT & STORE IT IN organizedFacultyList[]
-	const organizedFacultyList: OrganizedFacultyList[] = [];
+	let organizedFacultyList: OrganizedFacultyList[] = [];
 	facultyAreas.forEach(facultyArea => {
 		const facultiesInArea: string[] = [];
 		faculties.forEach((faculty: Faculty) => {
@@ -44,6 +44,17 @@ export const FacultyList: React.FC = () => {
 			facultyArea_org: facultyArea,
 			facultiesInArea_org: facultiesInArea,
 		});
+		const sortedFacultyList: OrganizedFacultyList[] = organizedFacultyList.sort(
+			(firstObj: OrganizedFacultyList, secondObj: OrganizedFacultyList) => {
+				if (
+					firstObj.facultiesInArea_org.length >
+					secondObj.facultiesInArea_org.length
+				) {
+					return -1;
+				} else return 1;
+			}
+		);
+		organizedFacultyList = sortedFacultyList;
 	});
 
 	//DISPLAY AREA AND LIST OF FACULTIES IN AREA, IN A SEPERATE <div>
