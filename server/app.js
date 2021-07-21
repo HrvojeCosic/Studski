@@ -19,6 +19,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
 
+db.authenticate()
+	.then(console.log('Connection has been established successfully.'))
+	.catch(error => console.error('Unable to connect to the database:', error));
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
 	next(createError(404));
