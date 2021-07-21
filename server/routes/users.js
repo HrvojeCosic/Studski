@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
-// const sequelize = require('sequelize')
 
 const userController = require('../controllers/userController');
 
-router.get('/', (req, res) => {
-	User.findAll();
-});
+router.get('/', userController.getAllUsers);
+router.post('/register', userController.createNewUser);
 
 module.exports = router;

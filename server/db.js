@@ -8,5 +8,6 @@ module.exports = new Sequelize(
 	{
 		host: process.env.HOST_DB,
 		dialect: 'mysql',
+		//createdAt and updatedAt automatic columns are ENABLED!
 	}
 );
