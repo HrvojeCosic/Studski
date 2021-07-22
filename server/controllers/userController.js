@@ -59,13 +59,3 @@ module.exports.createNewUser = async (req, res) => {
 			return;
 		});
 };
-
-module.exports.getAllUsers = (req, res) => {
-	User.findAll()
-		.then(users => {
-			res.status(200).json({ users: users });
-		})
-		.catch(err => {
-			throw err;
-		});
-};
