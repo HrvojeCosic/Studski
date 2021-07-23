@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const db = require('./db');
+const session = require('express-session');
+require('dotenv').config();
 
 const usersRouter = require('./routes/users');
 
@@ -16,6 +18,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//SESSION SETUP
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: false,
+		store: new SequelizeStore({
+			db: db /*sequelize*/,
+		}),
+
+		// cookie: { secure: true }, //no https atm
+	})
+);
 
 app.use('/api/users', usersRouter);
 
@@ -35,8 +52,8 @@ app.use(function (err, req, res, next) {
 	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
 	// render the error page
-	res.status(err.status || 500);
-	res.render('error');
+	// res.status(err.status || 500);  //no default engine was specified and no extension was provided...
+	// res.render('error');
 });
 
 module.exports = app;

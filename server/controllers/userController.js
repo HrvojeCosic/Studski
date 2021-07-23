@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-
 module.exports.createNewUser = async (req, res) => {
 	const { username, password, repeatPassword, email } = req.body;
 	if (password != repeatPassword) {
@@ -58,4 +57,8 @@ module.exports.createNewUser = async (req, res) => {
 			});
 			return;
 		});
+};
+
+module.exports.logUserIn = (req, res) => {
+	console.log(req.session.cookie);
 };
