@@ -30,7 +30,7 @@ app.use(
 			db: db /*sequelize*/,
 		}),
 
-		// cookie: { secure: true }, //no https atm
+		cookie: { secure: false }, //no https atm
 	})
 );
 

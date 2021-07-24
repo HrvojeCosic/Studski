@@ -59,6 +59,26 @@ module.exports.createNewUser = async (req, res) => {
 		});
 };
 
-module.exports.logUserIn = (req, res) => {
-	console.log(req.session.cookie);
+module.exports.logUserIn = async (req, res) => {
+	const { username, password } = req.body;
+	try {
+		const loggedUser = await User.findOne({ where: { username: username } });
+		if (!loggedUser) {
+			res
+				.status(403)
+				.json({ title: 'error', error: 'Taj korisnik ne postoji.' });
+			return;
+		}
+		let correctPassword = false;
+		correctPassword = await bcrypt.compare(password, loggedUser.password);
+		if (!correctPassword) {
+			res.status(403).json({ title: 'error', error: 'Netočna lozinka.' });
+			return;
+		}
+		res.status(200).cookie('sid', req.session.id);
+	} catch {
+		res
+			.status(404)
+			.json({ title: 'error', error: 'Pokušajte ponovno kasnije.' });
+	}
 };
