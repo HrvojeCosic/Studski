@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './RegisterPage.scss';
 
 export const RegisterPage: React.FC = () => {
@@ -8,6 +8,9 @@ export const RegisterPage: React.FC = () => {
 	const [password, setPassword] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const [email, setEmail] = useState('');
+	const [errorMsg, setErrorMsg] = useState('');
+
+	const history = useHistory();
 
 	const createUser = (event: React.MouseEvent<HTMLButtonElement>): void => {
 		event.preventDefault();
@@ -19,11 +22,12 @@ export const RegisterPage: React.FC = () => {
 		};
 		axios
 			.post('http://localhost:8000/api/users/register', newUser)
-			.then(res => {
-				console.log(res.data.message);
+			.then(() => {
+				setErrorMsg('');
+				history.push('/');
 			})
 			.catch(err => {
-				console.log(err.response.data.error);
+				setErrorMsg(err.response.data.error);
 			});
 	};
 	return (
@@ -67,6 +71,9 @@ export const RegisterPage: React.FC = () => {
 						<button onClick={createUser} className='sign-up-btn'>
 							Registriraj se
 						</button>
+						<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>
+							{errorMsg}
+						</p>
 						<Link to='/' className='back-to-hp'>
 							Natrag na početnu stranicu
 						</Link>

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './LoginPage.scss';
 
 export const LoginPage: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [errorMsg, setErrorMsg] = useState('');
+
+	const history = useHistory();
 
 	const login = (event: React.MouseEvent<HTMLButtonElement>): void => {
 		event.preventDefault();
@@ -17,11 +20,12 @@ export const LoginPage: React.FC = () => {
 			.post('http://localhost:8000/api/users/login', userCheck, {
 				withCredentials: true,
 			})
-			.then(res => {
-				console.log(res.data.message);
+			.then(() => {
+				setErrorMsg('');
+				history.push('/');
 			})
 			.catch(err => {
-				console.log(err.response.data.error);
+				setErrorMsg(err.response.data.error);
 			});
 	};
 	return (
@@ -48,6 +52,9 @@ export const LoginPage: React.FC = () => {
 							Prijavi se
 						</button>
 					</form>
+					<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>
+						{errorMsg}
+					</p>
 					<div className='links'>
 						<Link to='/' className='back-to-hp'>
 							Natrag na početnu stranicu

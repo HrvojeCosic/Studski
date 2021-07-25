@@ -70,4 +70,11 @@
 		border: 1px solid var(--border-color);
 		border-radius: 8px;
 	}
+	.error-msg {
+		text-align: center;
+		color: var(--error-text-color);
+	}
+	.hide {
+		display: none;
+	}
 }

@@ -98,5 +98,6 @@ module.exports.logUserIn = async (req, res) => {
 		res
 			.status(404)
 			.json({ title: 'error', error: 'Pokušajte ponovno kasnije.' });
+		return;
 	}
 };
