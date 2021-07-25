@@ -29,10 +29,10 @@
 		font-size: 14px;
 		font-weight: 400;
 		transition: 0.2s linear;
-	}
-	input:focus {
-		border: 1px solid var(--logo-color);
-		color: var(--primary-text-color);
+		&:focus {
+			border: 1px solid var(--logo-color);
+			color: var(--primary-text-color);
+		}
 	}
 	button {
 		cursor: pointer;
@@ -42,9 +42,13 @@
 		border: 0;
 		color: var(--secondary-bg-color);
 		font-size: 14px;
-	}
-	button:hover {
-		background: #5192ca;
+		outline: none;
+		&:hover {
+			background: #5192ca;
+		}
+		&:focus {
+			border: 1px solid var(--border-color);
+		}
 	}
 	.links {
 		display: flex;

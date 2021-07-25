@@ -32,7 +32,7 @@ export const RegisterPage: React.FC = () => {
 				<h2>Novi korisnički račun</h2>
 				<form className='loginbox'>
 					<input
-						placeholder='Username'
+						placeholder='Korisničko ime'
 						type='text'
 						value={username}
 						onChange={e => {
@@ -48,7 +48,7 @@ export const RegisterPage: React.FC = () => {
 						}}
 					/>
 					<input
-						placeholder='Password'
+						placeholder='Lozinka'
 						type='password'
 						value={password}
 						onChange={e => {
@@ -56,7 +56,7 @@ export const RegisterPage: React.FC = () => {
 						}}
 					/>
 					<input
-						placeholder='Repeat password'
+						placeholder='Lozinka'
 						type='password'
 						value={repeatPassword}
 						onChange={e => {
@@ -65,7 +65,7 @@ export const RegisterPage: React.FC = () => {
 					/>
 					<div className='links'>
 						<button onClick={createUser} className='sign-up-btn'>
-							Sign Up
+							Registriraj se
 						</button>
 						<Link to='/' className='back-to-hp'>
 							Natrag na početnu stranicu

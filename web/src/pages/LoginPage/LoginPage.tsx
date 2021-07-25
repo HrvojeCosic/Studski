@@ -28,7 +28,7 @@ export const LoginPage: React.FC = () => {
 		<div>
 			<div className='log-in-page-container'>
 				<div className='log-in-contents-container'>
-					<h2>Prijavi se</h2>
+					<h2>Prijava</h2>
 					<form className='loginbox'>
 						<input
 							placeholder='Korisničko ime'
