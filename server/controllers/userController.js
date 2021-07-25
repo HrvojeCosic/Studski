@@ -48,7 +48,9 @@ module.exports.createNewUser = async (req, res) => {
 		email: email,
 	})
 		.then(newUser => {
-			res.status(200).json({ newUser: newUser });
+			res
+				.status(200)
+				.json({ title: 'success', message: 'Korisnik uspješno kreiran' });
 		})
 		.catch(() => {
 			res.status(400).json({
