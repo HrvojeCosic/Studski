@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './RegisterPage.scss';
 
 export const RegisterPage: React.FC = () => {
 	const [username, setUsername] = useState('');
@@ -26,48 +27,52 @@ export const RegisterPage: React.FC = () => {
 			});
 	};
 	return (
-		<div className='sign-up-container'>
-			<h2>Novi korisnički račun</h2>
-			<form className='loginbox'>
-				<input
-					placeholder='Username'
-					type='text'
-					value={username}
-					onChange={e => {
-						setUsername(e.target.value);
-					}}
-				/>
-				<input
-					placeholder='E-mail'
-					type='text'
-					value={email}
-					onChange={e => {
-						setEmail(e.target.value);
-					}}
-				/>
-				<input
-					placeholder='Password'
-					type='password'
-					value={password}
-					onChange={e => {
-						setPassword(e.target.value);
-					}}
-				/>
-				<input
-					placeholder='Repeat password'
-					type='password'
-					value={repeatPassword}
-					onChange={e => {
-						setRepeatPassword(e.target.value);
-					}}
-				/>
-				<button onClick={createUser}>
-					<p>Sign Up</p>
-				</button>
-				<Link to='/'>
-					<button className='back-to-hp2'>Back to home page</button>
-				</Link>
-			</form>
+		<div className='sign-up-page-container'>
+			<div className='sign-up-contents-container'>
+				<h2>Novi korisnički račun</h2>
+				<form className='loginbox'>
+					<input
+						placeholder='Username'
+						type='text'
+						value={username}
+						onChange={e => {
+							setUsername(e.target.value);
+						}}
+					/>
+					<input
+						placeholder='E-mail'
+						type='text'
+						value={email}
+						onChange={e => {
+							setEmail(e.target.value);
+						}}
+					/>
+					<input
+						placeholder='Password'
+						type='password'
+						value={password}
+						onChange={e => {
+							setPassword(e.target.value);
+						}}
+					/>
+					<input
+						placeholder='Repeat password'
+						type='password'
+						value={repeatPassword}
+						onChange={e => {
+							setRepeatPassword(e.target.value);
+						}}
+					/>
+					<div className='links'>
+						<button onClick={createUser} className='sign-up-btn'>
+							Sign Up
+						</button>
+						<Link to='/' className='back-to-hp'>
+							Natrag na početnu stranicu
+						</Link>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 };

@@ -59,6 +59,7 @@
 		width: 230px;
 		&:focus {
 			border: 1px solid var(--border-color);
+			border-radius: 3px;
 		}
 	}
 	.sign-up-instead {
@@ -68,6 +69,7 @@
 		outline: none;
 		&:focus {
 			border: 1px solid var(--border-color);
+			border-radius: 3px;
 		}
 	}
 	.log-in-contents-container {
