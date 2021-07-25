@@ -19,7 +19,7 @@ export const RegisterPage: React.FC = () => {
 		axios
 			.post('http://localhost:8000/api/users/register', newUser)
 			.then(res => {
-				console.log(res);
+				console.log(res.data.message);
 			})
 			.catch(err => {
 				console.log(err.response.data.error);
@@ -27,7 +27,7 @@ export const RegisterPage: React.FC = () => {
 	};
 	return (
 		<div className='sign-up-container'>
-			<h2>Create a new account</h2>
+			<h2>Novi korisnički račun</h2>
 			<form className='loginbox'>
 				<input
 					placeholder='Username'
