@@ -11,8 +11,10 @@ export const NavBar: React.FC = () => {
 			<input type='text' className='search' />
 			<div className='header-btns'>
 				<div className='mode-toggle-btn' />
-				<div className='log-in-btn'>Prijavi se</div>
-				<Link to='/register' className='link'>
+				<Link to='/prijava' className='link'>
+					<div className='log-in-btn'>Prijavi se</div>
+				</Link>
+				<Link to='/registracija' className='link'>
 					<div className='sign-up-btn'>Registriraj se</div>
 				</Link>
 			</div>

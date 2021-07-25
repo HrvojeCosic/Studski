@@ -77,7 +77,10 @@ module.exports.logUserIn = async (req, res) => {
 			res.status(403).json({ title: 'error', error: 'Netočna lozinka.' });
 			return;
 		}
-		res.status(200).cookie('sid', req.session.id);
+		res
+			.status(200)
+			.json({ title: 'success', message: 'Prijava uspješna' })
+			.cookie('sid', req.session.id);
 	} catch {
 		res
 			.status(404)
