@@ -8,6 +8,12 @@ app.use(cookieParser());
 
 module.exports.createNewUser = async (req, res) => {
 	const { username, password, repeatPassword, email } = req.body;
+	if (!username || !password || !repeatPassword || !email) {
+		res
+			.status(403)
+			.json({ title: 'error', error: 'Sva polja moraju biti ispunjena.' });
+		return;
+	}
 	if (password != repeatPassword) {
 		res
 			.status(403)
@@ -53,7 +59,7 @@ module.exports.createNewUser = async (req, res) => {
 		password: bcrypt.hashSync(password, 10),
 		email: email,
 	})
-		.then(newUser => {
+		.then(() => {
 			res
 				.status(200)
 				.json({ title: 'success', message: 'Korisnik uspješno kreiran' });
