@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './LoginPage.scss';
 
 export const LoginPage: React.FC = () => {
 	const [username, setUsername] = useState('');
@@ -25,32 +26,36 @@ export const LoginPage: React.FC = () => {
 	};
 	return (
 		<div>
-			<div className='log-in-container'>
-				<h2>Prijavi se</h2>
-				<form className='loginbox'>
-					<input
-						placeholder='Korisničko ime'
-						type='text'
-						onChange={e => {
-							setUsername(e.target.value);
-						}}
-					/>
-					<input
-						placeholder='Lozinka'
-						type='password'
-						onChange={e => {
-							setPassword(e.target.value);
-						}}
-					/>
-					<button id='submit' onClick={login}></button>
-				</form>
-				<div className='links'>
-					<Link to='/' className='back-to-hp'>
-						Natrag na početnu stranicu
-					</Link>
-					<Link to='/registracija' className='sign-up-instead'>
-						Nemate račun? Registrirajte se
-					</Link>
+			<div className='log-in-page-container'>
+				<div className='log-in-contents-container'>
+					<h2>Prijavi se</h2>
+					<form className='loginbox'>
+						<input
+							placeholder='Korisničko ime'
+							type='text'
+							onChange={e => {
+								setUsername(e.target.value);
+							}}
+						/>
+						<input
+							placeholder='Lozinka'
+							type='password'
+							onChange={e => {
+								setPassword(e.target.value);
+							}}
+						/>
+						<button id='submit' onClick={login}>
+							Prijavi se
+						</button>
+					</form>
+					<div className='links'>
+						<Link to='/' className='back-to-hp'>
+							Natrag na početnu stranicu
+						</Link>
+						<Link to='/registracija' className='sign-up-instead'>
+							Nemaš račun? Registriraj se
+						</Link>
+					</div>
 				</div>
 			</div>
 		</div>
