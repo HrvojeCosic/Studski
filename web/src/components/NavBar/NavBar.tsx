@@ -1,6 +1,7 @@
 import React from 'react';
 import './NavBar.scss';
 import logo from '../../design-tokens/images/7wnfJt.png';
+import { Link } from 'react-router-dom';
 
 export const NavBar: React.FC = () => {
 	return (
@@ -11,7 +12,9 @@ export const NavBar: React.FC = () => {
 			<div className='header-btns'>
 				<div className='mode-toggle-btn' />
 				<div className='log-in-btn'>Prijavi se</div>
-				<div className='sign-up-btn'>Registriraj se</div>
+				<Link to='/register' className='link'>
+					<div className='sign-up-btn'>Registriraj se</div>
+				</Link>
 			</div>
 		</div>
 	);
