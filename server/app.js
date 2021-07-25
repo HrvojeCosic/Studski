@@ -12,7 +12,7 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:3000' })); //TODO(?): allow production frontend origin
+app.use(cors({ origin: 'http://localhost:3000', credentials: true })); //TODO(?): allow production frontend origin
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,8 +29,9 @@ app.use(
 		store: new SequelizeStore({
 			db: db /*sequelize*/,
 		}),
-
-		cookie: { secure: false }, //no https atm
+		cookie: {
+			httpOnly: true,
+		},
 	})
 );
 

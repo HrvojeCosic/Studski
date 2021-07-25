@@ -13,7 +13,9 @@ export const LoginPage: React.FC = () => {
 			password,
 		};
 		axios
-			.post('http://localhost:8000/api/users/login', userCheck)
+			.post('http://localhost:8000/api/users/login', userCheck, {
+				withCredentials: true,
+			})
 			.then(res => {
 				console.log(res.data.message);
 			})
@@ -46,7 +48,7 @@ export const LoginPage: React.FC = () => {
 					<Link to='/' className='back-to-hp'>
 						Natrag na početnu stranicu
 					</Link>
-					<Link to='/register' className='sign-up-instead'>
+					<Link to='/registracija' className='sign-up-instead'>
 						Nemate račun? Registrirajte se
 					</Link>
 				</div>
