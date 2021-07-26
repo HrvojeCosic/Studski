@@ -30,7 +30,9 @@ app.use(
 			db: db /*sequelize*/,
 		}),
 		cookie: {
-			httpOnly: true,
+			httpOnly: false,
+			expires: false,
+			maxAge: 1 * 12 * 4 * 7 * 24 * 60 * 60 * 1000, //about a year
 		},
 	})
 );

@@ -95,7 +95,8 @@ module.exports.logUserIn = async (req, res) => {
 			res.status(403).json({ title: 'error', error: 'Netočna lozinka.' });
 			return;
 		}
-		// req.session.username = loggedUser.username;
+
+		req.session.username = loggedUser.dataValues.username; //triggering cookie placement
 		res.status(200).json({ title: 'success', message: 'Prijava uspješna' });
 	} catch {
 		res
@@ -103,4 +104,9 @@ module.exports.logUserIn = async (req, res) => {
 			.json({ title: 'error', error: 'Pokušajte ponovno kasnije.' });
 		return;
 	}
+};
+
+const { sequelize } = require('../models/User');
+module.exports.checkAuth = async (req, res) => {
+	console.log(req.session);
 };
