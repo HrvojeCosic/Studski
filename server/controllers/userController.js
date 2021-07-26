@@ -76,6 +76,12 @@ module.exports.createNewUser = async (req, res) => {
 module.exports.logUserIn = async (req, res) => {
 	const { username, password } = req.body;
 	try {
+		if (!username || !password) {
+			res
+				.status(403)
+				.json({ title: 'error', error: 'Sva polja moraju biti ispunjena.' });
+			return;
+		}
 		const loggedUser = await User.findOne({ where: { username: username } });
 		if (!loggedUser) {
 			res
@@ -89,11 +95,8 @@ module.exports.logUserIn = async (req, res) => {
 			res.status(403).json({ title: 'error', error: 'Netočna lozinka.' });
 			return;
 		}
-		req.session.isAuth = false;
-		res
-			// .cookie('sid', req.session.id)
-			.status(200)
-			.json({ title: 'success', message: 'Prijava uspješna' });
+		// req.session.username = loggedUser.username;
+		res.status(200).json({ title: 'success', message: 'Prijava uspješna' });
 	} catch {
 		res
 			.status(404)
