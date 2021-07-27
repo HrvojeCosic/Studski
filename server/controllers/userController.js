@@ -105,8 +105,3 @@ module.exports.logUserIn = async (req, res) => {
 		return;
 	}
 };
-
-const { sequelize } = require('../models/User');
-module.exports.checkAuth = async (req, res) => {
-	console.log(req.session);
-};
