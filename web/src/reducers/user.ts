@@ -10,6 +10,8 @@ const initialState = {
 //TODO: reducer, action TYPES
 const userReducer: any = (state: UserState = initialState, action: any) => {
 	switch (action.type) {
+		case 'SET_USER':
+			return action.payload.username;
 		case 'REMOVE_USER':
 			Cookies.remove('connect.sid');
 			return '';

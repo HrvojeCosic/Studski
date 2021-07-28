@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './LoginPage.scss';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../actions/user';
 
 export const LoginPage: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
 
+	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const login = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -23,6 +26,7 @@ export const LoginPage: React.FC = () => {
 			.then(() => {
 				setErrorMsg('');
 				history.push('/');
+				dispatch(setUser(userCheck.username));
 			})
 			.catch(err => {
 				setErrorMsg(err.response.data.error);
