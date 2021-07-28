@@ -18,7 +18,7 @@ export const HomePage: React.FC = () => {
 				console.log(res.data.message);
 			})
 			.catch(err => {
-				console.log(err.response.data);
+				console.log(err.response);
 			});
 	}, []);
 	return (
