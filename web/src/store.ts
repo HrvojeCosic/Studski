@@ -4,9 +4,6 @@ import { createStore } from 'redux';
 export interface UserState {
 	currentUser: string;
 }
-export interface Action {
-	type: string;
-}
 
 export const initialState = {
 	currentUser: 'asd',
@@ -18,6 +15,11 @@ export const removeUser = () => {
 		type: 'REMOVE_USER',
 	};
 };
+export const getUser = () => {
+	return {
+		type: 'GET_USER',
+	};
+};
 
 //TODO: reducer, action TYPES
 export const userReducer: any = (
@@ -27,13 +29,11 @@ export const userReducer: any = (
 	switch (action.type) {
 		case 'REMOVE_USER':
 			Cookies.remove('connect.sid');
-			return (state.currentUser = '');
+			return '';
+		case 'GET_USER':
+			const sid = Cookies.get('connect.sid');
+			return sid;
 	}
 };
 
 export const store = createStore(userReducer);
-
-//LOG THE STATE WHEN ACTION IS DISPATCHED
-store.subscribe(() => {
-	console.log(store.getState());
-});

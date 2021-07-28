@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import { FacultyList } from '../../components/FacultyList/FacultyList';
 import { LoggedUserInfo } from '../../components/LoggedUserInfo/LoggedUserInfo';
 import { NavBar } from '../../components/NavBar/NavBar';
 import { ProfileList } from '../../components/ProfileList/ProfileList';
-import Cookies from 'js-cookie';
-import axios from 'axios';
 import './HomePage.scss';
 
 export const HomePage: React.FC = () => {
