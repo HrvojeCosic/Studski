@@ -8,6 +8,10 @@ import allReducers from './reducers';
 
 export const store = createStore(allReducers);
 
+export interface State {
+	user: { currentUser: string };
+}
+
 ReactDOM.render(
 	<Provider store={store}>
 		<React.StrictMode>

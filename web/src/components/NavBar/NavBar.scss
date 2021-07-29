@@ -38,14 +38,13 @@
 	font-size: 13px;
 	font-family: var(--main-font-family);
 	color: var(--contrast-text-color);
-
 	.sign-up-btn,
-	.log-in-btn {
+	.log-in-btn,
+	.log-out-btn {
 		padding: 0 15px;
 		text-decoration: none;
 		cursor: pointer;
 	}
-
 	.mode-toggle-btn {
 		background: url('../../design-tokens/images/toggle-mode-icon.png') no-repeat;
 		background-size: 40px;
