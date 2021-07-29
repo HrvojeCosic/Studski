@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie';
-
 interface UserState {
 	currentUser: string;
 }
@@ -13,11 +11,9 @@ const userReducer: any = (state: UserState = initialState, action: any) => {
 		case 'SET_USER':
 			return action.payload.username;
 		case 'REMOVE_USER':
-			Cookies.remove('connect.sid'); //TODO: remove side effect?
-			return '';
+			return action.payload.user;
 		case 'GET_USER':
-			const sid = Cookies.get('connect.sid'); //TODO: remove side effect?
-			return sid;
+			return action.payload.sid;
 		default:
 			return state;
 	}

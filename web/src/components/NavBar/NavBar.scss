@@ -34,6 +34,8 @@
 .header-btns {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	width: 250px;
 	font-weight: 600;
 	font-size: 13px;
 	font-family: var(--main-font-family);
@@ -44,6 +46,9 @@
 		padding: 0 15px;
 		text-decoration: none;
 		cursor: pointer;
+	}
+	.log-out-btn {
+		justify-content: right;
 	}
 	.mode-toggle-btn {
 		background: url('../../design-tokens/images/toggle-mode-icon.png') no-repeat;
