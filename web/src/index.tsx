@@ -5,11 +5,13 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import allReducers from './reducers';
+import { User } from './actions/user';
 
 export const store = createStore(allReducers);
 
+//Main state type
 export interface State {
-	user: { currentUser: string };
+	userState: User;
 }
 
 ReactDOM.render(

@@ -4,13 +4,18 @@ interface SetUser {
 	type: string;
 	payload: object;
 }
-interface Post {
+export interface Post {
 	author: string;
 	faculty: string;
 	title: string;
 	points: number;
 	createdAt: Date;
-	user_id: number;
+	id: number;
+}
+export interface User {
+	username: string;
+	points: number;
+	posts: Array<Post>;
 }
 
 export const setUser = (

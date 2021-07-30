@@ -1,14 +1,13 @@
-interface UserState {
-	currentUser: string;
-}
-const initialState = {
-	currentUser: '',
-	currentUserPoints: 0,
-	currentUserPosts: [],
+import { User } from '../actions/user';
+
+const initialUserState = {
+	username: '',
+	points: 0,
+	posts: [],
 };
 
-//TODO: reducer, action TYPES
-const userReducer: any = (state: UserState = initialState, action: any) => {
+//TODO: reducer & action TYPES
+const userReducer = (state: User = initialUserState, action: any) => {
 	switch (action.type) {
 		case 'SET_USER':
 			const { username, points, posts } = action.payload;
