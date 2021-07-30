@@ -36,9 +36,8 @@ const User = db.define('user', {
 });
 
 User.hasMany(Post, {
-	foreignKey: 'user_id',
+	foreignKey: { name: 'user_id', allowNull: false, defaultValue: '0' },
 	onDelete: 'CASCADE',
+	onUpdate: 'CASCADE',
 });
-Post.belongsTo(User, { foreignKey: 'post_id' });
-
 module.exports = User;

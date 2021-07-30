@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const Post = require('../models/Post');
 
 const app = express();
 app.use(cookieParser());
@@ -82,22 +83,30 @@ module.exports.logUserIn = async (req, res) => {
 				.json({ title: 'error', error: 'Sva polja moraju biti ispunjena.' });
 			return;
 		}
-		const loggedUser = await User.findOne({ where: { username: username } });
-		if (!loggedUser) {
+		const userInfo = await User.findOne({ where: { username: username } });
+		const userPosts = await Post.findAll({
+			where: { user_id: userInfo.dataValues.id },
+		});
+		if (!userInfo) {
 			res
 				.status(403)
 				.json({ title: 'error', error: 'Taj korisnik ne postoji.' });
 			return;
 		}
 		let correctPassword = false;
-		correctPassword = await bcrypt.compare(password, loggedUser.password);
+		correctPassword = await bcrypt.compare(password, userInfo.password);
 		if (!correctPassword) {
 			res.status(403).json({ title: 'error', error: 'Netočna lozinka.' });
 			return;
 		}
 
-		req.session.username = loggedUser.dataValues.username; //triggering cookie placement
-		res.status(200).json({ title: 'success', message: 'Prijava uspješna' });
+		req.session.username = userInfo.dataValues.username; //triggering cookie placement
+		res.status(200).json({
+			title: 'success',
+			message: 'Prijava uspješna',
+			userInfo: userInfo,
+			userPosts,
+		});
 	} catch {
 		res
 			.status(404)
