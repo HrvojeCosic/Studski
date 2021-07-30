@@ -23,10 +23,12 @@ export const LoginPage: React.FC = () => {
 			.post('http://localhost:8000/api/users/login', userCheck, {
 				withCredentials: true,
 			})
-			.then(() => {
+			.then(res => {
+				const { username, points } = res.data.userInfo;
+				const { userPosts } = res.data;
 				setErrorMsg('');
 				history.push('/');
-				dispatch(setUser(userCheck.username));
+				dispatch(setUser(username, points, userPosts));
 			})
 			.catch(err => {
 				setErrorMsg(err.response.data.error);

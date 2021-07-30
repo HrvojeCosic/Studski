@@ -14,9 +14,6 @@ export const HomePage: React.FC = () => {
 			.post('http://localhost:8000/api/users/checkAuth', sid, {
 				withCredentials: true,
 			})
-			.then(res => {
-				console.log(res.data.message);
-			})
 			.catch(err => {
 				console.log(err.response);
 			});
