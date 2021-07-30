@@ -9,6 +9,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 const usersRouter = require('./routes/users');
+const { Sequelize } = require('./db');
 
 const app = express();
 
@@ -40,7 +41,10 @@ app.use(
 app.use('/api/users', usersRouter);
 
 db.authenticate()
-	.then(console.log('Connection has been established successfully.'))
+	.then(async () => {
+		await db.sync();
+		console.log('Connection has been established successfully.');
+	})
 	.catch(error => console.error('Unable to connect to the database:', error));
 
 // catch 404 and forward to error handler

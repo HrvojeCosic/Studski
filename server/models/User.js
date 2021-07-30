@@ -29,8 +29,16 @@ const User = db.define('user', {
 			return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY');
 		},
 	},
+	points: {
+		type: Sequelize.INTEGER,
+		defaultValue: 0,
+	},
 });
 
-User.hasMany(Post);
+User.hasMany(Post, {
+	foreignKey: 'user_id',
+	onDelete: 'CASCADE',
+});
+Post.belongsTo(User, { foreignKey: 'post_id' });
 
 module.exports = User;
