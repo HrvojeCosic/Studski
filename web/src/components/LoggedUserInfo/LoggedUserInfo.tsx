@@ -1,12 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import './LoggedUserInfo.scss';
-import { State } from '../../index';
+import { User } from '../../actions/user';
 
 export const LoggedUserInfo: React.FC = () => {
-	const userState = useSelector((state: State) => state.userState);
+	const currentUserStringified = localStorage.getItem('currentUser') || '{}'; //if getItem() returns null, variable is = '{}'
+	const userState: User = JSON.parse(currentUserStringified);
 	const { username, points, posts } = userState;
-	console.log(userState);
 
 	const userPosts = posts.map(post => {
 		return (
