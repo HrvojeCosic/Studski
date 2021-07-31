@@ -4,6 +4,17 @@ interface SetUser {
 	type: string;
 	payload: object;
 }
+interface GetUser {
+	type: string;
+	payload: {
+		sid: string;
+		currentUser: {
+			username: string;
+			points: number;
+			posts: Array<Post>;
+		};
+	};
+}
 export interface Post {
 	author: string;
 	faculty: string;
@@ -23,6 +34,10 @@ export const setUser = (
 	points: number,
 	posts: Post
 ): SetUser => {
+	localStorage.setItem(
+		'currentUser',
+		JSON.stringify({ username, points, posts })
+	);
 	return {
 		type: 'SET_USER',
 		payload: { username, points, posts },
@@ -36,12 +51,15 @@ export const removeUser = () => {
 		payload: { user: '' },
 	};
 };
-export const getUser = () => {
+export const getUser = (): GetUser => {
 	let sid = Cookies.get('connect.sid');
 	!sid ? (sid = '') : (sid = sid);
 
+	const currentUserStringified = localStorage.getItem('currentUser') || '{}';
+	const currentUser: User = JSON.parse(currentUserStringified);
+
 	return {
 		type: 'GET_USER',
-		payload: { sid },
+		payload: { sid, currentUser },
 	};
 };
