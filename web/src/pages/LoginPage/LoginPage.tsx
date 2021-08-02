@@ -27,8 +27,8 @@ export const LoginPage: React.FC = () => {
 				const { username, points } = res.data.userInfo;
 				const { userPosts } = res.data;
 				setErrorMsg('');
-				history.push('/');
 				dispatch(setUser(username, points, userPosts));
+				history.push('/');
 			})
 			.catch(err => {
 				setErrorMsg(err.response.data.error);

@@ -1,11 +1,13 @@
 import React from 'react';
 import './LoggedUserInfo.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../actions/user';
+import { State } from '../../index';
 
 export const LoggedUserInfo: React.FC = () => {
 	const dispatch = useDispatch();
 	const { username, points, posts } = dispatch(getUser()).payload.currentUser;
+	useSelector((state: State) => state);
 
 	let userPosts;
 	if (posts) {

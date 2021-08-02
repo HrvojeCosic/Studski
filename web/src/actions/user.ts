@@ -45,7 +45,7 @@ export const setUser = (
 };
 export const removeUser = () => {
 	Cookies.remove('connect.sid');
-
+	localStorage.removeItem('currentUser');
 	return {
 		type: 'REMOVE_USER',
 		payload: { user: '' },
