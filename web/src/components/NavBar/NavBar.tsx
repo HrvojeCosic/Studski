@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { getUser, removeUser } from '../../actions/user';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const NavBar: React.FC = () => {
+export const NavBar: React.FC<{
+	toggleShowPostForm: any;
+}> = ({ toggleShowPostForm }) => {
 	const loggedIn = getUser();
 	useSelector(state => state);
 
@@ -31,6 +33,9 @@ export const NavBar: React.FC = () => {
 			) : (
 				<div className='header-btns'>
 					<div className='mode-toggle-btn' />
+					<div className='link' onClick={toggleShowPostForm}>
+						Objavi materijal
+					</div>
 					<div className='log-out-btn' onClick={logOut}>
 						Odjavi se
 					</div>
