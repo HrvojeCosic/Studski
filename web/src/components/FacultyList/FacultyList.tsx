@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './FacultyList.scss';
 
-interface Faculty {
+export interface Faculty {
 	ime: string;
 	grad: string;
 	id: number;
@@ -11,18 +11,9 @@ interface OrganizedFacultyList {
 	facultiesInArea_org: string[];
 }
 
-export const FacultyList: React.FC = () => {
-	const [faculties, setFaculties] = useState([]);
-	useEffect(() => {
-		fetch('faculties.json')
-			.then(res => {
-				return res.json();
-			})
-			.then(json => {
-				setFaculties(json);
-			});
-	}, []);
-
+export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
+	faculties,
+}) => {
 	//GET UNIQUE AREAS(GRADOVI) IN SEPERATE ARRAY
 	const facultyAreas: string[] = [];
 	faculties.forEach((faculty: Faculty) => {

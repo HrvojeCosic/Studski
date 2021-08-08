@@ -10,6 +10,7 @@ import { CreatePostForm } from '../../components/CreatePostForm/CreatePostForm';
 
 export const HomePage: React.FC = () => {
 	const [showForm, setShowForm] = useState(false);
+	const [faculties, setFaculties] = useState([]);
 
 	//NavBar prop:
 	const toggleShowPostForm = () => {
@@ -17,6 +18,7 @@ export const HomePage: React.FC = () => {
 	};
 
 	useEffect(() => {
+		//FIND USER
 		const sid = Cookies.get('connect.sid');
 		axios
 			.post('http://localhost:8000/api/users/checkAuth', sid, {
@@ -25,14 +27,28 @@ export const HomePage: React.FC = () => {
 			.catch(err => {
 				console.log(err.response);
 			});
+		//GET FACULTIES
+		fetch('faculties.json')
+			.then(res => {
+				return res.json();
+			})
+			.then(json => {
+				setFaculties(json);
+				console.log(faculties);
+			})
+			.then(() => {});
 	}, []);
 	return (
 		<div>
 			<NavBar toggleShowPostForm={toggleShowPostForm} />
 			<div className='home-page-body'>
-				<FacultyList />
+				<FacultyList faculties={faculties} />
 				<ProfileList />
-				{showForm ? <CreatePostForm /> : <LoggedUserInfo />}
+				{showForm ? (
+					<CreatePostForm faculties={faculties} />
+				) : (
+					<LoggedUserInfo />
+				)}
 			</div>
 		</div>
 	);
