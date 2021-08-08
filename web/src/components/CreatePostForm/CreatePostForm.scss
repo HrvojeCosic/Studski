@@ -1,0 +1,62 @@
+.post-form-container {
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	h3 {
+		color: var(--contrast-text-color);
+		font-family: var(--main-font-family);
+		margin-bottom: 5px;
+	}
+	select {
+		height: 30px;
+		font-size: 16px;
+		font-family: var(--main-font-family);
+		color: var(--primary-text-color);
+		border: 1px solid var(--primary-bg-color);
+		border-radius: 5px;
+		background-color: var(--secondary-bg-color);
+		outline: none;
+		&:focus {
+			border: 1px solid var(--border-color);
+		}
+	}
+	input[placeholder='Naslov'] {
+		height: 25px;
+		padding: 10px;
+		margin: 20px 0;
+		border-radius: 4px;
+		background-color: var(--secondary-bg-color);
+		border: 1px solid var(--primary-bg-color);
+		color: var(--primary-text-color);
+		font-size: 16px;
+		outline: none;
+		&:focus {
+			border: 1px solid var(--border-color);
+		}
+	}
+	input[name='datoteka'] {
+		color: var(--contrast-text-color);
+		outline: none;
+
+		&::-webkit-file-upload-button {
+			display: none;
+		}
+
+		&::before {
+			display: inline-block;
+			margin-right: 20px;
+			content: 'Odaberi datoteku';
+			color: var(--contrast-text-color);
+			font-size: 15px;
+			background-color: var(--secondary-bg-color);
+			border: 1px solid black;
+			border-radius: 3px;
+			padding: 5px 8px;
+			outline: none;
+		}
+
+		&:hover::before {
+			border-color: var(--border-color);
+		}
+	}
+}

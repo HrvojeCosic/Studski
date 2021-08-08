@@ -1,8 +1,9 @@
 import React from 'react';
+import './CreatePostForm.scss';
 
 export const CreatePostForm = () => {
 	return (
-		<div className='form-container'>
+		<div className='post-form-container'>
 			<h3>Fakultet</h3>
 			<select>
 				<option>fakultet 1...</option>
