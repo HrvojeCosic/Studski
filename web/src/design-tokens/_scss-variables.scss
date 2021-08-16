@@ -12,3 +12,12 @@
 	--main-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
 		Ubuntu, Cantarell, Oxygen, Roboto, Helvetica, Arial, sans-serif;
 }
+
+.error-msg {
+	text-align: center;
+	color: var(--error-text-color);
+	font-family: var(--main-font-family);
+}
+.hide {
+	display: none;
+}
