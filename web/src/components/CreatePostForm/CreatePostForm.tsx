@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { Faculty } from '../FacultyList/FacultyList';
 import './CreatePostForm.scss';
 
@@ -9,7 +9,12 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	const [formFacultyList, setFormFacultyList] = useState([
 		<option key='defaultKey'></option>,
 	]);
-	const [title, setTitle] = useState('');
+
+	const [postTitle, setPostTitle] = useState('');
+	const [facultyArea, setFacultyArea] = useState('');
+	const [facultyName, setFacultyName] = useState('');
+	const [file, setFile] = useState('');
+	const [errorMsg, setErrorMsg] = useState('');
 
 	const facultyAreasSet = new Set(
 		faculties.map(faculty => {
@@ -20,15 +25,10 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		return <option key={area}>{area}</option>;
 	});
 
-	const updateFacultyList = (event: ChangeEvent<HTMLSelectElement>) => {
-		const selectedArea = event.target.value;
+	const updateFacultyList = (selectedArea: string) => {
 		const list: Array<JSX.Element> = faculties.map(faculty => {
 			if (faculty.grad === selectedArea) {
-				return (
-					<option selected key={selectedArea + faculty.id}>
-						{faculty.ime}
-					</option>
-				);
+				return <option key={selectedArea + faculty.id}>{faculty.ime}</option>;
 			}
 			//return option element just to make typescript happy
 			else
@@ -44,35 +44,58 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 
 	const submitPost = () => {
 		axios
-			.post('http://localhost:8000/api/posts/submit', { title })
+			.post('http://localhost:8000/api/posts/submit', {
+				facultyName,
+				facultyArea,
+				postTitle,
+				file,
+			})
 			.then(res => {
-				console.log(res);
+				setErrorMsg(res.data.message);
 			})
 			.catch(err => {
-				console.log(err);
+				setErrorMsg(err.response.data.error);
 			});
 	};
 
 	return (
 		<div className='post-form-container'>
 			<h3>Grad</h3>
-			<select onChange={updateFacultyList}>
-				<option selected disabled hidden></option>
+			<select
+				onChange={e => {
+					updateFacultyList(e.target.value);
+					setFacultyArea(e.target.value);
+				}}
+			>
+				{/* <option selected disabled hidden></option> */}
+				<option hidden></option>
 				{facultyAreas}
 			</select>
 
 			<h3>Fakultet</h3>
-			<select>
+			<select
+				onChange={e => {
+					setFacultyName(e.target.value);
+				}}
+			>
 				{/* TODO: make user's faculty the first option */}
+				<option hidden></option>
 				{formFacultyList}
 			</select>
 			<input
 				type='text'
 				placeholder='Naslov'
-				onChange={e => setTitle(e.target.value)}
+				onChange={e => setPostTitle(e.target.value)}
 			/>
-			<input type='file' name='datoteka' />
+			<input
+				type='file'
+				name='datoteka'
+				onChange={e => {
+					setFile(e.target.value);
+				}}
+			/>
 			<input type='submit' value='Objavi' onClick={submitPost} />
+			<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>{errorMsg}</p>
 		</div>
 	);
 };
