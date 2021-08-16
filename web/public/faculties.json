@@ -115,11 +115,6 @@
 		"id": 23
 	},
 	{
-		"ime": "Prirodoslovno-matematički fakultet",
-		"grad": "Split",
-		"id": 24
-	},
-	{
 		"ime": "Zdravstveno veleučilište",
 		"grad": "Zagreb",
 		"id": 25
@@ -380,11 +375,6 @@
 		"id": 76
 	},
 	{
-		"ime": "Fakultet prometnih znanosti",
-		"grad": "Zagreb",
-		"id": 77
-	},
-	{
 		"ime": "Geotehnički fakultet",
 		"grad": "Varaždin",
 		"id": 78
@@ -408,11 +398,6 @@
 		"ime": "Visoka tehnička škola",
 		"grad": "Bjelovar",
 		"id": 82
-	},
-	{
-		"ime": "Umjetnička akademija",
-		"grad": "Split",
-		"id": 83
 	},
 	{
 		"ime": "Grafički fakultet",
