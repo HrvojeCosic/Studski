@@ -9,6 +9,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 const usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
 const { Sequelize } = require('./db');
 
 const app = express();
@@ -39,6 +40,7 @@ app.use(
 );
 
 app.use('/api/users', usersRouter);
+app.use('/api/posts', postsRouter);
 
 db.authenticate()
 	.then(async () => {

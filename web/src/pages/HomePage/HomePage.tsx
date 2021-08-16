@@ -34,7 +34,6 @@ export const HomePage: React.FC = () => {
 			})
 			.then(json => {
 				setFaculties(json);
-				console.log(faculties);
 			})
 			.then(() => {});
 	}, []);
