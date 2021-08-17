@@ -13,7 +13,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	const [postTitle, setPostTitle] = useState('');
 	const [facultyArea, setFacultyArea] = useState('');
 	const [facultyName, setFacultyName] = useState('');
-	const [file, setFile] = useState('');
+	const [fileName, setFileName] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
 
 	const facultyAreasSet = new Set(
@@ -43,12 +43,13 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	};
 
 	const submitPost = () => {
+		//request for validation
 		axios
 			.post('http://localhost:8000/api/posts/submit', {
 				facultyName,
 				facultyArea,
 				postTitle,
-				file,
+				fileName,
 			})
 			.then(res => {
 				setErrorMsg(res.data.message);
@@ -60,41 +61,49 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 
 	return (
 		<div className='post-form-container'>
-			<h3>Grad</h3>
-			<select
-				onChange={e => {
-					updateFacultyList(e.target.value);
-					setFacultyArea(e.target.value);
-				}}
+			<form
+				//request for file upload
+				action='http://localhost:8000/api/posts/submit'
+				method='POST'
+				encType='multipart/form-data'
 			>
-				{/* <option selected disabled hidden></option> */}
-				<option hidden></option>
-				{facultyAreas}
-			</select>
+				<h3>Grad</h3>
+				<select
+					onChange={e => {
+						updateFacultyList(e.target.value);
+						setFacultyArea(e.target.value);
+					}}
+				>
+					{/* <option selected disabled hidden></option> */}
+					<option hidden></option>
+					{facultyAreas}
+				</select>
 
-			<h3>Fakultet</h3>
-			<select
-				onChange={e => {
-					setFacultyName(e.target.value);
-				}}
-			>
-				{/* TODO: make user's faculty the first option */}
-				<option hidden></option>
-				{formFacultyList}
-			</select>
-			<input
-				type='text'
-				placeholder='Naslov'
-				onChange={e => setPostTitle(e.target.value)}
-			/>
-			<input
-				type='file'
-				name='datoteka'
-				onChange={e => {
-					setFile(e.target.value);
-				}}
-			/>
-			<input type='submit' value='Objavi' onClick={submitPost} />
+				<h3>Fakultet</h3>
+				<select
+					onChange={e => {
+						setFacultyName(e.target.value);
+					}}
+				>
+					{/* TODO: make user's faculty the first option */}
+					<option hidden></option>
+					{formFacultyList}
+				</select>
+				<input
+					type='text'
+					placeholder='Naslov'
+					onChange={e => setPostTitle(e.target.value)}
+				/>
+
+				<input
+					type='file'
+					name='material'
+					onChange={e => {
+						setFileName(e.target.value);
+					}}
+				/>
+				<input type='submit' value='Objavi' onClick={submitPost} />
+			</form>
 			<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>{errorMsg}</p>
 		</div>
 	);
