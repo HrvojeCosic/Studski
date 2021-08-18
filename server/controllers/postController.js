@@ -2,12 +2,12 @@ const Post = require('../models/Post');
 
 module.exports.createNewPost = (req, res) => {
 	const { file } = req;
-	const { facultyName, facultyArea, postTitle, fileName } = req.body;
+	const { facultyName, facultyArea, postTitle } = req.body;
+
 	if (
 		facultyName.length <= 0 ||
 		facultyArea.length <= 0 ||
-		postTitle.length <= 0 ||
-		fileName.length <= 0
+		postTitle.length <= 0
 	) {
 		return res
 			.status(403)

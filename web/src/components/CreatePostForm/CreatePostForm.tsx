@@ -49,7 +49,6 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 				facultyName,
 				facultyArea,
 				postTitle,
-				fileName,
 			})
 			.then(res => {
 				setErrorMsg(res.data.message);
@@ -74,7 +73,6 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 						setFacultyArea(e.target.value);
 					}}
 				>
-					{/* <option selected disabled hidden></option> */}
 					<option hidden></option>
 					{facultyAreas}
 				</select>
@@ -95,13 +93,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 					onChange={e => setPostTitle(e.target.value)}
 				/>
 
-				<input
-					type='file'
-					name='material'
-					onChange={e => {
-						setFileName(e.target.value);
-					}}
-				/>
+				<input type='file' name='material' />
 				<input type='submit' value='Objavi' onClick={submitPost} />
 			</form>
 			<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>{errorMsg}</p>
