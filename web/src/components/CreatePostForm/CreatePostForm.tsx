@@ -50,10 +50,14 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	const submitPost = (e: any) => {
 		const formData = new FormData();
 
-		if (file) {
-			formData.append('name', file.name);
-			formData.append('file', file);
+		if (!postTitle || !facultyArea || !facultyName || !file) {
+			setErrorMsg('Sva polja moraju biti ispunjena.');
+			return;
 		}
+
+		formData.append('name', file.name);
+		formData.append('file', file);
+
 		axios.post('http://localhost:8000/api/posts/submit', formData);
 		axios
 			.post('http://localhost:8000/api/posts/submit', {
