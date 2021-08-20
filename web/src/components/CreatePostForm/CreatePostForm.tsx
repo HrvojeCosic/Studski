@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import FormData from 'form-data';
+import Cookies from 'js-cookie';
 import { Faculty } from '../FacultyList/FacultyList';
 import './CreatePostForm.scss';
 
@@ -11,6 +12,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		<option key='defaultKey'></option>,
 	]);
 
+	const [postAuthor, setPostAuthor] = useState('');
 	const [postTitle, setPostTitle] = useState('');
 	const [facultyArea, setFacultyArea] = useState('');
 	const [facultyName, setFacultyName] = useState('');
@@ -58,9 +60,24 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		formData.append('name', file.name);
 		formData.append('file', file);
 
+		//AUTHORIZE
+		const sid = Cookies.get('connect.sid');
+		axios
+			.post('http://localhost:8000/api/users/checkAuth', sid, {
+				withCredentials: true,
+			})
+			.then(res => {
+				setPostAuthor(res.data.message);
+			})
+			.catch(err => {
+				setErrorMsg(err.response.data.error);
+				return;
+			});
+		//SEND formData FOR MULTER UPLOAD AND POST'S DATA FOR NEW DB INSTANCE
 		axios.post('http://localhost:8000/api/posts/submit', formData);
 		axios
 			.post('http://localhost:8000/api/posts/submit', {
+				postAuthor,
 				facultyName,
 				facultyArea,
 				postTitle,
