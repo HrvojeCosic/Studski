@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import FormData from 'form-data';
 import { Faculty } from '../FacultyList/FacultyList';
 import './CreatePostForm.scss';
 
@@ -13,8 +14,8 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	const [postTitle, setPostTitle] = useState('');
 	const [facultyArea, setFacultyArea] = useState('');
 	const [facultyName, setFacultyName] = useState('');
-	const [fileName, setFileName] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
+	const [file, setFile] = useState<any>(null);
 
 	const facultyAreasSet = new Set(
 		faculties.map(faculty => {
@@ -42,8 +43,18 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		setFormFacultyList(list);
 	};
 
-	const submitPost = () => {
-		//request for validation
+	const handleFile = (e: any) => {
+		setFile(e.target.files[0]);
+	};
+
+	const submitPost = (e: any) => {
+		const formData = new FormData();
+
+		if (file) {
+			formData.append('name', file.name);
+			formData.append('file', file);
+		}
+		axios.post('http://localhost:8000/api/posts/submit', formData);
 		axios
 			.post('http://localhost:8000/api/posts/submit', {
 				facultyName,
@@ -60,42 +71,38 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 
 	return (
 		<div className='post-form-container'>
-			<form
-				//request for file upload
-				action='http://localhost:8000/api/posts/submit'
-				method='POST'
-				encType='multipart/form-data'
+			<h3>Grad</h3>
+			<select
+				onChange={e => {
+					updateFacultyList(e.target.value);
+					setFacultyArea(e.target.value);
+				}}
 			>
-				<h3>Grad</h3>
-				<select
-					onChange={e => {
-						updateFacultyList(e.target.value);
-						setFacultyArea(e.target.value);
-					}}
-				>
-					<option hidden></option>
-					{facultyAreas}
-				</select>
-
-				<h3>Fakultet</h3>
-				<select
-					onChange={e => {
-						setFacultyName(e.target.value);
-					}}
-				>
-					{/* TODO: make user's faculty the first option */}
-					<option hidden></option>
-					{formFacultyList}
-				</select>
-				<input
-					type='text'
-					placeholder='Naslov'
-					onChange={e => setPostTitle(e.target.value)}
-				/>
-
-				<input type='file' name='material' />
-				<input type='submit' value='Objavi' onClick={submitPost} />
-			</form>
+				<option hidden></option>
+				{facultyAreas}
+			</select>
+			<h3>Fakultet</h3>
+			<select
+				onChange={e => {
+					setFacultyName(e.target.value);
+				}}
+			>
+				{/* TODO:(?) make user's faculty the first option */}
+				<option hidden></option>
+				{formFacultyList}
+			</select>
+			<input
+				type='text'
+				placeholder='Naslov'
+				onChange={e => setPostTitle(e.target.value)}
+			/>
+			<input
+				type='file'
+				onChange={e => {
+					handleFile(e);
+				}}
+			/>
+			<button onClick={e => submitPost(e)}>Objavi</button>
 			<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>{errorMsg}</p>
 		</div>
 	);

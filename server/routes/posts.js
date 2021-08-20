@@ -6,5 +6,5 @@ const upload = multer({ dest: './fileUploads/' });
 
 const postController = require('../controllers/postController');
 
-router.post('/submit', upload.single('material'), postController.createNewPost);
+router.post('/submit', upload.single('file'), postController.createNewPost);
 module.exports = router;

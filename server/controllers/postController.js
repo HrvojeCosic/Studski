@@ -3,7 +3,6 @@ const Post = require('../models/Post');
 module.exports.createNewPost = (req, res) => {
 	const { file } = req;
 	const { facultyName, facultyArea, postTitle } = req.body;
-
 	if (
 		facultyName.length <= 0 ||
 		facultyArea.length <= 0 ||
