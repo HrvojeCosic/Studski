@@ -57,7 +57,11 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 			return;
 		}
 
-		formData.append('name', file.name);
+		formData.append('postAuthor', postAuthor);
+		formData.append('facultyName', facultyName);
+		formData.append('facultyArea', facultyArea);
+		formData.append('postTitle', postTitle);
+		formData.append('fileName', file.name);
 		formData.append('file', file);
 
 		//AUTHORIZE
@@ -73,15 +77,10 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 				setErrorMsg(err.response.data.error);
 				return;
 			});
-		//SEND formData FOR MULTER UPLOAD AND POST'S DATA FOR NEW DB INSTANCE
-		axios.post('http://localhost:8000/api/posts/submit', formData);
+
+		//REQUEST
 		axios
-			.post('http://localhost:8000/api/posts/submit', {
-				postAuthor,
-				facultyName,
-				facultyArea,
-				postTitle,
-			})
+			.post('http://localhost:8000/api/posts/submit', formData)
 			.then(res => {
 				setErrorMsg(res.data.message);
 			})

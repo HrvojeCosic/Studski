@@ -19,6 +19,10 @@ const Post = db.define('post', {
 		allownull: false,
 		default: 0,
 	},
+	fileName: {
+		type: Sequelize.STRING,
+		allownull: false,
+	},
 	//todo(?): dodati smjer, predmet
 });
 
