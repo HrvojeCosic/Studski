@@ -55,7 +55,6 @@ module.exports.createNewPost = async (req, res) => {
 			return;
 		} catch (err) {
 			respondError(res);
-			console.log(err);
 		}
 	} catch {
 		respondError(res);

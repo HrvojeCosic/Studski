@@ -1,16 +1,43 @@
+import axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import './ProfileList.scss';
 
+interface LeaderboardUser {
+	points: number;
+	username: string;
+}
+
 export const ProfileList: React.FC = () => {
+	const [userListJSX, setUserListJSX] = useState([]);
+	useEffect(() => {
+		axios.get('http://localhost:8000/api/users/getUserList').then(res => {
+			const sortedUserList = res.data.userList.sort(
+				(a: LeaderboardUser, b: LeaderboardUser) => {
+					if (a.points > b.points) return -1;
+					else if (b.points > a.points) return 1;
+					else return 0;
+				}
+			);
+			setUserListJSX(
+				sortedUserList.map((user: LeaderboardUser) => {
+					return (
+						<div className='featured-profile' key={user.username}>
+							<p>{user.username}</p>
+							<p>TODO: fakultet</p>
+							<p>Kolegijalnost: {user.points}</p>
+						</div>
+					);
+				})
+			);
+		});
+	}, []);
+
 	return (
 		<div className='profile-list-container'>
-			<h1>Kolege</h1>
-			{/* TODO: foreach... */}
-			<div className='featured-profile'>
-				<p className='name'>Ime</p>
-				<p className='points'>*100000</p>
-				<p className='faculty'>Fakultet</p>
-			</div>
+			<h1>Tablica</h1>
+			{userListJSX}
 		</div>
 	);
 };

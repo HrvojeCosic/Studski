@@ -8,19 +8,16 @@
 		margin: 0;
 	}
 	.featured-profile {
-		display: grid;
-		grid-template-columns: auto auto;
 		width: 100%;
 		background-color: var(--secondary-bg-color);
+		border: 1px solid var(--border-color);
 		border-radius: 5px;
+		margin: 5px 0;
 	}
 	p {
 		margin: 0;
-		padding: 10px;
+		padding: 5px;
 		min-width: 0;
 		min-height: 0;
-	}
-	.points {
-		text-align: right;
 	}
 }

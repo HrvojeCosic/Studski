@@ -114,3 +114,16 @@ module.exports.logUserIn = async (req, res) => {
 		return;
 	}
 };
+
+module.exports.getUserList = (req, res) => {
+	let userList = [];
+	User.findAll()
+		.then(result => {
+			result.map(user => {
+				userList.push({ username: user.username, points: user.points }); //TODO: add user's faculty
+			});
+		})
+		.then(() => {
+			return res.status(200).json({ userList });
+		});
+};

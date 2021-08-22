@@ -25,7 +25,7 @@ export const HomePage: React.FC = () => {
 				withCredentials: true,
 			})
 			.catch(err => {
-				console.log(err.response);
+				console.log('Korisnik nije prijavljen');
 			});
 		//GET FACULTIES
 		fetch('faculties.json')
