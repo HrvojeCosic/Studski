@@ -36,8 +36,8 @@ module.exports.createNewPost = async (req, res) => {
 
 	try {
 		let authorID;
-		await User.findOne({ where: { username: postAuthor } }).then(res => {
-			authorID = res.dataValues.id;
+		await User.findOne({ where: { username: postAuthor } }).then(result => {
+			authorID = result.dataValues.id;
 		});
 
 		try {
@@ -53,10 +53,11 @@ module.exports.createNewPost = async (req, res) => {
 				.status(200)
 				.json({ title: 'success', message: 'Materijal uspješno objavljen.' });
 			return;
-		} catch {
-			respondError();
+		} catch (err) {
+			respondError(res);
+			console.log(err);
 		}
 	} catch {
-		respondError();
+		respondError(res);
 	}
 };
