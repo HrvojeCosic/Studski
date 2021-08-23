@@ -49,11 +49,16 @@ module.exports.createNewPost = async (req, res) => {
 				points: 0,
 				fileName,
 			});
-			res
-				.status(200)
-				.json({ title: 'success', message: 'Materijal uspješno objavljen.' });
+			const updatedUserPosts = await Post.findAll({
+				where: { author: postAuthor },
+			});
+			res.status(200).json({
+				title: 'success',
+				message: 'Materijal uspješno objavljen.',
+				updatedUserPosts,
+			});
 			return;
-		} catch (err) {
+		} catch {
 			respondError(res);
 		}
 	} catch {
