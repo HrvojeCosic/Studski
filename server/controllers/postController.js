@@ -41,6 +41,7 @@ module.exports.createNewPost = async (req, res) => {
 		});
 
 		try {
+			let newPost;
 			await Post.create({
 				user_id: authorID,
 				author: postAuthor,
@@ -48,14 +49,16 @@ module.exports.createNewPost = async (req, res) => {
 				title: postTitle,
 				points: 0,
 				fileName,
+			}).then(post => {
+				const { author, faculty, title, points, createdAt, id } =
+					post.dataValues;
+				newPost = { author, faculty, title, points, createdAt, id };
 			});
-			const updatedUserPosts = await Post.findAll({
-				where: { author: postAuthor },
-			});
+
 			res.status(200).json({
 				title: 'success',
 				message: 'Materijal uspješno objavljen.',
-				updatedUserPosts,
+				newPost,
 			});
 			return;
 		} catch {

@@ -1,4 +1,16 @@
-import { User } from '../actions/user';
+export interface Post {
+	author: string;
+	faculty: string;
+	title: string;
+	points: number;
+	createdAt: Date;
+	id: number;
+}
+export interface User {
+	username: string;
+	points: number;
+	posts: Array<Post>;
+}
 
 const initialUserState = {
 	username: '',
@@ -16,6 +28,8 @@ const userReducer = (state: User = initialUserState, action: any) => {
 			return action.payload.user;
 		case 'GET_USER':
 			return action.payload.sid;
+		case 'UPDATE_POSTS':
+			return action.payload.currentUser;
 		default:
 			return state;
 	}

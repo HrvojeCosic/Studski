@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import FormData from 'form-data';
 import Cookies from 'js-cookie';
 import { Faculty } from '../FacultyList/FacultyList';
 import './CreatePostForm.scss';
+import { updateUserPosts } from '../../actions/user';
 
 export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	faculties,
@@ -11,6 +13,8 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	const [formFacultyList, setFormFacultyList] = useState([
 		<option key='defaultKey'></option>,
 	]);
+
+	const dispatch = useDispatch();
 
 	const [postAuthor, setPostAuthor] = useState('');
 	const [postTitle, setPostTitle] = useState('');
@@ -82,6 +86,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		axios
 			.post('http://localhost:8000/api/posts/submit', formData)
 			.then(res => {
+				dispatch(updateUserPosts('add post', res.data.newPost));
 				setErrorMsg(res.data.message);
 			})
 			.catch(err => {
