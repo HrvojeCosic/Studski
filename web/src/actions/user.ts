@@ -5,18 +5,6 @@ interface SetUserAction {
 	type: string;
 	payload: object;
 }
-interface GetUserAction {
-	type: string;
-	payload: {
-		sid: string;
-		currentUser: {
-			username: string;
-			points: number;
-			posts: Array<Post>;
-		};
-	};
-}
-
 export const setUser = (
 	username: string,
 	points: number,
@@ -37,18 +25,6 @@ export const removeUser = () => {
 	return {
 		type: 'REMOVE_USER',
 		payload: { user: '' },
-	};
-};
-export const getUser = (): GetUserAction => {
-	let sid = Cookies.get('connect.sid');
-	!sid ? (sid = '') : (sid = sid);
-
-	const currentUserStringified = localStorage.getItem('currentUser') || '{}';
-	const currentUser: User = JSON.parse(currentUserStringified);
-
-	return {
-		type: 'GET_USER',
-		payload: { sid, currentUser },
 	};
 };
 export const updateUserPosts = (updateType: string, newPost?: Post) => {

@@ -1,17 +1,31 @@
 import React from 'react';
-import './LoggedUserInfo.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../../actions/user';
+import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
 import { State } from '../../index';
+import { Post } from '../../reducers/user';
+import './LoggedUserInfo.scss';
+
+export const getUser = () => {
+	let sid = Cookies.get('connect.sid');
+	if (!sid) sid = '';
+
+	const stringifiedCurrentUser = localStorage.getItem('currentUser');
+	if (!stringifiedCurrentUser) {
+		return { username: '', points: 0, posts: [], sid };
+	}
+
+	let currentUser = JSON.parse(stringifiedCurrentUser);
+	currentUser.sid = sid;
+	return currentUser;
+};
 
 export const LoggedUserInfo: React.FC = () => {
-	const dispatch = useDispatch();
-	const { username, points, posts } = dispatch(getUser()).payload.currentUser;
+	const { username, points, posts } = getUser();
 	useSelector((state: State) => state);
 
 	let userPosts;
 	if (posts) {
-		userPosts = posts.map(post => {
+		userPosts = posts.map((post: Post) => {
 			return (
 				//TODO: style this div:
 				<div key={post.id} className='user-post'>

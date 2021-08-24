@@ -2,13 +2,17 @@ import React from 'react';
 import './NavBar.scss';
 import logo from '../../design-tokens/images/7wnfJt.png';
 import { Link } from 'react-router-dom';
-import { getUser, removeUser } from '../../actions/user';
+import { removeUser } from '../../actions/user';
 import { useDispatch, useSelector } from 'react-redux';
+import { User } from '../../reducers/user';
+import { getUser } from '../LoggedUserInfo/LoggedUserInfo';
+
+let loggedInUser: User;
 
 export const NavBar: React.FC<{
 	toggleShowPostForm: any;
 }> = ({ toggleShowPostForm }) => {
-	const loggedIn = getUser();
+	loggedInUser = getUser();
 	useSelector(state => state);
 
 	const dispatch = useDispatch();
@@ -20,7 +24,7 @@ export const NavBar: React.FC<{
 		<div className='header'>
 			<img src={logo} alt='logo-img' />
 			<input type='text' className='search' />
-			{loggedIn.payload.sid.length === 0 ? (
+			{loggedInUser.sid.length === 0 ? (
 				<div className='header-btns'>
 					<div className='mode-toggle-btn' />
 					<Link to='/prijava' className='link'>

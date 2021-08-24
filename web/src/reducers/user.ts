@@ -10,12 +10,13 @@ export interface User {
 	username: string;
 	points: number;
 	posts: Array<Post>;
+	sid: string;
 }
-
 const initialUserState = {
 	username: '',
 	points: 0,
 	posts: [],
+	sid: '',
 };
 
 //TODO: reducer & action TYPES
@@ -26,8 +27,6 @@ const userReducer = (state: User = initialUserState, action: any) => {
 			return { username, points, posts };
 		case 'REMOVE_USER':
 			return action.payload.user;
-		case 'GET_USER':
-			return action.payload.sid;
 		case 'UPDATE_POSTS':
 			return action.payload.currentUser;
 		default:
