@@ -1,4 +1,6 @@
 .logged-user-info-container {
+  width: 400px;
+  margin: 10px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -17,6 +19,10 @@
       grid-template-columns: auto auto;
 }
 
+.logged-user-info-container .logged-user-main h3 {
+  margin: 0;
+}
+
 .logged-user-info-container .logged-user-main .user-numbers {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -25,5 +31,17 @@
 
 .logged-user-info-container .logged-user-main .user-numbers p {
   padding: 0 10px;
+  margin: 0;
+}
+
+.logged-user-info-container .announce-text {
+  margin: 10px 0 0 0;
+}
+
+.logged-user-info-container .user-post {
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
 }
 /*# sourceMappingURL=LoggedUserInfo.css.map */

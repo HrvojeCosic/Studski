@@ -1,0 +1,90 @@
+.post-form-container {
+  width: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.post-form-container h3 {
+  color: var(--contrast-text-color);
+  font-family: var(--main-font-family);
+  margin-bottom: 5px;
+}
+
+.post-form-container select {
+  height: 30px;
+  font-size: 16px;
+  font-family: var(--main-font-family);
+  color: var(--primary-text-color);
+  border: 1px solid var(--primary-bg-color);
+  border-radius: 5px;
+  background-color: var(--secondary-bg-color);
+  outline: none;
+}
+
+.post-form-container select:focus {
+  border: 1px solid var(--border-color);
+}
+
+.post-form-container input[placeholder='Naslov'] {
+  height: 25px;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 4px;
+  background-color: var(--secondary-bg-color);
+  border: 1px solid var(--primary-bg-color);
+  color: var(--primary-text-color);
+  font-size: 16px;
+  outline: none;
+}
+
+.post-form-container input[placeholder='Naslov']:focus {
+  border: 1px solid var(--border-color);
+}
+
+.post-form-container input[name='datoteka'] {
+  color: var(--contrast-text-color);
+  outline: none;
+}
+
+.post-form-container input[name='datoteka']::-webkit-file-upload-button {
+  display: none;
+}
+
+.post-form-container input[name='datoteka']::before {
+  display: inline-block;
+  margin-right: 20px;
+  content: 'Odaberi datoteku';
+  color: var(--contrast-text-color);
+  font-size: 15px;
+  background-color: var(--secondary-bg-color);
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+}
+
+.post-form-container input[name='datoteka']:hover::before {
+  border-color: var(--border-color);
+}
+
+.post-form-container button {
+  height: 30px;
+  margin: 10px 0;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--secondary);
+  color: var(--contrast-text-color);
+  cursor: pointer;
+  outline: none;
+}
+
+.post-form-container button:focus {
+  background-color: var(--secondary-bg-color);
+}
+/*# sourceMappingURL=CreatePostForm.css.map */

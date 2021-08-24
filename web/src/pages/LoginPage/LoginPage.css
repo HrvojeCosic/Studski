@@ -1,0 +1,110 @@
+.log-in-page-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  font-family: var(--main-font-family);
+  background: var(--primary-bg-color);
+  padding: 10%;
+}
+
+.log-in-page-container h2 {
+  margin: 0 0 20px;
+  color: var(--primary-text-color);
+  font-size: 40px;
+}
+
+.log-in-page-container input {
+  outline: none;
+  display: block;
+  width: 600px;
+  margin: 0 0 20px;
+  padding: 15px 15px;
+  border: 1px solid var(--border-color);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: var(--secondary-bg-color);
+  color: var(--contrast-text-color);
+  font-size: 14px;
+  font-weight: 400;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+
+.log-in-page-container input:focus {
+  border: 1px solid var(--logo-color);
+  color: var(--primary-text-color);
+}
+
+.log-in-page-container button {
+  cursor: pointer;
+  background-color: var(--logo-color);
+  width: 100%;
+  padding: 10px 15px;
+  border: 0;
+  color: var(--secondary-bg-color);
+  font-size: 14px;
+  outline: none;
+}
+
+.log-in-page-container button:hover {
+  background: #5192ca;
+}
+
+.log-in-page-container button:focus {
+  border: 1px solid var(--border-color);
+}
+
+.log-in-page-container .links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+
+.log-in-page-container .back-to-hp {
+  margin-top: 20px;
+  color: var(--logo-color);
+  text-decoration: none;
+  outline: none;
+  width: 230px;
+}
+
+.log-in-page-container .back-to-hp:focus {
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+}
+
+.log-in-page-container .sign-up-instead {
+  color: var(--logo-color);
+  text-decoration: none;
+  width: 230px;
+  outline: none;
+}
+
+.log-in-page-container .sign-up-instead:focus {
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+}
+
+.log-in-page-container .log-in-contents-container {
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+/*# sourceMappingURL=LoginPage.css.map */

@@ -1,0 +1,97 @@
+.sign-up-page-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  font-family: var(--main-font-family);
+  background: var(--primary-bg-color);
+  padding: 10%;
+}
+
+.sign-up-page-container h2 {
+  margin: 0 0 20px;
+  color: var(--primary-text-color);
+  font-size: 40px;
+}
+
+.sign-up-page-container input {
+  outline: none;
+  display: block;
+  width: 600px;
+  margin: 0 0 20px;
+  padding: 15px 15px;
+  border: 1px solid var(--border-color);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: var(--secondary-bg-color);
+  color: var(--contrast-text-color);
+  font-size: 14px;
+  font-weight: 400;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+
+.sign-up-page-container input:focus {
+  border: 1px solid var(--logo-color);
+  color: var(--primary-text-color);
+}
+
+.sign-up-page-container .links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+
+.sign-up-page-container .sign-up-btn {
+  cursor: pointer;
+  color: var(--secondary-bg-color);
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 14px;
+  background-color: var(--logo-color);
+  text-decoration: none;
+  outline: none;
+}
+
+.sign-up-page-container .sign-up-btn:focus {
+  border: 1px solid var(--border-color);
+}
+
+.sign-up-page-container .sign-up-btn:hover {
+  background-color: #5192ca;
+}
+
+.sign-up-page-container .back-to-hp {
+  color: var(--logo-color);
+  text-decoration: none;
+  outline: none;
+  width: 230px;
+}
+
+.sign-up-page-container .back-to-hp:focus {
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+}
+
+.sign-up-page-container .sign-up-contents-container {
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+/*# sourceMappingURL=RegisterPage.css.map */

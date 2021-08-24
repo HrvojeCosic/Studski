@@ -53,22 +53,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		setFile(e.target.files[0]);
 	};
 
-	const submitPost = (e: any) => {
-		const formData = new FormData();
-
-		if (!postTitle || !facultyArea || !facultyName || !file) {
-			setErrorMsg('Sva polja moraju biti ispunjena.');
-			return;
-		}
-
-		formData.append('postAuthor', postAuthor);
-		formData.append('facultyName', facultyName);
-		formData.append('facultyArea', facultyArea);
-		formData.append('postTitle', postTitle);
-		formData.append('fileName', file.name);
-		formData.append('file', file);
-
-		//AUTHORIZE
+	const authorizeUser = () => {
 		const sid = Cookies.get('connect.sid');
 		axios
 			.post('http://localhost:8000/api/users/checkAuth', sid, {
@@ -81,8 +66,22 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 				setErrorMsg(err.response.data.error);
 				return;
 			});
+	};
 
-		//REQUEST
+	const requstPostSubmission = () => {
+		const formData = new FormData();
+
+		if (!postTitle || !facultyArea || !facultyName || !file) {
+			setErrorMsg('Sva polja moraju biti ispunjena.');
+			return;
+		}
+		formData.append('postAuthor', postAuthor);
+		formData.append('facultyName', facultyName);
+		formData.append('facultyArea', facultyArea);
+		formData.append('postTitle', postTitle);
+		formData.append('fileName', file.name);
+		formData.append('file', file);
+
 		axios
 			.post('http://localhost:8000/api/posts/submit', formData)
 			.then(res => {
@@ -94,10 +93,22 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 			});
 	};
 
+	const submitPost = () => {
+		authorizeUser();
+		requstPostSubmission();
+
+		setPostTitle('');
+		setPostAuthor('');
+		setFacultyArea('');
+		setFacultyName('');
+		// setFile(null); TODO: uncomment when custom file name is done
+	};
+
 	return (
 		<div className='post-form-container'>
 			<h3>Grad</h3>
 			<select
+				value={facultyArea}
 				onChange={e => {
 					updateFacultyList(e.target.value);
 					setFacultyArea(e.target.value);
@@ -108,6 +119,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 			</select>
 			<h3>Fakultet</h3>
 			<select
+				value={facultyName}
 				onChange={e => {
 					setFacultyName(e.target.value);
 				}}
@@ -119,15 +131,16 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 			<input
 				type='text'
 				placeholder='Naslov'
+				value={postTitle}
 				onChange={e => setPostTitle(e.target.value)}
 			/>
 			<input
-				type='file'
+				type='file' //TODO: make custom file name and "Choose File"
 				onChange={e => {
 					handleFile(e);
 				}}
 			/>
-			<button onClick={e => submitPost(e)}>Objavi</button>
+			<button onClick={e => submitPost()}>Objavi</button>
 			<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>{errorMsg}</p>
 		</div>
 	);

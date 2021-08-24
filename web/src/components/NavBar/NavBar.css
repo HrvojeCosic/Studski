@@ -50,6 +50,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 250px;
   font-weight: 600;
   font-size: 13px;
   font-family: var(--main-font-family);
@@ -57,10 +61,17 @@
 }
 
 .header-btns .sign-up-btn,
-.header-btns .log-in-btn {
+.header-btns .log-in-btn,
+.header-btns .log-out-btn {
   padding: 0 15px;
   text-decoration: none;
   cursor: pointer;
+}
+
+.header-btns .log-out-btn {
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
 }
 
 .header-btns .mode-toggle-btn {
@@ -68,6 +79,12 @@
   background-size: 40px;
   height: 40px;
   width: 40px;
+  cursor: pointer;
+}
+
+.header-btns .link {
+  text-decoration: none;
+  color: inherit;
   cursor: pointer;
 }
 /*# sourceMappingURL=NavBar.css.map */
