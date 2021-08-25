@@ -16,12 +16,12 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 
 	const dispatch = useDispatch();
 
-	const [postAuthor, setPostAuthor] = useState('');
 	const [postTitle, setPostTitle] = useState('');
 	const [facultyArea, setFacultyArea] = useState('');
 	const [facultyName, setFacultyName] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
 	const [file, setFile] = useState<any>(null);
+	let postAuthor = '';
 
 	const facultyAreasSet = new Set(
 		faculties.map(faculty => {
@@ -53,28 +53,28 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		setFile(e.target.files[0]);
 	};
 
-	const authorizeUser = () => {
+	const submitPost = async () => {
 		const sid = Cookies.get('connect.sid');
-		axios
+		//AUTHORIZE & SET postAuthor
+		await axios
 			.post('http://localhost:8000/api/users/checkAuth', sid, {
 				withCredentials: true,
 			})
 			.then(res => {
-				setPostAuthor(res.data.message);
+				postAuthor = res.data.message;
 			})
 			.catch(err => {
 				setErrorMsg(err.response.data.error);
 				return;
 			});
-	};
 
-	const requstPostSubmission = () => {
 		const formData = new FormData();
 
 		if (!postTitle || !facultyArea || !facultyName || !file) {
 			setErrorMsg('Sva polja moraju biti ispunjena.');
 			return;
 		}
+
 		formData.append('postAuthor', postAuthor);
 		formData.append('facultyName', facultyName);
 		formData.append('facultyArea', facultyArea);
@@ -90,17 +90,13 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 			})
 			.catch(err => {
 				setErrorMsg(err.response.data.error);
+				return;
 			});
-	};
-
-	const submitPost = () => {
-		authorizeUser();
-		requstPostSubmission();
 
 		setPostTitle('');
-		setPostAuthor('');
 		setFacultyArea('');
 		setFacultyName('');
+		postAuthor = '';
 		// setFile(null); TODO: uncomment when custom file name is done
 	};
 
