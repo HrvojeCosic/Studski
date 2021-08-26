@@ -115,15 +115,37 @@ module.exports.logUserIn = async (req, res) => {
 	}
 };
 
-module.exports.getUserList = (req, res) => {
+module.exports.getUserList = async (req, res) => {
 	let userList = [];
-	User.findAll()
-		.then(result => {
-			result.map(user => {
-				userList.push({ username: user.username, points: user.points }); //TODO: add user's faculty
-			});
-		})
-		.then(() => {
-			return res.status(200).json({ userList });
+
+	const users = await User.findAll();
+	for (let i = 0; i < users.length; i++) {
+		let userFaculty = '';
+		let numberOfInstances = 0;
+
+		const allUserPosts = await Post.findAll({
+			where: { author: users[i].username },
 		});
+
+		//DETERMINE USER'S FACULTY BY NUMBER OF POSTS THAT INCLUDE THAT FACULTY
+		allUserPosts.forEach(post => {
+			const mainFaculty = post.faculty;
+			const sameNames = allUserPosts.filter(
+				post => post.dataValues.faculty === mainFaculty
+			);
+			currentNumberOfInstances = sameNames.length;
+
+			if (currentNumberOfInstances > numberOfInstances) {
+				numberOfInstances = currentNumberOfInstances;
+				userFaculty = sameNames[0].dataValues.faculty;
+			}
+		});
+
+		userList.push({
+			username: users[i].username,
+			points: users[i].points,
+			faculty: userFaculty,
+		});
+	}
+	return res.status(200).json({ userList });
 };

@@ -7,6 +7,7 @@ import './ProfileList.scss';
 interface LeaderboardUser {
 	points: number;
 	username: string;
+	faculty: string;
 }
 
 export const ProfileList: React.FC = () => {
@@ -24,8 +25,9 @@ export const ProfileList: React.FC = () => {
 				sortedUserList.map((user: LeaderboardUser) => {
 					return (
 						<div className='featured-profile' key={user.username}>
-							<p>{user.username}</p>
-							<p>TODO: fakultet</p>
+							<p>
+								{user.username} {user.faculty ? '- ' + user.faculty : ''}
+							</p>
 							<p>Kolegijalnost: {user.points}</p>
 						</div>
 					);
