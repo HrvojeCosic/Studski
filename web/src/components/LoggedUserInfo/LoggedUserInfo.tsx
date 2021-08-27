@@ -2,7 +2,6 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
 import { State } from '../../index';
-import { Post } from '../../reducers/user';
 import './LoggedUserInfo.scss';
 
 export const getUser = () => {
@@ -23,21 +22,26 @@ export const LoggedUserInfo: React.FC = () => {
 	const { username, points, posts } = getUser();
 	useSelector((state: State) => state);
 
-	let userPosts;
+	let userPosts = [];
+	let limit;
+
+	//TODO: fix "unique key prop" warning - probably caused by this if-else
 	if (posts) {
-		userPosts = posts.map((post: Post) => {
-			return (
+		posts.length > 5 ? (limit = 5) : (limit = posts.length);
+		//LAST FIVE POSTS
+		for (let i = posts.length - 1; i > posts.length - limit - 1; i--) {
+			userPosts.push(
 				//TODO: style this div:
-				<div key={post.id} className='user-post'>
-					<p>Autor: {post.author}</p>
-					<p>Fakultet: {post.faculty}</p>
-					<p>Naslov: {post.title}</p>
-					<p>Kolegijalnost: {post.points}</p>
-					<p>Datum: {post.createdAt}</p>
+				<div key={posts[i].id} className='user-post'>
+					<p>Autor: {posts[i].author}</p>
+					<p>Fakultet: {posts[i].faculty}</p>
+					<p>Naslov: {posts[i].title}</p>
+					<p>Kolegijalnost: {posts[i].points}</p>
+					<p>Datum: {posts[i].createdAt}</p>
 				</div>
 			);
-		});
-	} else userPosts = {};
+		}
+	} else userPosts = [];
 
 	return (
 		<div className='logged-user-info-container'>
@@ -53,8 +57,17 @@ export const LoggedUserInfo: React.FC = () => {
 						</div>
 					</div>
 					<div className='logged-user-list'>
-						<h3 className='announce-text'>Objave:</h3>
+						{userPosts.length > 0 ? (
+							<h3 className='announce-text'>Zadnje objave:</h3>
+						) : (
+							''
+						)}
 						{userPosts}
+						{limit === 5 ? (
+							<a href={`/korisnik/${username}`}>Sve objave...</a>
+						) : (
+							''
+						)}
 					</div>
 				</div>
 			)}
