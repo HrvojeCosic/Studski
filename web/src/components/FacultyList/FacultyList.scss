@@ -3,4 +3,10 @@
 	flex-grow: 0.7;
 	font-family: var(--main-font-family);
 	color: var(--contrast-text-color);
+	a {
+		display: block;
+		text-decoration: none;
+		color: var(--primary-text-color);
+		margin: 10px 0;
+	}
 }

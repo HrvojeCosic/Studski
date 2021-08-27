@@ -53,7 +53,11 @@ export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
 		(obj: OrganizedFacultyList, index: number) => {
 			const facultiesForArea = obj.facultiesInArea_org.map(
 				(faculty: string, FacIndex: number) => {
-					return <p key={FacIndex}>{faculty}</p>;
+					return (
+						<a href={`/fakultet/${faculty}`} key={FacIndex}>
+							{faculty}
+						</a>
+					);
 				}
 			);
 			return (
