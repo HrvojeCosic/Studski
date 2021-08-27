@@ -5,6 +5,7 @@ export interface Post {
 	points: number;
 	createdAt: Date;
 	id: number;
+	fileName: string;
 }
 export interface User {
 	username: string;

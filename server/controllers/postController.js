@@ -68,3 +68,16 @@ module.exports.createNewPost = async (req, res) => {
 		respondError(res);
 	}
 };
+
+module.exports.getFacultyPosts = (req, res) => {
+	const facultyName = req.params.facultyName;
+	Post.findAll({ where: { faculty: facultyName } })
+		.then(posts => {
+			res.status(200).json(posts);
+		})
+		.catch(() => {
+			res
+				.status(404)
+				.json({ title: 'error', error: 'Neuspješno dohvaćanje materijala.' });
+		});
+};
