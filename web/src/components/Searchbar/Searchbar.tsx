@@ -27,7 +27,7 @@ export const Searchbar: React.FC<Props> = ({ searchFaculties }) => {
 			<input
 				type='text'
 				className='search'
-				placeholder='Potraži fakultet'
+				placeholder='Potraži fakultete'
 				onChange={e => {
 					search(e);
 				}}
