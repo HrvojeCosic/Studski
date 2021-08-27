@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { FacultyList } from '../../components/FacultyList/FacultyList';
+import { Faculty, FacultyList } from '../../components/FacultyList/FacultyList';
 import { LoggedUserInfo } from '../../components/LoggedUserInfo/LoggedUserInfo';
 import { NavBar } from '../../components/NavBar/NavBar';
 import { ProfileList } from '../../components/ProfileList/ProfileList';
@@ -10,7 +10,7 @@ import { CreatePostForm } from '../../components/CreatePostForm/CreatePostForm';
 
 export const HomePage: React.FC = () => {
 	const [showForm, setShowForm] = useState(false);
-	const [faculties, setFaculties] = useState([]);
+	const [faculties, setFaculties] = useState<Array<Faculty>>([]);
 
 	//NavBar prop:
 	const toggleShowPostForm = () => {
@@ -39,7 +39,12 @@ export const HomePage: React.FC = () => {
 	}, []);
 	return (
 		<div>
-			<NavBar toggleShowPostForm={toggleShowPostForm} />
+			<NavBar
+				toggleShowPostForm={toggleShowPostForm}
+				searchFaculties={(updatedFaculties: Array<Faculty>) => {
+					setFaculties(updatedFaculties);
+				}}
+			/>
 			<div className='home-page-body'>
 				<FacultyList faculties={faculties} />
 				<ProfileList />
