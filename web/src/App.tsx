@@ -5,6 +5,7 @@ import '../src/design-tokens/_scss-variables.scss';
 import { RegisterPage } from './pages/RegisterPage/RegisterPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { FacultyPostsPage } from './pages/FacultyPostsPage/FacultyPostsPage';
+import { UserProfilePage } from './pages/UserProfilePage/UserProfilePage';
 
 const App: React.FC = () => {
 	return (
@@ -18,6 +19,11 @@ const App: React.FC = () => {
 						exact
 						path='/fakultet/:facultyName'
 						component={FacultyPostsPage}
+					></Route>
+					<Route
+						exact
+						path='/korisnik/:username'
+						component={UserProfilePage}
 					></Route>
 				</Switch>
 			</div>

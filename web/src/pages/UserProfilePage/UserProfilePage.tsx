@@ -3,15 +3,15 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router';
 import { Post } from '../../reducers/user';
-import './FacultyPostsPage.scss';
+import './UserProfilePage.scss';
 
-interface FacultyParams {
-	facultyName: string;
+interface UserParams {
+	username: string;
 }
 
-export const FacultyPostsPage: React.FC = () => {
+export const UserProfilePage: React.FC = () => {
 	const [posts, setPosts] = useState<Array<Post>>([]);
-	const params: FacultyParams = useParams();
+	const params: UserParams = useParams();
 
 	const postsJSX = posts.map((post: Post) => {
 		return (
@@ -27,9 +27,7 @@ export const FacultyPostsPage: React.FC = () => {
 
 	useEffect(() => {
 		axios
-			.get(
-				`http://localhost:8000/api/posts/getFacultyPosts/${params.facultyName}`
-			)
+			.get(`http://localhost:8000/api/posts/getUserPosts/${params.username}`)
 			.then(res => {
 				setPosts(res.data);
 			})
@@ -40,7 +38,7 @@ export const FacultyPostsPage: React.FC = () => {
 
 	return (
 		<div>
-			<h1>{params.facultyName}</h1>
+			<h1>{params.username}</h1>
 			{postsJSX}
 		</div>
 	);

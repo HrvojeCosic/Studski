@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './ProfileList.scss';
 
 interface LeaderboardUser {
@@ -24,12 +25,17 @@ export const ProfileList: React.FC = () => {
 			setUserListJSX(
 				sortedUserList.map((user: LeaderboardUser) => {
 					return (
-						<div className='featured-profile' key={user.username}>
-							<p>
-								{user.username} {user.faculty ? '- ' + user.faculty : ''}
-							</p>
-							<p>Kolegijalnost: {user.points}</p>
-						</div>
+						<Link
+							to={`/korisnik/${user.username}`}
+							className='profile-list-container'
+						>
+							<div className='featured-profile' key={user.username}>
+								<p>
+									{user.username} {user.faculty ? '- ' + user.faculty : ''}
+								</p>
+								<p>Kolegijalnost: {user.points}</p>
+							</div>
+						</Link>
 					);
 				})
 			);

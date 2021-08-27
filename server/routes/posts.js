@@ -8,4 +8,5 @@ const postController = require('../controllers/postController');
 
 router.post('/submit', upload.single('file'), postController.createNewPost);
 router.get('/getFacultyPosts/:facultyName', postController.getFacultyPosts);
+router.get('/getUserPosts/:username', postController.getUserPosts);
 module.exports = router;
