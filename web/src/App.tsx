@@ -6,6 +6,7 @@ import { RegisterPage } from './pages/RegisterPage/RegisterPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { FacultyPostsPage } from './pages/FacultyPostsPage/FacultyPostsPage';
 import { UserProfilePage } from './pages/UserProfilePage/UserProfilePage';
+import { PostPage } from './pages/PostPage/PostPage';
 
 const App: React.FC = () => {
 	return (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
 						path='/korisnik/:username'
 						component={UserProfilePage}
 					></Route>
+					<Route exact path='/materijal/:postID' component={PostPage}></Route>
 				</Switch>
 			</div>
 		</Router>

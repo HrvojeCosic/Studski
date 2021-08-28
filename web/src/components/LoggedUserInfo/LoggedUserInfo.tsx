@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
 import { State } from '../../index';
 import './LoggedUserInfo.scss';
+import { Link } from 'react-router-dom';
 
 export const getUser = () => {
 	let sid = Cookies.get('connect.sid');
@@ -25,20 +26,22 @@ export const LoggedUserInfo: React.FC = () => {
 	let userPosts = [];
 	let limit;
 
-	//TODO: fix "unique key prop" warning - probably caused by this if-else
+	//TODO: fix "unique key prop" warning - probably caused somewhere in this if-else
 	if (posts) {
 		posts.length > 5 ? (limit = 5) : (limit = posts.length);
 		//LAST FIVE POSTS
 		for (let i = posts.length - 1; i > posts.length - limit - 1; i--) {
 			userPosts.push(
 				//TODO: style this div:
-				<div key={posts[i].id} className='user-post'>
-					<p>Autor: {posts[i].author}</p>
-					<p>Fakultet: {posts[i].faculty}</p>
-					<p>Naslov: {posts[i].title}</p>
-					<p>Kolegijalnost: {posts[i].points}</p>
-					<p>Datum: {posts[i].createdAt}</p>
-				</div>
+				<Link to={`/materijal/${posts[i].id}`} key={posts[i].id}>
+					<div className='user-post'>
+						<p>Autor: {posts[i].author}</p>
+						<p>Fakultet: {posts[i].faculty}</p>
+						<p>Naslov: {posts[i].title}</p>
+						<p>Kolegijalnost: {posts[i].points}</p>
+						<p>Datum: {posts[i].createdAt}</p>
+					</div>
+				</Link>
 			);
 		}
 	} else userPosts = [];

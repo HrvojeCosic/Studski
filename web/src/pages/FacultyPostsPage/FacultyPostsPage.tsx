@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Post } from '../../reducers/user';
 import './FacultyPostsPage.scss';
 
@@ -15,13 +16,13 @@ export const FacultyPostsPage: React.FC = () => {
 
 	const postsJSX = posts.map((post: Post) => {
 		return (
-			<div key={post.id}>
+			<Link to={`/materijal/${post.id}`} key={post.id}>
 				<p>{post.author}</p>
 				<p>{post.title}</p>
 				<p>{post.points}</p>
 				<p>{post.createdAt}</p>
 				<p>{post.fileName}</p>
-			</div>
+			</Link>
 		);
 	});
 
@@ -31,7 +32,7 @@ export const FacultyPostsPage: React.FC = () => {
 				`http://localhost:8000/api/posts/getFacultyPosts/${params.facultyName}`
 			)
 			.then(res => {
-				setPosts(res.data);
+				setPosts(res.data.posts);
 			})
 			.catch(err => {
 				alert(err.response.data.error); //TODO: create an error page OR redirect back

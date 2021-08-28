@@ -79,7 +79,7 @@ module.exports.getFacultyPosts = (req, res) => {
 					error: 'Taj fakultet ne postoji ili još nema niti jednu objavu.',
 				});
 			}
-			res.status(200).json(posts);
+			res.status(200).json({ title: 'success', posts });
 		})
 		.catch(() => {
 			return res
@@ -101,7 +101,21 @@ module.exports.getUserPosts = async (req, res) => {
 
 	Post.findAll({ where: { author: username } })
 		.then(posts => {
-			res.status(200).json(posts);
+			res.status(200).json({ title: 'success', posts });
+		})
+		.catch(() => {
+			return res
+				.status(404)
+				.json({ title: 'error', error: 'Neuspješno dohvaćanje materijala.' });
+		});
+};
+
+module.exports.getSinglePost = (req, res) => {
+	const postID = req.params.postID;
+
+	Post.findOne({ where: { id: postID } })
+		.then(post => {
+			res.status(200).json({ title: 'success', post });
 		})
 		.catch(() => {
 			return res
