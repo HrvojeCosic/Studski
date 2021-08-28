@@ -29,6 +29,12 @@ const User = db.define('user', {
 			return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY');
 		},
 	},
+	updatedAt: {
+		type: Sequelize.DATE,
+		get() {
+			return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY');
+		},
+	},
 	points: {
 		type: Sequelize.INTEGER,
 		defaultValue: 0,

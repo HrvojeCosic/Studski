@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
+const moment = require('moment');
 
 const respondError = res => {
 	res.status(400).json({
@@ -19,7 +20,7 @@ module.exports.createNewPost = async (req, res) => {
 			faculty: facultyName,
 			title: postTitle,
 			author: postAuthor,
-			fileName: fileName,
+			fileName,
 		},
 	})
 		.then(result => {
@@ -50,8 +51,8 @@ module.exports.createNewPost = async (req, res) => {
 				points: 0,
 				fileName,
 			}).then(post => {
-				const { author, faculty, title, points, createdAt, id } =
-					post.dataValues;
+				let { author, faculty, title, points, createdAt, id } = post.dataValues;
+				createdAt = moment(createdAt).format('DD/MM/YYYY');
 				newPost = { author, faculty, title, points, createdAt, id };
 			});
 
@@ -115,6 +116,12 @@ module.exports.getSinglePost = (req, res) => {
 
 	Post.findOne({ where: { id: postID } })
 		.then(post => {
+			if (!post) {
+				return res.status(404).json({
+					title: 'error',
+					error: 'Taj objava ne postoji.',
+				});
+			}
 			res.status(200).json({ title: 'success', post });
 		})
 		.catch(() => {
