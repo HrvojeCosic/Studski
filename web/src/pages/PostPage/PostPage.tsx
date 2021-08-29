@@ -42,10 +42,16 @@ export const PostPage: React.FC = () => {
 	const voteForPost = () => {
 		const postID = params.postID;
 		const postAuthor = post.author;
+
+		const user = localStorage.getItem('currentUser');
+		let voter = '';
+		if (user) voter = JSON.parse(user).username;
+
 		axios
 			.patch('http://localhost:8000/api/posts/voteForPost', {
 				postID,
 				postAuthor,
+				voter,
 			})
 			.then(res => {
 				if (res.data.message === 'upvoted') {

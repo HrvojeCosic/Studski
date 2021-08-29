@@ -133,38 +133,56 @@ module.exports.getSinglePost = (req, res) => {
 };
 
 module.exports.voteForPost = async (req, res) => {
-	const { postID, postAuthor } = req.body;
-	let userID;
-	//GET USER'S ID
-	await User.findOne({ where: { username: postAuthor } }).then(user => {
-		userID = user.dataValues.id;
+	const { postID, postAuthor, voter } = req.body;
+	//GET VOTER'S ID
+	await User.findOne({ where: { username: voter } }).then(voter => {
+		voterID = voter.dataValues.id;
 	});
 
-	Voted.findOne({ where: { user_id: userID, post_id: postID } }).then(
+	Voted.findOne({ where: { user_id: voterID, post_id: postID } }).then(
 		result => {
 			if (result) {
 				result.destroy().then(() => {
-					Post.findOne({ where: { id: postID } }).then(post => {
-						post.points -= 1;
-						post.save();
-					});
+					alterPostPoints(postID, 'deduct points');
+					alterUserPoints(postAuthor, 'deduct points');
 					res.status(200).json({ message: 'downvoted' });
 				});
 			} else {
 				Voted.create({
-					user_id: userID,
+					user_id: voterID,
 					post_id: postID,
 				}).then(() => {
-					Post.findOne({ where: { id: postID } }).then(post => {
-						post.points += 1;
-						post.save();
-					});
+					alterPostPoints(postID, 'add points');
+					alterUserPoints(postAuthor, 'add points');
 					res.status(200).json({ message: 'upvoted' });
 				});
 			}
 		}
 	);
-	return res.status(200);
+};
+const alterUserPoints = (username, type) => {
+	User.findOne({ where: { username } }).then(user => {
+		if (type === 'add points') {
+			user.points += 1;
+			user.save();
+		} else if (type === 'deduct points') {
+			user.points -= 1;
+			user.save();
+		}
+	});
+};
+const alterPostPoints = (postID, type) => {
+	if (type === 'add points') {
+		Post.findOne({ where: { id: postID } }).then(post => {
+			post.points += 1;
+			post.save();
+		});
+	} else if (type === 'deduct points') {
+		Post.findOne({ where: { id: postID } }).then(post => {
+			post.points -= 1;
+			post.save();
+		});
+	}
 };
 
 module.exports.checkVoted = async (req, res) => {
