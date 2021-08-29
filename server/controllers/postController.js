@@ -166,3 +166,20 @@ module.exports.voteForPost = async (req, res) => {
 	);
 	return res.status(200);
 };
+
+module.exports.checkVoted = async (req, res) => {
+	const { username, postID } = req.params;
+
+	User.findOne({ where: { username } })
+		.then(user => {
+			Voted.findOne({
+				where: { user_id: user.dataValues.id, post_id: postID },
+			}).then(voted => {
+				if (voted) res.status(200).json({ message: 'already voted' });
+				else if (!voted) res.status(200).json({ message: 'has not voted' });
+			});
+		})
+		.catch(() => {
+			return res.status(404).json({ message: 'user not logged in' });
+		});
+};

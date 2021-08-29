@@ -10,7 +10,8 @@ interface PostParams {
 
 export const PostPage: React.FC = () => {
 	const [post, setPost] = useState<any>({}); //"any" BECAUSE OF createdAt PROPERTY IN Post TYPE‚
-	const [voted, setVoted] = useState('');
+	const [voted, setVoted] = useState<boolean>(false);
+	const [allowVote, setAllowVote] = useState<boolean>(true);
 	const params: PostParams = useParams();
 
 	useEffect(() => {
@@ -21,6 +22,20 @@ export const PostPage: React.FC = () => {
 			})
 			.catch(err => {
 				alert(err.response.data.error); //TODO: create an error page OR redirect back
+			});
+
+		const user = localStorage.getItem('currentUser');
+		let username;
+		if (!user) setAllowVote(false);
+		else if (user) username = JSON.parse(user).username;
+
+		axios
+			.get(
+				`http://localhost:8000/api/posts/checkVoted/${username}/${params.postID}`
+			)
+			.then(res => {
+				if (res.data.message === 'already voted') setVoted(true);
+				else if (res.data.message === 'has not voted') setVoted(false);
 			});
 	}, []);
 
@@ -33,9 +48,13 @@ export const PostPage: React.FC = () => {
 				postAuthor,
 			})
 			.then(res => {
-				setVoted(res.data.message);
-				if (res.data.message === 'upvoted') post.points++;
-				else if (res.data.message === 'downvoted') post.points--;
+				if (res.data.message === 'upvoted') {
+					post.points++;
+					setVoted(true);
+				} else if (res.data.message === 'downvoted') {
+					post.points--;
+					setVoted(false);
+				}
 			})
 			.catch(err => {
 				console.log(err);
@@ -49,8 +68,14 @@ export const PostPage: React.FC = () => {
 			<p>{post.title}</p>
 			<p>{post.createdAt}</p>
 			<p>{post.fileName}</p>
-			<div onClick={voteForPost}>KORISNO - {voted}</div>
-			<p>{post.points}</p>
+			{allowVote ? (
+				<div onClick={voteForPost}>
+					<p className={voted ? 'voted' : 'non-voted'}>KORISNO</p>
+				</div>
+			) : (
+				''
+			)}
+			<p>broj bodova: {post.points}</p>
 		</div>
 	);
 };
