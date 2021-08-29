@@ -9,7 +9,8 @@ interface PostParams {
 }
 
 export const PostPage: React.FC = () => {
-	const [post, setPost] = useState<any>({}); //"any" BECAUSE OF createdAt PROPERTY IN Post TYPE
+	const [post, setPost] = useState<any>({}); //"any" BECAUSE OF createdAt PROPERTY IN Post TYPE‚
+	const [voted, setVoted] = useState('');
 	const params: PostParams = useParams();
 
 	useEffect(() => {
@@ -23,14 +24,33 @@ export const PostPage: React.FC = () => {
 			});
 	}, []);
 
+	const voteForPost = () => {
+		const postID = params.postID;
+		const postAuthor = post.author;
+		axios
+			.patch('http://localhost:8000/api/posts/voteForPost', {
+				postID,
+				postAuthor,
+			})
+			.then(res => {
+				setVoted(res.data.message);
+				if (res.data.message === 'upvoted') post.points++;
+				else if (res.data.message === 'downvoted') post.points--;
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
+
 	return (
 		<div>
 			<p>{post.author}</p>
 			<p>{post.faculty}</p>
 			<p>{post.title}</p>
-			<p>{post.points}</p>
 			<p>{post.createdAt}</p>
 			<p>{post.fileName}</p>
+			<div onClick={voteForPost}>KORISNO - {voted}</div>
+			<p>{post.points}</p>
 		</div>
 	);
 };

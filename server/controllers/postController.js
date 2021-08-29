@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
 const moment = require('moment');
+const Voted = require('../models/Voted');
 
 const respondError = res => {
 	res.status(400).json({
@@ -129,4 +130,39 @@ module.exports.getSinglePost = (req, res) => {
 				.status(404)
 				.json({ title: 'error', error: 'Neuspješno dohvaćanje materijala.' });
 		});
+};
+
+module.exports.voteForPost = async (req, res) => {
+	const { postID, postAuthor } = req.body;
+	let userID;
+	//GET USER'S ID
+	await User.findOne({ where: { username: postAuthor } }).then(user => {
+		userID = user.dataValues.id;
+	});
+
+	Voted.findOne({ where: { user_id: userID, post_id: postID } }).then(
+		result => {
+			if (result) {
+				result.destroy().then(() => {
+					Post.findOne({ where: { id: postID } }).then(post => {
+						post.points -= 1;
+						post.save();
+					});
+					res.status(200).json({ message: 'downvoted' });
+				});
+			} else {
+				Voted.create({
+					user_id: userID,
+					post_id: postID,
+				}).then(() => {
+					Post.findOne({ where: { id: postID } }).then(post => {
+						post.points += 1;
+						post.save();
+					});
+					res.status(200).json({ message: 'upvoted' });
+				});
+			}
+		}
+	);
+	return res.status(200);
 };
