@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
+import { updateUserPosts } from '../../actions/user';
 import './PostPage.scss';
 
 interface PostParams {
@@ -13,6 +15,8 @@ export const PostPage: React.FC = () => {
 	const [voted, setVoted] = useState<boolean>(false);
 	const [allowVote, setAllowVote] = useState<boolean>(true);
 	const params: PostParams = useParams();
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		axios
@@ -57,13 +61,12 @@ export const PostPage: React.FC = () => {
 				if (res.data.message === 'upvoted') {
 					post.points++;
 					setVoted(true);
+					dispatch(updateUserPosts('upvote post', undefined, post));
 				} else if (res.data.message === 'downvoted') {
 					post.points--;
 					setVoted(false);
+					dispatch(updateUserPosts('downvote post', undefined, post));
 				}
-			})
-			.catch(err => {
-				console.log(err);
 			});
 	};
 

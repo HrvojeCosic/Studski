@@ -27,12 +27,32 @@ export const removeUser = () => {
 		payload: { user: '' },
 	};
 };
-export const updateUserPosts = (updateType: string, newPost?: Post) => {
+export const updateUserPosts = (
+	updateType: string,
+	newPost?: Post,
+	updatedPost?: Post
+) => {
 	const currentUserStringified = localStorage.getItem('currentUser') || '{}';
 	const currentUser: User = JSON.parse(currentUserStringified);
 
 	if (updateType === 'add post' && newPost) {
 		currentUser.posts.push(newPost);
+	}
+
+	if (updateType === 'upvote post' && updatedPost) {
+		const indexToUpdate = currentUser.posts.findIndex(
+			post => post.id === updatedPost.id
+		);
+		currentUser.posts[indexToUpdate].points++;
+		currentUser.points++;
+	}
+
+	if (updateType === 'downvote post' && updatedPost) {
+		const indexToUpdate = currentUser.posts.findIndex(
+			post => post.id === updatedPost.id
+		);
+		currentUser.posts[indexToUpdate].points--;
+		currentUser.points--;
 	}
 
 	localStorage.setItem('currentUser', JSON.stringify(currentUser));
