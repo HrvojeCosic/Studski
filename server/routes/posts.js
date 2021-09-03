@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
-const multer = require('multer');
-const upload = multer({ dest: './fileUploads/' });
-
 const postController = require('../controllers/postController');
+const upload = require('../controllers/fileUploader');
 
 router.post('/submit', upload.array('files'), postController.createNewPost);
 router.get('/getFacultyPosts/:facultyName', postController.getFacultyPosts);
