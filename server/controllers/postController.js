@@ -2,6 +2,7 @@ const Post = require('../models/Post');
 const User = require('../models/User');
 const moment = require('moment');
 const Voted = require('../models/Voted');
+const File = require('../models/File');
 
 const respondError = res => {
 	res.status(400).json({
@@ -53,6 +54,13 @@ module.exports.createNewPost = async (req, res) => {
 				let { author, faculty, title, points, createdAt, id } = post.dataValues;
 				createdAt = moment(createdAt).format('DD/MM/YYYY');
 				newPost = { author, faculty, title, points, createdAt, id };
+			});
+
+			req.files.forEach(async file => {
+				await File.create({
+					fileName: file.filename,
+					post_id: newPost.id,
+				});
 			});
 
 			res.status(200).json({

@@ -1,6 +1,7 @@
 const moment = require('moment');
 const Sequelize = require('sequelize');
 const db = require('../db');
+const File = require('./File');
 
 const Post = db.define('post', {
 	author: {
@@ -34,6 +35,12 @@ const Post = db.define('post', {
 	},
 
 	//todo(?): dodati smjer, predmet
+});
+
+Post.hasMany(File, {
+	foreignKey: { name: 'post_id', allowNull: false },
+	onDelete: 'CASCADE',
+	onUpdate: 'CASCADE',
 });
 
 module.exports = Post;
