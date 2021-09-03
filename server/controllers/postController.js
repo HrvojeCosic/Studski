@@ -121,21 +121,23 @@ module.exports.getUserPosts = async (req, res) => {
 module.exports.getSinglePost = (req, res) => {
 	const postID = req.params.postID;
 
-	Post.findOne({ where: { id: postID } })
-		.then(post => {
-			if (!post) {
-				return res.status(404).json({
-					title: 'error',
-					error: 'Taj objava ne postoji.',
-				});
-			}
-			res.status(200).json({ title: 'success', post });
-		})
-		.catch(() => {
-			return res
-				.status(404)
-				.json({ title: 'error', error: 'Neuspješno dohvaćanje materijala.' });
-		});
+	File.findAll({ where: { post_id: postID } }).then(files => {
+		Post.findOne({ where: { id: postID } })
+			.then(post => {
+				if (!post) {
+					return res.status(404).json({
+						title: 'error',
+						error: 'Taj objava ne postoji.',
+					});
+				}
+				res.status(200).json({ title: 'success', post, files });
+			})
+			.catch(() => {
+				return res
+					.status(404)
+					.json({ title: 'error', error: 'Neuspješno dohvaćanje materijala.' });
+			});
+	});
 };
 
 module.exports.voteForPost = async (req, res) => {

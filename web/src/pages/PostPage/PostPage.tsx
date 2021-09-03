@@ -10,10 +10,19 @@ interface PostParams {
 	postID: string;
 }
 
+interface PostFile {
+	createdAt: string;
+	fileName: string;
+	id: number;
+	post_id: number;
+	updatedAt: string;
+}
+
 export const PostPage: React.FC = () => {
 	const [post, setPost] = useState<any>({}); //"any" BECAUSE OF createdAt PROPERTY IN Post TYPE‚
 	const [voted, setVoted] = useState<boolean>(false);
 	const [allowVote, setAllowVote] = useState<boolean>(true);
+	const [files, setFiles] = useState<Array<PostFile>>([]);
 	const params: PostParams = useParams();
 
 	const dispatch = useDispatch();
@@ -23,6 +32,7 @@ export const PostPage: React.FC = () => {
 			.get(`http://localhost:8000/api/posts/getPost/${params.postID}`)
 			.then(res => {
 				setPost(res.data.post);
+				setFiles(res.data.files);
 			})
 			.catch(err => {
 				alert(err.response.data.error); //TODO: create an error page OR redirect back
@@ -70,6 +80,16 @@ export const PostPage: React.FC = () => {
 			});
 	};
 
+	const filesJSX = files.map(file => {
+		const readableFileName = file.fileName.slice(0, -13); //Date.now() ADDS EXACTLY 13 CHARACTERS
+
+		return (
+			<div>
+				<div>{readableFileName}</div>
+			</div>
+		);
+	});
+
 	return (
 		<div>
 			<p>{post.author}</p>
@@ -85,6 +105,7 @@ export const PostPage: React.FC = () => {
 				''
 			)}
 			<p>broj bodova: {post.points}</p>
+			{filesJSX}
 		</div>
 	);
 };
