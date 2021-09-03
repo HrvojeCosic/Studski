@@ -20,10 +20,6 @@ const Post = db.define('post', {
 		allownull: false,
 		default: 0,
 	},
-	fileName: {
-		type: Sequelize.STRING,
-		allownull: false,
-	},
 	createdAt: {
 		type: Sequelize.DATE,
 		get() {

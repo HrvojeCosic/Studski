@@ -12,7 +12,6 @@ const respondError = res => {
 };
 
 module.exports.createNewPost = async (req, res) => {
-	console.log(req.files);
 	const { facultyName, postTitle, postAuthor } = req.body;
 
 	//CHECK FOR EXISTING POST
@@ -50,7 +49,6 @@ module.exports.createNewPost = async (req, res) => {
 				faculty: facultyName,
 				title: postTitle,
 				points: 0,
-				fileName,
 			}).then(post => {
 				let { author, faculty, title, points, createdAt, id } = post.dataValues;
 				createdAt = moment(createdAt).format('DD/MM/YYYY');
