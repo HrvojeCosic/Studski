@@ -12,7 +12,8 @@ const respondError = res => {
 };
 
 module.exports.createNewPost = async (req, res) => {
-	const { facultyName, postTitle, postAuthor, fileName } = req.body;
+	console.log(req.files);
+	const { facultyName, postTitle, postAuthor } = req.body;
 
 	//CHECK FOR EXISTING POST
 	let postExists = false;
@@ -21,7 +22,6 @@ module.exports.createNewPost = async (req, res) => {
 			faculty: facultyName,
 			title: postTitle,
 			author: postAuthor,
-			fileName,
 		},
 	})
 		.then(result => {

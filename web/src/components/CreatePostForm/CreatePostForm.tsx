@@ -20,7 +20,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	const [facultyArea, setFacultyArea] = useState('');
 	const [facultyName, setFacultyName] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
-	const [file, setFile] = useState<any>(null);
+	const [files, setFiles] = useState<any>(null);
 	let postAuthor = '';
 
 	const facultyAreasSet = new Set(
@@ -50,7 +50,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	};
 
 	const handleFile = (e: any) => {
-		setFile(e.target.files[0]);
+		setFiles(e.target.files);
 	};
 
 	const submitPost = async () => {
@@ -70,7 +70,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 
 		const formData = new FormData();
 
-		if (!postTitle || !facultyArea || !facultyName || !file) {
+		if (!postTitle || !facultyArea || !facultyName || !files) {
 			setErrorMsg('Sva polja moraju biti ispunjena.');
 			return;
 		}
@@ -79,8 +79,9 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		formData.append('facultyName', facultyName);
 		formData.append('facultyArea', facultyArea);
 		formData.append('postTitle', postTitle);
-		formData.append('fileName', file.name);
-		formData.append('file', file);
+		for (let i = 0; i < files.length; i++) {
+			formData.append('files', files[i]); //form data doesn't support FileList object so it has to be done this way
+		}
 
 		axios
 			.post('http://localhost:8000/api/posts/submit', formData)
@@ -131,6 +132,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 				onChange={e => setPostTitle(e.target.value)}
 			/>
 			<input
+				multiple
 				type='file' //TODO: make custom file name and "Choose File"
 				onChange={e => {
 					handleFile(e);
