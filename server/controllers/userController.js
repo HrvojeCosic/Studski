@@ -84,15 +84,15 @@ module.exports.logUserIn = async (req, res) => {
 			return;
 		}
 		const userInfo = await User.findOne({ where: { username: username } });
-		const userPosts = await Post.findAll({
-			where: { user_id: userInfo.dataValues.id },
-		});
 		if (!userInfo) {
 			res
 				.status(403)
 				.json({ title: 'error', error: 'Taj korisnik ne postoji.' });
 			return;
 		}
+		const userPosts = await Post.findAll({
+			where: { user_id: userInfo.dataValues.id },
+		});
 		let correctPassword = false;
 		correctPassword = await bcrypt.compare(password, userInfo.password);
 		if (!correctPassword) {
