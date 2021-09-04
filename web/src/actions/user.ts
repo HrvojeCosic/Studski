@@ -40,22 +40,6 @@ export const updateUserPosts = (
 		currentUser.posts.push(newPost);
 	}
 
-	if (updateType === 'upvote post' && updatedPost) {
-		const indexToUpdate = currentUser.posts.findIndex(
-			post => post.id === updatedPost.id
-		);
-		currentUser.posts[indexToUpdate].points++;
-		currentUser.points++;
-	}
-
-	if (updateType === 'downvote post' && updatedPost) {
-		const indexToUpdate = currentUser.posts.findIndex(
-			post => post.id === updatedPost.id
-		);
-		currentUser.posts[indexToUpdate].points--;
-		currentUser.points--;
-	}
-
 	if (updateType === 'delete post' && deletedPost) {
 		const newPostsArray = currentUser.posts.filter(
 			post => post.id !== deletedPost.id
