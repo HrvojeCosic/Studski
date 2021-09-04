@@ -80,12 +80,22 @@ export const PostPage: React.FC = () => {
 			});
 	};
 
+	const downloadFile = (fileName: string) => {
+		window.open(`http://localhost:8000/api/posts/downloadFile/${fileName}`);
+	};
+
 	const filesJSX = files.map(file => {
 		const readableFileName = file.fileName.slice(0, -13); //Date.now() ADDS EXACTLY 13 CHARACTERS
 
 		return (
 			<div>
-				<div>{readableFileName}</div>
+				<div
+					onClick={() => {
+						downloadFile(file.fileName);
+					}}
+				>
+					{readableFileName}
+				</div>
 			</div>
 		);
 	});

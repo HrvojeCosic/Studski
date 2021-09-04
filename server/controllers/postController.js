@@ -1,6 +1,7 @@
+const path = require('path');
+const moment = require('moment');
 const Post = require('../models/Post');
 const User = require('../models/User');
-const moment = require('moment');
 const Voted = require('../models/Voted');
 const File = require('../models/File');
 
@@ -208,4 +209,10 @@ module.exports.checkVoted = async (req, res) => {
 		.catch(() => {
 			return res.status(404).json({ message: 'user not logged in' });
 		});
+};
+
+module.exports.downloadFile = (req, res) => {
+	const file = path.join(__dirname, '../fileUploads', req.params.fileName);
+	const correctFileName = req.params.fileName.slice(0, -13);
+	res.download(file, correctFileName);
 };
