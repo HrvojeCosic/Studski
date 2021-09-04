@@ -216,3 +216,10 @@ module.exports.downloadFile = (req, res) => {
 	const correctFileName = req.params.fileName.slice(0, -13);
 	res.download(file, correctFileName);
 };
+
+module.exports.deletePost = (req, res) => {
+	Post.findOne({ where: { id: req.params.postID } }).then(async post => {
+		await post.destroy();
+		res.status(200).json({ message: 'post deleted', post });
+	});
+};

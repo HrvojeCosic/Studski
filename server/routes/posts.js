@@ -9,5 +9,6 @@ router.get('/getUserPosts/:username', postController.getUserPosts);
 router.get('/getPost/:postID', postController.getSinglePost);
 router.get('/downloadFile/:fileName', postController.downloadFile);
 router.get('/checkVoted/:username/:postID', postController.checkVoted);
+router.delete('/deletePost/:postID', postController.deletePost);
 router.patch('/voteForPost', postController.voteForPost);
 module.exports = router;

@@ -1,8 +1,9 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { updateUserPosts } from '../../actions/user';
 import './PostPage.scss';
 
@@ -21,13 +22,25 @@ interface PostFile {
 export const PostPage: React.FC = () => {
 	const [post, setPost] = useState<any>({}); //"any" BECAUSE OF createdAt PROPERTY IN Post TYPE‚
 	const [voted, setVoted] = useState<boolean>(false);
-	const [allowVote, setAllowVote] = useState<boolean>(true);
 	const [files, setFiles] = useState<Array<PostFile>>([]);
+	const [allowVote, setAllowVote] = useState<boolean>(true);
+	const [deletePrompt, setDeletePrompt] = useState<boolean>(false);
+	const [visitor, setVisitor] = useState<string>('');
 	const params: PostParams = useParams();
 
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
+		const sid = Cookies.get('connect.sid');
+		axios
+			.post('http://localhost:8000/api/users/checkAuth', sid, {
+				withCredentials: true,
+			})
+			.then(res => {
+				setVisitor(res.data.message);
+			});
+
 		axios
 			.get(`http://localhost:8000/api/posts/getPost/${params.postID}`)
 			.then(res => {
@@ -84,6 +97,17 @@ export const PostPage: React.FC = () => {
 		window.open(`http://localhost:8000/api/posts/downloadFile/${fileName}`);
 	};
 
+	const deletePost = () => {
+		axios
+			.delete(`http://localhost:8000/api/posts/deletePost/${params.postID}`)
+			.then(res => {
+				dispatch(
+					updateUserPosts('delete post', undefined, undefined, res.data.post)
+				);
+				history.push('/');
+			});
+	};
+
 	const filesJSX = files.map(file => {
 		const readableFileName = file.fileName.slice(0, -13); //Date.now() ADDS EXACTLY 13 CHARACTERS
 
@@ -106,8 +130,7 @@ export const PostPage: React.FC = () => {
 			<p>{post.faculty}</p>
 			<p>{post.title}</p>
 			<p>{post.createdAt}</p>
-			<p>{post.fileName}</p>
-			{allowVote ? (
+			{allowVote && post.author !== visitor ? (
 				<div onClick={voteForPost}>
 					<p className={voted ? 'voted' : 'non-voted'}>KORISNO</p>
 				</div>
@@ -116,6 +139,34 @@ export const PostPage: React.FC = () => {
 			)}
 			<p>broj bodova: {post.points}</p>
 			{filesJSX}
+
+			{visitor === post.author ? (
+				<div
+					onClick={() => {
+						setDeletePrompt(true);
+					}}
+				>
+					Obriši objavu
+				</div>
+			) : (
+				''
+			)}
+
+			{deletePrompt ? (
+				<div>
+					<h3>Jeste li sigurni da želite obrisati ovu objavu?</h3>
+					<div onClick={deletePost}>DA</div>
+					<div
+						onClick={() => {
+							setDeletePrompt(false);
+						}}
+					>
+						NE
+					</div>
+				</div>
+			) : (
+				''
+			)}
 		</div>
 	);
 };

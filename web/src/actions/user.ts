@@ -30,7 +30,8 @@ export const removeUser = () => {
 export const updateUserPosts = (
 	updateType: string,
 	newPost?: Post,
-	updatedPost?: Post
+	updatedPost?: Post,
+	deletedPost?: Post
 ) => {
 	const currentUserStringified = localStorage.getItem('currentUser') || '{}';
 	const currentUser: User = JSON.parse(currentUserStringified);
@@ -53,6 +54,13 @@ export const updateUserPosts = (
 		);
 		currentUser.posts[indexToUpdate].points--;
 		currentUser.points--;
+	}
+
+	if (updateType === 'delete post' && deletedPost) {
+		const newPostsArray = currentUser.posts.filter(
+			post => post.id !== deletedPost.id
+		);
+		currentUser.posts = newPostsArray;
 	}
 
 	localStorage.setItem('currentUser', JSON.stringify(currentUser));
