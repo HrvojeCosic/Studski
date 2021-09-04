@@ -37,7 +37,7 @@ export const FacultyPostsPage: React.FC = () => {
 			.catch(err => {
 				alert(err.response.data.error); //TODO: create an error page OR redirect back
 			});
-	}, []);
+	}, [params.facultyName]);
 
 	return (
 		<div>

@@ -26,7 +26,6 @@ export const LoggedUserInfo: React.FC = () => {
 	let userPosts = [];
 	let limit;
 
-	//TODO: fix "unique key prop" warning - probably caused somewhere in this if-else
 	if (posts) {
 		posts.length > 5 ? (limit = 5) : (limit = posts.length);
 		//LAST FIVE POSTS

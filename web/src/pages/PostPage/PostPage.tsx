@@ -51,7 +51,7 @@ export const PostPage: React.FC = () => {
 				if (res.data.message === 'already voted') setVoted(true);
 				else if (res.data.message === 'has not voted') setVoted(false);
 			});
-	}, []);
+	}, [params.postID]);
 
 	const voteForPost = () => {
 		const postID = params.postID;
@@ -88,7 +88,7 @@ export const PostPage: React.FC = () => {
 		const readableFileName = file.fileName.slice(0, -13); //Date.now() ADDS EXACTLY 13 CHARACTERS
 
 		return (
-			<div>
+			<div key={file.id}>
 				<div
 					onClick={() => {
 						downloadFile(file.fileName);

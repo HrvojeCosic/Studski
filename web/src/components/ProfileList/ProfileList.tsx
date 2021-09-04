@@ -28,6 +28,7 @@ export const ProfileList: React.FC = () => {
 						<Link
 							to={`/korisnik/${user.username}`}
 							className='profile-list-container'
+							key={user.username}
 						>
 							<div className='featured-profile' key={user.username}>
 								<p>

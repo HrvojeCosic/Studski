@@ -34,7 +34,7 @@ export const UserProfilePage: React.FC = () => {
 			.catch(err => {
 				alert(err.response.data.error); //TODO: create an error page OR redirect back
 			});
-	}, []);
+	}, [params.username]);
 
 	return (
 		<div>
