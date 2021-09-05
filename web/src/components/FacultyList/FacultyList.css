@@ -1,9 +1,18 @@
 .faculty-list-container {
-  width: 100px;
-  -webkit-box-flex: 0.7;
-      -ms-flex-positive: 0.7;
-          flex-grow: 0.7;
+  border: 1px solid pink;
   font-family: var(--main-font-family);
   color: var(--contrast-text-color);
+}
+
+.faculty-list-container .faculty-area {
+  cursor: pointer;
+}
+
+.faculty-list-container .link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border: 1px solid black;
+  margin: 10px;
 }
 /*# sourceMappingURL=FacultyList.css.map */

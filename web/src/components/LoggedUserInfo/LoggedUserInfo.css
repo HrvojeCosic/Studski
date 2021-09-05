@@ -1,5 +1,5 @@
 .logged-user-info-container {
-  width: 400px;
+  border: 1px solid pink;
   margin: 10px 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -43,5 +43,10 @@
   padding: 5px;
   border: 1px solid var(--border-color);
   border-radius: 3px;
+}
+
+.logged-user-info-container a {
+  text-decoration: none;
+  color: var(--contrast-text-color);
 }
 /*# sourceMappingURL=LoggedUserInfo.css.map */

@@ -1,12 +1,15 @@
 .faculty-list-container {
-	width: 100px;
-	flex-grow: 0.7;
+	border: 1px solid pink;
 	font-family: var(--main-font-family);
 	color: var(--contrast-text-color);
-	a {
-		display: block;
+	.faculty-area {
+		cursor: pointer;
+	}
+	.link {
 		text-decoration: none;
-		color: var(--primary-text-color);
-		margin: 10px 0;
+		color: inherit;
+		cursor: pointer;
+		border: 1px solid black;
+		margin: 10px;
 	}
 }

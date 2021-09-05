@@ -1,10 +1,8 @@
 .profile-list-container {
+	border: 1px solid pink;
 	font-family: var(--main-font-family);
 	color: var(--contrast-text-color);
 	text-decoration: none;
-	flex-shrink: 0;
-	min-width: 400px;
-	flex-grow: 2;
 	h1 {
 		margin: 0;
 	}

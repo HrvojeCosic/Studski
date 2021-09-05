@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './FacultyList.scss';
 
 export interface Faculty {
@@ -14,12 +15,48 @@ interface OrganizedFacultyList {
 export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
 	faculties,
 }) => {
+	const [selectedAreaFaculties, setSelectedAreaFaculties] =
+		useState<Array<JSX.Element>>();
+
 	//GET UNIQUE AREAS(GRADOVI) IN SEPERATE ARRAY
 	const facultyAreas: string[] = [];
 	faculties.forEach((faculty: Faculty) => {
 		if (!facultyAreas.includes(faculty.grad)) {
 			facultyAreas.push(faculty.grad);
 		}
+	});
+
+	const changeSelectedArea = (area: string) => {
+		const selectedArea = facultyAreas.find(facultyArea => facultyArea === area);
+		const facultiesInSelectedArea = organizedFacultyList.find(
+			faculty => faculty.facultyArea_org === selectedArea
+		);
+
+		let facultiesInAreaJSX;
+		if (facultiesInSelectedArea) {
+			facultiesInAreaJSX = facultiesInSelectedArea.facultiesInArea_org.map(
+				faculty => {
+					return (
+						<Link to={`/fakultet/${faculty}`} key={faculty} className='link'>
+							{faculty}
+						</Link>
+					);
+				}
+			);
+			setSelectedAreaFaculties(facultiesInAreaJSX);
+		}
+	};
+
+	const facultyAreasJSX = facultyAreas.map(area => {
+		return (
+			<div
+				key={area}
+				onClick={() => changeSelectedArea(area)}
+				className='faculty-area'
+			>
+				{area}
+			</div>
+		);
 	});
 
 	//FOR EACH AREA(GRAD), MAKE AN OBJECT & STORE IT IN organizedFacultyList[]
@@ -48,31 +85,11 @@ export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
 		organizedFacultyList = sortedFacultyList;
 	});
 
-	//DISPLAY AREA AND LIST OF FACULTIES IN AREA, IN A SEPERATE <div>
-	const facultyListJSX = organizedFacultyList.map(
-		(obj: OrganizedFacultyList, index: number) => {
-			const facultiesForArea = obj.facultiesInArea_org.map(
-				(faculty: string, FacIndex: number) => {
-					return (
-						<a href={`/fakultet/${faculty}`} key={FacIndex}>
-							{faculty}
-						</a>
-					);
-				}
-			);
-			return (
-				<div key={index}>
-					<h3>{obj.facultyArea_org}</h3>
-					{facultiesForArea}
-				</div>
-			);
-		}
-	);
-
 	return (
 		<div className='faculty-list-container'>
 			<h1>Fakulteti</h1>
-			{facultyListJSX}
+			{facultyAreasJSX}
+			{selectedAreaFaculties}
 		</div>
 	);
 };
