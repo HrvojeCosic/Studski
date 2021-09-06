@@ -33,7 +33,6 @@ export const LoggedUserInfo: React.FC = () => {
 			userPosts.push(
 				<Link to={`/materijal/${posts[i].id}`} key={posts[i].id}>
 					<div className='user-post'>
-						<p>Autor: {posts[i].author}</p>
 						<p>Fakultet: {posts[i].faculty}</p>
 						<p>Naslov: {posts[i].title}</p>
 						<p>Kolegijalnost: {posts[i].points}</p>
