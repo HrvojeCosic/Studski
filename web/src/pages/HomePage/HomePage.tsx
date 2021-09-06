@@ -46,8 +46,8 @@ export const HomePage: React.FC = () => {
 				}}
 			/>
 			<div className='home-page-body'>
-				<FacultyList faculties={faculties} />
 				<ProfileList />
+				<FacultyList faculties={faculties} />
 				{showForm ? (
 					<CreatePostForm faculties={faculties} />
 				) : (

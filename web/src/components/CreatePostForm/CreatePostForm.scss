@@ -1,7 +1,7 @@
 .post-form-container {
-	width: 400px;
 	display: flex;
 	flex-direction: column;
+	max-width: 400px;
 	h3 {
 		color: var(--contrast-text-color);
 		font-family: var(--main-font-family);
@@ -9,7 +9,7 @@
 	}
 	select {
 		height: 30px;
-		font-size: 16px;
+		font-size: 15px;
 		font-family: var(--main-font-family);
 		color: var(--primary-text-color);
 		border: 1px solid var(--primary-bg-color);
@@ -28,7 +28,7 @@
 		background-color: var(--secondary-bg-color);
 		border: 1px solid var(--primary-bg-color);
 		color: var(--primary-text-color);
-		font-size: 16px;
+		font-size: 15px;
 		outline: none;
 		&:focus {
 			border: 1px solid var(--border-color);
@@ -47,7 +47,6 @@
 			margin-right: 20px;
 			content: 'Odaberi datoteku';
 			color: var(--contrast-text-color);
-			font-size: 15px;
 			background-color: var(--secondary-bg-color);
 			border: 1px solid black;
 			border-radius: 3px;

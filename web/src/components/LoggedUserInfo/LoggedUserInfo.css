@@ -1,6 +1,4 @@
 .logged-user-info-container {
-  border: 1px solid pink;
-  margin: 10px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8,7 +6,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  max-width: 400px;
   font-family: var(--main-font-family);
+  font-size: 15px;
   color: var(--contrast-text-color);
 }
 
@@ -43,6 +43,7 @@
   padding: 5px;
   border: 1px solid var(--border-color);
   border-radius: 3px;
+  word-wrap: break-word;
 }
 
 .logged-user-info-container a {

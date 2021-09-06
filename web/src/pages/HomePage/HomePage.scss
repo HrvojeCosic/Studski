@@ -1,11 +1,14 @@
 .home-page-body {
+	display: flex;
+	gap: 30px;
 	min-height: 100vh;
 	justify-content: space-between;
 	background-color: var(--primary-bg-color);
-	> * {
-		padding: 20px;
-	}
 	h1 {
 		margin: 0;
+	}
+	> * {
+		margin: 10px;
+		flex-basis: 100%;
 	}
 }

@@ -1,5 +1,4 @@
 .post-form-container {
-  width: 400px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7,6 +6,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  max-width: 400px;
 }
 
 .post-form-container h3 {
@@ -17,7 +17,7 @@
 
 .post-form-container select {
   height: 30px;
-  font-size: 16px;
+  font-size: 15px;
   font-family: var(--main-font-family);
   color: var(--primary-text-color);
   border: 1px solid var(--primary-bg-color);
@@ -38,7 +38,7 @@
   background-color: var(--secondary-bg-color);
   border: 1px solid var(--primary-bg-color);
   color: var(--primary-text-color);
-  font-size: 16px;
+  font-size: 15px;
   outline: none;
 }
 
@@ -60,7 +60,6 @@
   margin-right: 20px;
   content: 'Odaberi datoteku';
   color: var(--contrast-text-color);
-  font-size: 15px;
   background-color: var(--secondary-bg-color);
   border: 1px solid black;
   border-radius: 3px;

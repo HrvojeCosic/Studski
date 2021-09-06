@@ -1,9 +1,9 @@
 .logged-user-info-container {
-	border: 1px solid pink;
-	margin: 10px 0;
 	display: flex;
 	flex-direction: column;
+	max-width: 400px;
 	font-family: var(--main-font-family);
+	font-size: 15px;
 	color: var(--contrast-text-color);
 	.logged-user-main {
 		display: grid;
@@ -27,6 +27,7 @@
 		padding: 5px;
 		border: 1px solid var(--border-color);
 		border-radius: 3px;
+		word-wrap: break-word;
 	}
 	a {
 		text-decoration: none;

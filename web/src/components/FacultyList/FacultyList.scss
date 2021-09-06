@@ -1,15 +1,37 @@
-.faculty-list-container {
-	border: 1px solid pink;
-	font-family: var(--main-font-family);
-	color: var(--contrast-text-color);
-	.faculty-area {
-		cursor: pointer;
+.main-container {
+	h1 {
+		text-align: center;
 	}
-	.link {
-		text-decoration: none;
-		color: inherit;
-		cursor: pointer;
-		border: 1px solid black;
-		margin: 10px;
+	color: var(--contrast-text-color);
+	font-family: var(--main-font-family);
+	.faculty-areas-container {
+		justify-content: center;
+		display: flex;
+		flex-wrap: wrap;
+		.faculty-area {
+			background-color: var(--secondary-bg-color);
+			border: 1px solid black;
+			cursor: pointer;
+			margin: 10px;
+			padding: 30px;
+		}
+	}
+	.faculties-container {
+		display: flex;
+		align-items: stretch;
+		flex-wrap: wrap;
+		.link {
+			width: 100%;
+			background-color: var(--secondary-bg-color);
+			border: 1px solid black;
+			padding: 10px;
+			margin: 10px;
+			text-decoration: none;
+			color: inherit;
+			cursor: pointer;
+		}
+		.exit-btn {
+			cursor: pointer;
+		}
 	}
 }

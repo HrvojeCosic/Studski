@@ -86,10 +86,22 @@ export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
 	});
 
 	return (
-		<div className='faculty-list-container'>
+		<div className='main-container'>
 			<h1>Fakulteti</h1>
-			{facultyAreasJSX}
-			{selectedAreaFaculties}
+
+			{selectedAreaFaculties ? (
+				<div className='faculties-container'>
+					<div
+						className='exit-btn'
+						onClick={() => setSelectedAreaFaculties(undefined)}
+					>
+						X
+					</div>
+					{selectedAreaFaculties}
+				</div>
+			) : (
+				<div className='faculty-areas-container'>{facultyAreasJSX}</div>
+			)}
 		</div>
 	);
 };

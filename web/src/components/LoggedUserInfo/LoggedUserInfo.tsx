@@ -31,7 +31,6 @@ export const LoggedUserInfo: React.FC = () => {
 		//LAST FIVE POSTS
 		for (let i = posts.length - 1; i > posts.length - limit - 1; i--) {
 			userPosts.push(
-				//TODO: style this div:
 				<Link to={`/materijal/${posts[i].id}`} key={posts[i].id}>
 					<div className='user-post'>
 						<p>Autor: {posts[i].author}</p>

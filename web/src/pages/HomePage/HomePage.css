@@ -1,4 +1,8 @@
 .home-page-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 30px;
   min-height: 100vh;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -6,11 +10,13 @@
   background-color: var(--primary-bg-color);
 }
 
-.home-page-body > * {
-  padding: 20px;
-}
-
 .home-page-body h1 {
   margin: 0;
+}
+
+.home-page-body > * {
+  margin: 10px;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
 }
 /*# sourceMappingURL=HomePage.css.map */
