@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { State } from '../../index';
 import './LoggedUserInfo.scss';
 import { Link } from 'react-router-dom';
+import { LatestPosts } from '../LatestPosts/LatestPosts';
 
 export const getUser = () => {
 	let sid = Cookies.get('connect.sid');
@@ -46,7 +47,7 @@ export const LoggedUserInfo: React.FC = () => {
 	return (
 		<div className='logged-user-info-container'>
 			{!username ? (
-				<p>prijavite se...</p>
+				<LatestPosts />
 			) : (
 				<div>
 					<div className='logged-user-main'>
@@ -64,7 +65,7 @@ export const LoggedUserInfo: React.FC = () => {
 						)}
 						{userPosts}
 						{limit === 5 ? (
-							<a href={`/korisnik/${username}`}>Sve objave...</a>
+							<a href={`/korisnik/${username}`}>Prikaži sve</a>
 						) : (
 							''
 						)}

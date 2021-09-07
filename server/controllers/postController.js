@@ -223,3 +223,15 @@ module.exports.deletePost = (req, res) => {
 		res.status(200).json({ message: 'post deleted', post });
 	});
 };
+
+module.exports.getLatestPosts = (req, res) => {
+	Post.findAll({ order: [['createdAt', 'DESC']] })
+		.then(posts => {
+			res.status(200).json({ posts });
+		})
+		.catch(() => {
+			res
+				.status(404)
+				.json({ message: 'Dogodila se pogreška u pronalaženju objava.' });
+		});
+};
