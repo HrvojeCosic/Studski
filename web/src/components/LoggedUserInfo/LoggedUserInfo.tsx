@@ -51,7 +51,9 @@ export const LoggedUserInfo: React.FC = () => {
 			) : (
 				<div>
 					<div className='logged-user-main'>
-						<h3>{username}</h3>
+						<a href={`/korisnik/${username}`}>
+							<h3>{username}</h3>
+						</a>
 						<div className='user-numbers'>
 							<p>Kolegijalnost: {points}</p>
 							<p>Broj objava: {posts.length}</p>
