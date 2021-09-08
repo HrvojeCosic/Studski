@@ -22,7 +22,10 @@ export const NavBar: React.FC<{
 
 	return (
 		<div className='header'>
-			<img src={logo} alt='logo-img' />
+			<div className='branding'>
+				<img src={logo} alt='logo-img' />
+				<h1>StudentHub</h1>
+			</div>
 			{loggedInUser.sid.length === 0 ? (
 				<div className='header-btns'>
 					<div className='mode-toggle-btn' />

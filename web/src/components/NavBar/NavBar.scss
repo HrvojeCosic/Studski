@@ -1,14 +1,23 @@
 .header {
+	font-family: var(--main-font-family);
 	display: flex;
 	align-items: center;
 	flex-direction: row;
 	justify-content: space-between;
 	color: var(--primary-text-color);
 	background-color: var(--primary-bg-color);
-	img {
-		width: 90px;
-		height: auto;
+	.branding {
+		display: flex;
 		cursor: pointer;
+		img {
+			width: 90px;
+			height: 60px;
+		}
+		h1 {
+			font-size: 23px;
+			font-weight: 400;
+			color: #029eee;
+		}
 	}
 }
 .header-btns {
@@ -18,7 +27,6 @@
 	width: 250px;
 	font-weight: 600;
 	font-size: 13px;
-	font-family: var(--main-font-family);
 	color: var(--contrast-text-color);
 	.sign-up-btn,
 	.log-in-btn,
