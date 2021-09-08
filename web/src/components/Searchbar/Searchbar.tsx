@@ -1,25 +1,9 @@
 import { Faculty } from '../FacultyList/FacultyList';
 import './Searchbar.scss';
 
-interface Props {
-	searchFaculties: (updatedFaculties: Array<Faculty>) => void;
-}
-
-export const Searchbar: React.FC<Props> = ({ searchFaculties }) => {
+export const Searchbar: React.FC = () => {
 	const search = (e: any) => {
-		const searchedTerm = e.target.value;
-		fetch('faculties.json')
-			.then(res => {
-				return res.json();
-			})
-			.then(faculties => {
-				const filtered = faculties.filter((faculty: Faculty) =>
-					faculty.ime.includes(
-						searchedTerm.charAt(0).toUpperCase() + searchedTerm.slice(1)
-					)
-				);
-				searchFaculties(filtered);
-			});
+		console.log(e.target.value);
 	};
 
 	return (
@@ -27,7 +11,7 @@ export const Searchbar: React.FC<Props> = ({ searchFaculties }) => {
 			<input
 				type='text'
 				className='search'
-				placeholder='Potraži fakultete'
+				placeholder='Potraži'
 				onChange={e => {
 					search(e);
 				}}

@@ -39,12 +39,7 @@ export const HomePage: React.FC = () => {
 	}, []);
 	return (
 		<div>
-			<NavBar
-				toggleShowPostForm={toggleShowPostForm}
-				searchFaculties={(updatedFaculties: Array<Faculty>) => {
-					setFaculties(updatedFaculties);
-				}}
-			/>
+			<NavBar toggleShowPostForm={toggleShowPostForm} />
 			<div className='home-page-body'>
 				<ProfileList />
 				<FacultyList faculties={faculties} />

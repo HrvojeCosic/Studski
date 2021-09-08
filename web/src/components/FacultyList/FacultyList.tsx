@@ -68,6 +68,9 @@ export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
 				facultiesInArea.push(faculty.ime);
 			}
 		});
+
+		facultiesInArea.sort(); //ALPHABETICALLY SORT
+
 		organizedFacultyList.push({
 			facultyArea_org: facultyArea,
 			facultiesInArea_org: facultiesInArea,
