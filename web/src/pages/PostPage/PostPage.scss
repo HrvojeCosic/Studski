@@ -1,0 +1,18 @@
+.post {
+	height: calc(100vh - 60px); //60px is NavBar height
+	background-color: var(--primary-bg-color);
+	color: var(--contrast-text-color);
+	font-family: var(--main-font-family);
+	> * {
+		margin: 0 10px;
+	}
+	.downloadable {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		.image {
+			height: 30px;
+			width: auto;
+		}
+	}
+}

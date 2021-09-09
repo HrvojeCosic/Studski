@@ -111,6 +111,55 @@ export const PostPage: React.FC = () => {
 
 	const filesJSX = files.map(file => {
 		const readableFileName = file.fileName.slice(0, -13); //Date.now() ADDS EXACTLY 13 CHARACTERS
+		let image;
+		const setImage = (src: string) => {
+			image = <img src={src} className='image' />;
+		};
+		switch (readableFileName.slice(-3)) {
+			case 'pdf':
+				setImage('../../extensionIcons/pdf.png');
+				break;
+			case 'doc':
+			case 'docx':
+			case 'docm':
+			case 'rtf':
+			case 'dot':
+			case 'dotx':
+			case 'dotm':
+			case 'odt':
+				setImage('../../extensionIcons/doc.png');
+				break;
+			case 'mht':
+			case 'mhtml':
+			case 'htm':
+			case 'html':
+				setImage('../../extensionIcons/html.png');
+				break;
+			case 'css':
+				setImage('../../extensionIcons/css.png');
+				break;
+			case 'jpg':
+			case 'jpeg':
+				setImage('../../extensionIcons/jpg.png');
+				break;
+			case 'mp3':
+				setImage('../../extensionIcons/mp3.png');
+				break;
+			case 'ppt':
+				setImage('../../extensionIcons/ppt.png');
+				break;
+			case 'xls':
+				setImage('../../extensionIcons/xls.png');
+				break;
+			case 'zip':
+				setImage('../../extensionIcons/zip.png');
+				break;
+			case 'txt':
+				setImage('../../extensionIcons/txt.png');
+				break;
+			default:
+				setImage('../../extensionIcons/other.png');
+		}
 
 		return (
 			<div key={file.id}>
@@ -119,7 +168,10 @@ export const PostPage: React.FC = () => {
 						downloadFile(file.fileName);
 					}}
 				>
-					{readableFileName}
+					<div className='downloadable'>
+						{image}
+						<div className='file-name'>{readableFileName}</div>
+					</div>
 				</div>
 			</div>
 		);
@@ -128,43 +180,45 @@ export const PostPage: React.FC = () => {
 	return (
 		<div>
 			<NavBar />
-			<p>{post.author}</p>
-			<p>{post.faculty}</p>
-			<p>{post.title}</p>
-			<p>{post.createdAt}</p>
-			{allowVote && post.author !== visitor ? (
-				<div onClick={voteForPost}>
-					<p className={voted ? 'voted' : 'non-voted'}>KORISNO</p>
-				</div>
-			) : null}
-			<p>broj bodova: {post.points}</p>
-			{filesJSX}
+			<div className='post'>
+				<p>{post.author}</p>
+				<p>{post.faculty}</p>
+				<p>{post.title}</p>
+				<p>{post.createdAt}</p>
+				{allowVote && post.author !== visitor ? (
+					<div onClick={voteForPost}>
+						<p className={voted ? 'voted' : 'non-voted'}>KORISNO</p>
+					</div>
+				) : null}
+				<p>broj bodova: {post.points}</p>
+				{filesJSX}
 
-			{visitor === post.author ? (
-				<div
-					onClick={() => {
-						setDeletePrompt(true);
-					}}
-				>
-					Obriši objavu
-				</div>
-			) : (
-				''
-			)}
-
-			{deletePrompt ? (
-				<div>
-					<h3>Jeste li sigurni da želite obrisati ovu objavu?</h3>
-					<div onClick={deletePost}>DA</div>
+				{visitor === post.author ? (
 					<div
 						onClick={() => {
-							setDeletePrompt(false);
+							setDeletePrompt(true);
 						}}
 					>
-						NE
+						Obriši objavu
 					</div>
-				</div>
-			) : null}
+				) : (
+					''
+				)}
+
+				{deletePrompt ? (
+					<div>
+						<h3>Jeste li sigurni da želite obrisati ovu objavu?</h3>
+						<div onClick={deletePost}>DA</div>
+						<div
+							onClick={() => {
+								setDeletePrompt(false);
+							}}
+						>
+							NE
+						</div>
+					</div>
+				) : null}
+			</div>
 		</div>
 	);
 };

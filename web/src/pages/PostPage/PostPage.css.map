@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACL,MAAM,EAAE,kBAAkB;EAC1B,gBAAgB,EAAE,uBAAuB;EACzC,KAAK,EAAE,0BAA0B;EACjC,WAAW,EAAE,uBAAuB;CAIpC;;AARD,AAKC,KALI,CAKJ,CAAC,CAAC;EACD,MAAM,EAAE,CAAC;CACT",
     "sources": [
         "PostPage.scss"
     ],

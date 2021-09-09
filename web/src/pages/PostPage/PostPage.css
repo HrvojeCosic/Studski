@@ -1,1 +1,11 @@
-/* No CSS *//*# sourceMappingURL=PostPage.css.map */
+.post {
+  height: calc(100vh - 60px);
+  background-color: var(--primary-bg-color);
+  color: var(--contrast-text-color);
+  font-family: var(--main-font-family);
+}
+
+.post p {
+  margin: 0;
+}
+/*# sourceMappingURL=PostPage.css.map */
