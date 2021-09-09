@@ -1,4 +1,5 @@
 .header {
+  font-family: var(--main-font-family);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -16,9 +17,27 @@
   background-color: var(--primary-bg-color);
 }
 
-.header img {
+.header .branding {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+}
+
+.header .branding img {
   width: 90px;
-  height: auto;
+  height: 60px;
+}
+
+.header .branding h1 {
+  font-size: 23px;
+  font-weight: 400;
+  color: #029eee;
+}
+
+.header .link {
+  text-decoration: none;
+  color: inherit;
   cursor: pointer;
 }
 
@@ -35,7 +54,6 @@
   width: 250px;
   font-weight: 600;
   font-size: 13px;
-  font-family: var(--main-font-family);
   color: var(--contrast-text-color);
 }
 
@@ -58,12 +76,6 @@
   background-size: 40px;
   height: 40px;
   width: 40px;
-  cursor: pointer;
-}
-
-.header-btns .link {
-  text-decoration: none;
-  color: inherit;
   cursor: pointer;
 }
 /*# sourceMappingURL=NavBar.css.map */

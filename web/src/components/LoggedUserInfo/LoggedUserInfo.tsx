@@ -62,15 +62,11 @@ export const LoggedUserInfo: React.FC = () => {
 					<div className='logged-user-list'>
 						{userPosts.length > 0 ? (
 							<h3 className='announce-text'>Zadnje objave:</h3>
-						) : (
-							''
-						)}
+						) : null}
 						{userPosts}
 						{limit === 5 ? (
 							<a href={`/korisnik/${username}`}>Prikaži sve</a>
-						) : (
-							''
-						)}
+						) : null}
 					</div>
 				</div>
 			)}

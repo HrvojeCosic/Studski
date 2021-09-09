@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Post } from '../../reducers/user';
 import './UserProfilePage.scss';
+import { NavBar } from '../../components/NavBar/NavBar';
 
 interface UserParams {
 	username: string;
@@ -38,6 +39,7 @@ export const UserProfilePage: React.FC = () => {
 
 	return (
 		<div>
+			<NavBar />
 			<h1>{params.username}</h1>
 			{postsJSX}
 		</div>

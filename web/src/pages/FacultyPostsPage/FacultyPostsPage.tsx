@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Post } from '../../reducers/user';
 import './FacultyPostsPage.scss';
+import { NavBar } from '../../components/NavBar/NavBar';
 
 interface FacultyParams {
 	facultyName: string;
@@ -41,6 +42,7 @@ export const FacultyPostsPage: React.FC = () => {
 
 	return (
 		<div>
+			<NavBar />
 			<h1>{params.facultyName}</h1>
 			{postsJSX}
 		</div>

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { updateUserPosts } from '../../actions/user';
+import { NavBar } from '../../components/NavBar/NavBar';
 import './PostPage.scss';
 
 interface PostParams {
@@ -126,6 +127,7 @@ export const PostPage: React.FC = () => {
 
 	return (
 		<div>
+			<NavBar />
 			<p>{post.author}</p>
 			<p>{post.faculty}</p>
 			<p>{post.title}</p>
@@ -134,9 +136,7 @@ export const PostPage: React.FC = () => {
 				<div onClick={voteForPost}>
 					<p className={voted ? 'voted' : 'non-voted'}>KORISNO</p>
 				</div>
-			) : (
-				''
-			)}
+			) : null}
 			<p>broj bodova: {post.points}</p>
 			{filesJSX}
 
@@ -164,9 +164,7 @@ export const PostPage: React.FC = () => {
 						NE
 					</div>
 				</div>
-			) : (
-				''
-			)}
+			) : null}
 		</div>
 	);
 };
