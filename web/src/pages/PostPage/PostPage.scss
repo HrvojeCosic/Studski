@@ -1,18 +1,75 @@
-.post {
-	height: calc(100vh - 60px); //60px is NavBar height
+.main-postpage-container {
 	background-color: var(--primary-bg-color);
-	color: var(--contrast-text-color);
-	font-family: var(--main-font-family);
-	> * {
-		margin: 0 10px;
-	}
-	.downloadable {
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		.image {
-			height: 30px;
-			width: auto;
+	.post {
+		min-height: calc(100vh - 60px); //60px is NavBar height
+		width: 50%;
+		margin: auto;
+		background-color: var(--secondary-bg-color);
+		border-radius: 15px;
+		color: var(--contrast-text-color);
+		font-family: var(--main-font-family);
+		overflow: hidden;
+		> * {
+			margin: 0 10px;
+			padding: 10px;
+			font-weight: 300;
 		}
+		.upper-info {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 20px;
+			p {
+				text-align: center;
+				font-size: 30px;
+			}
+			img {
+				height: 40px;
+				width: auto;
+				cursor: pointer;
+			}
+		}
+		.delete-post-yes,
+		.delete-post-no {
+			display: inline-block;
+			margin: 0 10px 0 0;
+			font-size: 20px;
+			text-align: center;
+			border: 1px solid var(--border-color);
+			border-radius: 2px;
+			width: 5ch;
+			cursor: pointer;
+		}
+		.middle-upper-info {
+			display: flex;
+			flex-direction: column;
+			> * {
+				color: inherit;
+				font-weight: 400;
+				font-size: 20px;
+				cursor: pointer;
+				text-decoration: none;
+			}
+		}
+		.downloadable {
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+			.image {
+				height: 30px;
+				width: auto;
+			}
+		}
+	}
+	.non-voted,
+	.voted {
+		width: fit-content;
+		border: 1px solid var(--border-color);
+		border-radius: 5px;
+		padding: 5px;
+		cursor: pointer;
+	}
+	.voted {
+		background-color: var(--primary-bg-color);
 	}
 }

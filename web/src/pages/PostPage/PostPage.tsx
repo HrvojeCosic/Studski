@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { updateUserPosts } from '../../actions/user';
 import { NavBar } from '../../components/NavBar/NavBar';
 import './PostPage.scss';
@@ -117,7 +118,7 @@ export const PostPage: React.FC = () => {
 		};
 		switch (readableFileName.slice(-3)) {
 			case 'pdf':
-				setImage('../../extensionIcons/pdf.png');
+				setImage('../../icons/extensionIcons/pdf.png');
 				break;
 			case 'doc':
 			case 'docx':
@@ -127,38 +128,38 @@ export const PostPage: React.FC = () => {
 			case 'dotx':
 			case 'dotm':
 			case 'odt':
-				setImage('../../extensionIcons/doc.png');
+				setImage('../../icons/extensionIcons/doc.png');
 				break;
 			case 'mht':
 			case 'mhtml':
 			case 'htm':
 			case 'html':
-				setImage('../../extensionIcons/html.png');
+				setImage('../../icons/extensionIcons/html.png');
 				break;
 			case 'css':
-				setImage('../../extensionIcons/css.png');
+				setImage('../../icons/extensionIcons/css.png');
 				break;
 			case 'jpg':
 			case 'jpeg':
-				setImage('../../extensionIcons/jpg.png');
+				setImage('../../icons/extensionIcons/jpg.png');
 				break;
 			case 'mp3':
-				setImage('../../extensionIcons/mp3.png');
+				setImage('../../icons/extensionIcons/mp3.png');
 				break;
 			case 'ppt':
-				setImage('../../extensionIcons/ppt.png');
+				setImage('../../icons/extensionIcons/ppt.png');
 				break;
 			case 'xls':
-				setImage('../../extensionIcons/xls.png');
+				setImage('../../icons/extensionIcons/xls.png');
 				break;
 			case 'zip':
-				setImage('../../extensionIcons/zip.png');
+				setImage('../../icons/extensionIcons/zip.png');
 				break;
 			case 'txt':
-				setImage('../../extensionIcons/txt.png');
+				setImage('../../icons/extensionIcons/txt.png');
 				break;
 			default:
-				setImage('../../extensionIcons/other.png');
+				setImage('../../icons/extensionIcons/other.png');
 		}
 
 		return (
@@ -178,38 +179,30 @@ export const PostPage: React.FC = () => {
 	});
 
 	return (
-		<div>
+		<div className='main-postpage-container'>
 			<NavBar />
 			<div className='post'>
-				<p>{post.author}</p>
-				<p>{post.faculty}</p>
-				<p>{post.title}</p>
-				<p>{post.createdAt}</p>
-				{allowVote && post.author !== visitor ? (
-					<div onClick={voteForPost}>
-						<p className={voted ? 'voted' : 'non-voted'}>KORISNO</p>
-					</div>
-				) : null}
-				<p>broj bodova: {post.points}</p>
-				{filesJSX}
-
-				{visitor === post.author ? (
-					<div
-						onClick={() => {
-							setDeletePrompt(true);
-						}}
-					>
-						Obriši objavu
-					</div>
-				) : (
-					''
-				)}
-
+				<div className='upper-info'>
+					<p className='post-title'>{post.title}</p>
+					{visitor === post.author ? (
+						<img
+							src='https://icons-for-free.com/iconfiles/png/512/delete+remove+trash+trash+bin+trash+can+icon-1320073117929397588.png'
+							onClick={() => {
+								setDeletePrompt(true);
+							}}
+						/>
+					) : null}
+				</div>
 				{deletePrompt ? (
 					<div>
-						<h3>Jeste li sigurni da želite obrisati ovu objavu?</h3>
-						<div onClick={deletePost}>DA</div>
+						<h3 style={{ fontWeight: 300 }}>
+							Jeste li sigurni da želite obrisati ovu objavu?
+						</h3>
+						<div onClick={deletePost} className='delete-post-yes'>
+							DA
+						</div>
 						<div
+							className='delete-post-no'
 							onClick={() => {
 								setDeletePrompt(false);
 							}}
@@ -218,6 +211,24 @@ export const PostPage: React.FC = () => {
 						</div>
 					</div>
 				) : null}
+				<div className='middle-upper-info'>
+					<Link to={`/korisnik/${post.author}`} className='post-faculty'>
+						{post.author}
+					</Link>
+					<Link to={`/fakultet/${post.faculty}`} className='post-faculty'>
+						{post.faculty}
+					</Link>
+				</div>
+				<div>
+					<p className='post-date'>Objavljeno {post.createdAt}</p>
+					<p>Kolegijalnost: {post.points}</p>
+					{allowVote && post.author !== visitor ? (
+						<div onClick={voteForPost}>
+							<p className={voted ? 'voted' : 'non-voted'}>KORISNO?</p>
+						</div>
+					) : null}
+				</div>
+				{filesJSX}
 			</div>
 		</div>
 	);

@@ -1,11 +1,105 @@
-.post {
-  height: calc(100vh - 60px);
+.main-postpage-container {
   background-color: var(--primary-bg-color);
-  color: var(--contrast-text-color);
-  font-family: var(--main-font-family);
 }
 
-.post p {
-  margin: 0;
+.main-postpage-container .post {
+  min-height: calc(100vh - 60px);
+  width: 50%;
+  margin: auto;
+  background-color: var(--secondary-bg-color);
+  border-radius: 15px;
+  color: var(--contrast-text-color);
+  font-family: var(--main-font-family);
+  overflow: hidden;
+}
+
+.main-postpage-container .post > * {
+  margin: 0 10px;
+  padding: 10px;
+  font-weight: 300;
+}
+
+.main-postpage-container .post .upper-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 20px;
+}
+
+.main-postpage-container .post .upper-info p {
+  text-align: center;
+  font-size: 30px;
+}
+
+.main-postpage-container .post .upper-info img {
+  height: 40px;
+  width: auto;
+  cursor: pointer;
+}
+
+.main-postpage-container .post .delete-post-yes,
+.main-postpage-container .post .delete-post-no {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  width: 5ch;
+  cursor: pointer;
+}
+
+.main-postpage-container .post .middle-upper-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.main-postpage-container .post .middle-upper-info > * {
+  color: inherit;
+  font-weight: 400;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.main-postpage-container .post .downloadable {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.main-postpage-container .post .downloadable .image {
+  height: 30px;
+  width: auto;
+}
+
+.main-postpage-container .non-voted,
+.main-postpage-container .voted {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.main-postpage-container .voted {
+  background-color: var(--primary-bg-color);
 }
 /*# sourceMappingURL=PostPage.css.map */
