@@ -186,7 +186,7 @@ export const PostPage: React.FC = () => {
 					<p className='post-title'>{post.title}</p>
 					{visitor === post.author ? (
 						<img
-							src='https://icons-for-free.com/iconfiles/png/512/delete+remove+trash+trash+bin+trash+can+icon-1320073117929397588.png'
+							src='../../icons/otherIcons/delete-item.png'
 							onClick={() => {
 								setDeletePrompt(true);
 							}}

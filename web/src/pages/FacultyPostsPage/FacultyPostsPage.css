@@ -1,1 +1,65 @@
-/* No CSS *//*# sourceMappingURL=FacultyPostsPage.css.map */
+html {
+  background-color: var(--primary-bg-color);
+}
+
+.faculty-page-container {
+  margin: 0 5px;
+  min-height: 100vh;
+  background-color: var(--primary-bg-color);
+  font-family: var(--main-font-family);
+  font-weight: 300;
+  color: var(--contrast-text-color);
+}
+
+.faculty-page-container .post-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 5px 0;
+  padding: 5px;
+  background-color: var(--secondary-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  word-wrap: break-word;
+}
+
+.faculty-page-container .post-container .post-upper-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+
+.faculty-page-container .post-container .post-title {
+  margin: 10px 0;
+  font-size: 22px;
+}
+
+.faculty-page-container .post-container .post-side {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 10px;
+}
+
+.faculty-page-container .post-container .post-side img {
+  width: 20px;
+  height: auto;
+  padding: 0 5px;
+}
+
+.faculty-page-container a {
+  text-decoration: none;
+  color: var(--contrast-text-color);
+}
+
+.faculty-page-container p {
+  margin: 0;
+}
+/*# sourceMappingURL=FacultyPostsPage.css.map */

@@ -18,11 +18,20 @@ export const FacultyPostsPage: React.FC = () => {
 	const postsJSX = posts.map((post: Post) => {
 		return (
 			<Link to={`/materijal/${post.id}`} key={post.id}>
-				<p>{post.author}</p>
-				<p>{post.title}</p>
-				<p>{post.points}</p>
-				<p>{post.createdAt}</p>
-				<p>{post.fileName}</p>
+				<div className='post-container'>
+					<div className='post-main'>
+						<div className='post-upper-info'>
+							<p>{post.author}</p>
+							<p>{post.createdAt}</p>
+						</div>
+						<p className='post-title'>{post.title}</p>
+						<p>{post.fileName}</p>
+					</div>
+					<div className='post-side'>
+						<img src='../../icons/otherIcons/heart.png' />
+						<p>{post.points}</p>
+					</div>
+				</div>
 			</Link>
 		);
 	});
@@ -41,9 +50,9 @@ export const FacultyPostsPage: React.FC = () => {
 	}, [params.facultyName]);
 
 	return (
-		<div>
+		<div className='faculty-page-container'>
 			<NavBar />
-			<h1>{params.facultyName}</h1>
+			<h1 style={{ fontWeight: 400 }}>{params.facultyName}</h1>
 			{postsJSX}
 		</div>
 	);
