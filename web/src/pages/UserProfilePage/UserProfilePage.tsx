@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Post } from '../../reducers/user';
-import './UserProfilePage.scss';
+import '../FacultyPostsPage/PostsPages.scss'; //same style as FacultyPostPage
 import { NavBar } from '../../components/NavBar/NavBar';
 
 interface UserParams {
@@ -18,10 +18,20 @@ export const UserProfilePage: React.FC = () => {
 	const postsJSX = posts.map((post: Post) => {
 		return (
 			<Link to={`/materijal/${post.id}`} key={post.id}>
-				<p>{post.title}</p>
-				<p>{post.points}</p>
-				<p>{post.createdAt}</p>
-				<p>{post.fileName}</p>
+				<div className='post-container'>
+					<div className='post-main'>
+						<div className='post-upper-info'>
+							<p>{post.createdAt}</p>
+							<p>{post.faculty}</p>
+						</div>
+						<p className='post-title'>{post.title}</p>
+						<p>{post.fileName}</p>
+					</div>
+					<div className='post-side'>
+						<img src='../../icons/otherIcons/heart.png' />
+						<p>{post.points}</p>
+					</div>
+				</div>
 			</Link>
 		);
 	});
@@ -38,7 +48,7 @@ export const UserProfilePage: React.FC = () => {
 	}, [params.username]);
 
 	return (
-		<div>
+		<div className='posts-page-container'>
 			<NavBar />
 			<h1>{params.username}</h1>
 			{postsJSX}

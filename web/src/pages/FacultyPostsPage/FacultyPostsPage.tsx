@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Post } from '../../reducers/user';
-import './FacultyPostsPage.scss';
+import './PostsPages.scss';
 import { NavBar } from '../../components/NavBar/NavBar';
 
 interface FacultyParams {
@@ -50,7 +50,7 @@ export const FacultyPostsPage: React.FC = () => {
 	}, [params.facultyName]);
 
 	return (
-		<div className='faculty-page-container'>
+		<div className='posts-page-container'>
 			<NavBar />
 			<h1 style={{ fontWeight: 400 }}>{params.facultyName}</h1>
 			{postsJSX}
