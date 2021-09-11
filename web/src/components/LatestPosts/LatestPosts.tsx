@@ -16,9 +16,9 @@ export const LatestPosts = () => {
 	}, [latestPosts.length]);
 
 	const latestPostsJSX = latestPosts.map((post, index) => {
-		while (index < limit) {
+		do {
 			return (
-				<Link to={`/materijal/${post.id}`}>
+				<Link to={`/materijal/${post.id}`} key={post.id}>
 					<div className='latest-post'>
 						<p>{post.title}</p>
 						<p>{post.faculty}</p>
@@ -28,7 +28,7 @@ export const LatestPosts = () => {
 					</div>
 				</Link>
 			);
-		}
+		} while (index < limit);
 	});
 
 	const showMore = () => {

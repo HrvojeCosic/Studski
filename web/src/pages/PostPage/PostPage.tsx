@@ -114,7 +114,7 @@ export const PostPage: React.FC = () => {
 		const readableFileName = file.fileName.slice(0, -13); //Date.now() ADDS EXACTLY 13 CHARACTERS
 		let image;
 		const setImage = (src: string) => {
-			image = <img src={src} className='image' />;
+			image = <img src={src} className='image' alt={'extension icon'} />;
 		};
 		switch (readableFileName.slice(-3)) {
 			case 'pdf':
@@ -187,6 +187,7 @@ export const PostPage: React.FC = () => {
 					{visitor === post.author ? (
 						<img
 							src='../../icons/otherIcons/delete-item.png'
+							alt=''
 							onClick={() => {
 								setDeletePrompt(true);
 							}}

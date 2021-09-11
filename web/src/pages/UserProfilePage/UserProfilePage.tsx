@@ -28,7 +28,7 @@ export const UserProfilePage: React.FC = () => {
 						<p>{post.fileName}</p>
 					</div>
 					<div className='post-side'>
-						<img src='../../icons/otherIcons/heart.png' />
+						<img src='../../icons/otherIcons/heart.png' alt='' />
 						<p>{post.points}</p>
 					</div>
 				</div>
