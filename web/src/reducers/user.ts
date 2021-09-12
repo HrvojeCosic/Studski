@@ -13,6 +13,18 @@ export interface User {
 	posts: Array<Post>;
 	sid: string;
 }
+
+interface UserAction {
+	type: string;
+	payload: {
+		user: User;
+		currentUser: User;
+		username: string;
+		points: number;
+		posts: Post[];
+	};
+}
+
 const initialUserState = {
 	username: '',
 	points: 0,
@@ -20,8 +32,7 @@ const initialUserState = {
 	sid: '',
 };
 
-//TODO: reducer & action TYPES
-const userReducer = (state: User = initialUserState, action: any) => {
+const userReducer = (state: User = initialUserState, action: UserAction) => {
 	switch (action.type) {
 		case 'SET_USER':
 			const { username, points, posts } = action.payload;
