@@ -21,3 +21,26 @@
 .hide {
 	display: none;
 }
+
+.loading {
+	background: linear-gradient(
+		-45deg,
+		var(--primary-bg-color),
+		var(--secondary-bg-color)
+	);
+	background-size: 400% 400%;
+	animation: gradient 1.5s ease infinite;
+	color: transparent;
+
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+}

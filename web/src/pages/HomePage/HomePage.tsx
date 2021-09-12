@@ -27,6 +27,18 @@ export const HomePage: React.FC = () => {
 			.catch(err => {
 				console.log('Korisnik nije prijavljen');
 			});
+
+		//SET DUMMY FACULTY LIST WHILE LOADING
+		let loadingTemplateFacultyList: Array<Faculty> = [];
+		for (let i = 1; i < 19; i++) {
+			loadingTemplateFacultyList.push({
+				ime: i.toString(),
+				grad: `gradPR${i}`,
+				id: i,
+			});
+		}
+		setFaculties(loadingTemplateFacultyList);
+
 		//GET FACULTIES
 		fetch('faculties.json')
 			.then(res => {
@@ -34,8 +46,7 @@ export const HomePage: React.FC = () => {
 			})
 			.then(json => {
 				setFaculties(json);
-			})
-			.then(() => {});
+			});
 	}, []);
 	return (
 		<div>

@@ -6,7 +6,8 @@
 	h1 {
 		margin: 0;
 	}
-	.featured-profile {
+	.featured-profile,
+	.loading {
 		width: 100%;
 		background-color: var(--secondary-bg-color);
 		border: 1px solid var(--border-color);

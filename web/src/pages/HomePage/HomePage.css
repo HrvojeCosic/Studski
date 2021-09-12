@@ -19,4 +19,11 @@
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
 }
+
+.home-page-loader {
+  text-align: center;
+  font-size: 30px;
+  font-family: var(--main-font-family);
+  color: var(--contrast-text-color);
+}
 /*# sourceMappingURL=HomePage.css.map */

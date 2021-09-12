@@ -12,9 +12,23 @@ interface LeaderboardUser {
 }
 
 export const ProfileList: React.FC = () => {
-	const [userListJSX, setUserListJSX] = useState([]);
+	const [userListJSX, setUserListJSX] = useState<Array<JSX.Element>>([]);
 	useEffect(() => {
+		let loadingTemplateUserListJSX: Array<JSX.Element> = [];
+		for (let i = 0; i < 15; i++) {
+			loadingTemplateUserListJSX.push(
+				<div className='profile-list-container ' key={i}>
+					<div className='loading'>
+						<p>a </p>
+						<p>a </p>
+					</div>
+				</div>
+			);
+		}
+		setUserListJSX(loadingTemplateUserListJSX);
+
 		axios.get('http://localhost:8000/api/users/getUserList').then(res => {
+			//TODO: LIMIT TO 15 USERS
 			const sortedUserList = res.data.userList.sort(
 				(a: LeaderboardUser, b: LeaderboardUser) => {
 					if (a.points > b.points) return -1;
@@ -46,7 +60,7 @@ export const ProfileList: React.FC = () => {
 	return (
 		<div className='profile-list-container'>
 			<h1>Tablica</h1>
-			{userListJSX}
+			<div>{userListJSX}</div>
 		</div>
 	);
 };

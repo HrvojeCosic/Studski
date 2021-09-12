@@ -15,6 +15,11 @@ interface OrganizedFacultyList {
 export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
 	faculties,
 }) => {
+	let loadingFaculties = false;
+	if (faculties.length > 0 && faculties[0].ime === '1') {
+		loadingFaculties = true;
+	}
+
 	const [selectedAreaFaculties, setSelectedAreaFaculties] =
 		useState<Array<JSX.Element>>();
 
@@ -52,7 +57,7 @@ export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
 			<div
 				key={area}
 				onClick={() => changeSelectedArea(area)}
-				className='faculty-area'
+				className={loadingFaculties ? 'loading' : 'faculty-area'}
 			>
 				{area}
 			</div>
@@ -91,7 +96,6 @@ export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
 	return (
 		<div className='main-container'>
 			<h1>Fakulteti</h1>
-
 			{selectedAreaFaculties ? (
 				<div className='faculties-container'>
 					<div
