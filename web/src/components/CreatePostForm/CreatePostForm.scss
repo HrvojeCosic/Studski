@@ -1,4 +1,5 @@
 .post-form-container {
+	font-family: var(--main-font-family);
 	display: flex;
 	flex-direction: column;
 	max-width: 400px;
@@ -34,7 +35,10 @@
 			border: 1px solid var(--border-color);
 		}
 	}
-	input[name='datoteka'] {
+	input[type='file'] {
+		display: none;
+	}
+	.file-label {
 		color: var(--contrast-text-color);
 		outline: none;
 

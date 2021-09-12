@@ -21,6 +21,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	const [facultyName, setFacultyName] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
 	const [files, setFiles] = useState<any>(null);
+	const [filesTitle, setFilesTitle] = useState<any>('Nema odabranih datoteka');
 	let postAuthor = '';
 
 	const facultyAreasSet = new Set(
@@ -49,8 +50,17 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		setFormFacultyList(list);
 	};
 
-	const handleFile = (e: any) => {
-		setFiles(e.target.files);
+	const handleFiles = (e: any) => {
+		const chosenFiles = e.target.files;
+		setFiles(chosenFiles);
+		if (chosenFiles.length === 1) {
+			setFilesTitle(chosenFiles[0].name);
+		} else if (chosenFiles.length === 0) {
+			setFilesTitle('Nema odabranih datoteka');
+			setFiles(null);
+		} else {
+			setFilesTitle(`Broj datoteka: ${chosenFiles.length}`);
+		}
 	};
 
 	const submitPost = async () => {
@@ -98,7 +108,8 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		setFacultyArea('');
 		setFacultyName('');
 		postAuthor = '';
-		// setFile(null); TODO: uncomment when custom file name is done
+		setFiles(null);
+		setFilesTitle('Nema odabranih datoteka');
 	};
 
 	return (
@@ -121,7 +132,6 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 					setFacultyName(e.target.value);
 				}}
 			>
-				{/* TODO:(?) make user's faculty the first option */}
 				<option hidden></option>
 				{formFacultyList}
 			</select>
@@ -133,11 +143,15 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 			/>
 			<input
 				multiple
-				type='file' //TODO: make custom file name and "Choose File"
+				type='file'
 				onChange={e => {
-					handleFile(e);
+					handleFiles(e);
 				}}
+				id='actual-input'
 			/>
+			<label htmlFor='actual-input' className='file-label'>
+				{filesTitle}
+			</label>
 			<button onClick={e => submitPost()}>Objavi</button>
 			<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>{errorMsg}</p>
 		</div>
