@@ -7,8 +7,10 @@ import './LatestPosts.scss';
 export const LatestPosts = () => {
 	const [latestPostsJSX, setLatestPostsJSX] = useState<Array<JSX.Element>>([]);
 	const [limitReached, setLimitReached] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>();
 
 	const requestMorePosts = () => {
+		setLoading(true);
 		axios
 			.get(
 				`http://localhost:8000/api/posts/getLatestPosts/${latestPostsJSX.length}`
@@ -30,10 +32,25 @@ export const LatestPosts = () => {
 				const updatedLatestPosts = [...latestPostsJSX, ...responsePostsJSX];
 				setLatestPostsJSX(updatedLatestPosts);
 				if (res.data.message) setLimitReached(true);
+				setLoading(false);
 			});
 	};
 
 	useEffect(() => {
+		//SET DUMMY POST LIST WHILE LOADING
+		let loadingTemplatePostList: Array<JSX.Element> = [];
+		for (let i = 0; i < 5; i++) {
+			loadingTemplatePostList.push(
+				<div key={i} className='latest-post loading'>
+					<p>{i}</p>
+					<p>{i}</p>
+					<p>{i}</p>
+					<p>{i}</p>
+					<p>{i}</p>
+				</div>
+			);
+		}
+		setLatestPostsJSX(loadingTemplatePostList);
 		requestMorePosts();
 	}, []);
 
@@ -49,7 +66,7 @@ export const LatestPosts = () => {
 					}}
 					style={{ cursor: 'pointer' }}
 				>
-					Prikaži više
+					{!loading ? <p>Prikaži više</p> : 'Pričekajte...'}
 				</div>
 			) : (
 				'Nema više objava za pokazati...'
