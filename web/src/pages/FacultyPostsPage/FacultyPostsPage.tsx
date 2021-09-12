@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Post } from '../../reducers/user';
 import './PostsPages.scss';
@@ -14,6 +14,8 @@ interface FacultyParams {
 export const FacultyPostsPage: React.FC = () => {
 	const [posts, setPosts] = useState<Array<Post>>([]);
 	const params: FacultyParams = useParams();
+
+	const history = useHistory();
 
 	const postsJSX = posts.map((post: Post) => {
 		return (
@@ -45,9 +47,10 @@ export const FacultyPostsPage: React.FC = () => {
 				setPosts(res.data.posts);
 			})
 			.catch(err => {
-				alert(err.response.data.error); //TODO: create an error page OR redirect back
+				alert(err.response.data.error);
+				history.push('/');
 			});
-	}, [params.facultyName]);
+	}, [params.facultyName, history]);
 
 	return (
 		<div className='posts-page-container'>

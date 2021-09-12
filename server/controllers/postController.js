@@ -128,7 +128,7 @@ module.exports.getSinglePost = (req, res) => {
 				if (!post) {
 					return res.status(404).json({
 						title: 'error',
-						error: 'Taj objava ne postoji.',
+						error: 'Ta objava ne postoji.',
 					});
 				}
 				res.status(200).json({ title: 'success', post, files });

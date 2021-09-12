@@ -34,6 +34,7 @@ export const PostPage: React.FC = () => {
 	const history = useHistory();
 
 	useEffect(() => {
+		const cancelTokenSource = axios.CancelToken.source();
 		const sid = Cookies.get('connect.sid');
 		axios
 			.post('http://localhost:8000/api/users/checkAuth', sid, {
@@ -50,7 +51,8 @@ export const PostPage: React.FC = () => {
 				setFiles(res.data.files);
 			})
 			.catch(err => {
-				alert(err.response.data.error); //TODO: create an error page OR redirect back
+				alert(err.response.data.error);
+				history.push('/');
 			});
 
 		const user = localStorage.getItem('currentUser');
@@ -66,7 +68,11 @@ export const PostPage: React.FC = () => {
 				if (res.data.message === 'already voted') setVoted(true);
 				else if (res.data.message === 'has not voted') setVoted(false);
 			});
-	}, [params.postID]);
+
+		return () => {
+			cancelTokenSource.cancel('component unmounted, requests cancelled');
+		};
+	}, [params.postID, history]);
 
 	const voteForPost = () => {
 		const postID = params.postID;
