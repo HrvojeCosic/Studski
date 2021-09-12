@@ -33,8 +33,6 @@ const Post = db.define('post', {
 			return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY');
 		},
 	},
-
-	//todo(?): dodati smjer, predmet
 });
 
 Post.hasMany(File, {

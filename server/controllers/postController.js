@@ -225,8 +225,17 @@ module.exports.deletePost = (req, res) => {
 };
 
 module.exports.getLatestPosts = (req, res) => {
+	const currentNumOfPosts = parseInt(req.params.currentNumber);
 	Post.findAll({ order: [['createdAt', 'DESC']] })
-		.then(posts => {
+		.then(allPosts => {
+			let posts = [];
+			for (let i = currentNumOfPosts; i < currentNumOfPosts + 5; i++) {
+				if (allPosts[i]) posts.push(allPosts[i]);
+				else
+					return res
+						.status(200)
+						.json({ posts, message: 'no more posts to show' });
+			}
 			res.status(200).json({ posts });
 		})
 		.catch(() => {
