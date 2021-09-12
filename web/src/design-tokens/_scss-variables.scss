@@ -31,6 +31,7 @@
 	background-size: 400% 400%;
 	animation: gradient 1.5s ease infinite;
 	color: transparent;
+	user-select: none;
 
 	@keyframes gradient {
 		0% {
