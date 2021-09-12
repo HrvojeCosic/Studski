@@ -14,6 +14,7 @@ interface LeaderboardUser {
 export const ProfileList: React.FC = () => {
 	const [userListJSX, setUserListJSX] = useState<Array<JSX.Element>>([]);
 	useEffect(() => {
+		//SET DUMMY USER LIST WHILE LOADING
 		let loadingTemplateUserListJSX: Array<JSX.Element> = [];
 		for (let i = 0; i < 15; i++) {
 			loadingTemplateUserListJSX.push(
