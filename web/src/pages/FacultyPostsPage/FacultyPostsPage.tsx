@@ -12,39 +12,62 @@ interface FacultyParams {
 }
 
 export const FacultyPostsPage: React.FC = () => {
-	const [posts, setPosts] = useState<Array<Post>>([]);
+	const [postsJSX, setPostsJSX] = useState<Array<JSX.Element>>([]);
 	const params: FacultyParams = useParams();
 
 	const history = useHistory();
 
-	const postsJSX = posts.map((post: Post) => {
-		return (
-			<Link to={`/materijal/${post.id}`} key={post.id}>
-				<div className='post-container'>
-					<div className='post-main'>
-						<div className='post-upper-info'>
-							<p>{post.author}</p>
-							<p>{post.createdAt}</p>
+	useEffect(() => {
+		//SET DUMMY POST LIST WHILE LOADING
+		let loadingTemplatePostList: Array<JSX.Element> = [];
+		for (let i = 0; i < 5; i++) {
+			loadingTemplatePostList.push(
+				<div>
+					<div key={i} className='post-container loading'>
+						<div className='post-main'>
+							<div className='post-upper-info'>
+								<p>{i}</p>
+								<p>{i}</p>
+							</div>
+							<p className='post-title'>{i}</p>
+							<p>{i}</p>
 						</div>
-						<p className='post-title'>{post.title}</p>
-						<p>{post.fileName}</p>
-					</div>
-					<div className='post-side'>
-						<img src='../../icons/otherIcons/heart.png' alt='' />
-						<p>{post.points}</p>
+						<div className='post-side'>
+							<p>{i}</p>
+						</div>
 					</div>
 				</div>
-			</Link>
-		);
-	});
+			);
+		}
+		setPostsJSX(loadingTemplatePostList);
 
-	useEffect(() => {
 		axios
 			.get(
 				`http://localhost:8000/api/posts/getFacultyPosts/${params.facultyName}`
 			)
 			.then(res => {
-				setPosts(res.data.posts);
+				setPostsJSX(
+					res.data.posts.map((post: Post) => {
+						return (
+							<Link to={`/materijal/${post.id}`} key={post.id}>
+								<div className='post-container'>
+									<div className='post-main'>
+										<div className='post-upper-info'>
+											<p>{post.author}</p>
+											<p>{post.createdAt}</p>
+										</div>
+										<p className='post-title'>{post.title}</p>
+										<p>{post.fileName}</p>
+									</div>
+									<div className='post-side'>
+										<img src='../../icons/otherIcons/heart.png' alt='' />
+										<p>{post.points}</p>
+									</div>
+								</div>
+							</Link>
+						);
+					})
+				);
 			})
 			.catch(err => {
 				alert(err.response.data.error);
