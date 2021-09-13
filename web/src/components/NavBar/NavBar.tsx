@@ -43,11 +43,11 @@ export const NavBar: React.FC<{
 			) : (
 				<div className='header-btns'>
 					<div className='mode-toggle-btn' />
-					{location.pathname === '/' ? (
+					{location.pathname === '/' && (
 						<div className='link' onClick={toggleShowPostForm}>
 							Objavi materijal
 						</div>
-					) : null}
+					)}
 
 					<div className='log-out-btn' onClick={logOut}>
 						Odjavi se

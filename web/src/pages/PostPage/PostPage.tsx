@@ -194,7 +194,7 @@ export const PostPage: React.FC = () => {
 			<div className={loading ? 'post loading' : 'post'}>
 				<div className='upper-info'>
 					<p className='post-title'>{post.title}</p>
-					{visitor === post.author ? (
+					{visitor === post.author && (
 						<img
 							src='../../icons/otherIcons/delete-item.png'
 							alt=''
@@ -202,9 +202,9 @@ export const PostPage: React.FC = () => {
 								setDeletePrompt(true);
 							}}
 						/>
-					) : null}
+					)}
 				</div>
-				{deletePrompt ? (
+				{deletePrompt && (
 					<div>
 						<h3 style={{ fontWeight: 300 }}>
 							Jeste li sigurni da želite obrisati ovu objavu?
@@ -221,7 +221,7 @@ export const PostPage: React.FC = () => {
 							NE
 						</div>
 					</div>
-				) : null}
+				)}
 				<div className='middle-upper-info'>
 					<Link to={`/korisnik/${post.author}`} className='post-faculty'>
 						{post.author}
@@ -234,11 +234,11 @@ export const PostPage: React.FC = () => {
 					<div>
 						<p className='post-date'>Objavljeno {post.createdAt}</p>
 						<p>Kolegijalnost: {post.points}</p>
-						{allowVote && post.author !== visitor ? (
+						{allowVote && post.author !== visitor && (
 							<div onClick={voteForPost}>
 								<p className={voted ? 'voted' : 'non-voted'}>KORISNO?</p>
 							</div>
-						) : null}
+						)}
 					</div>
 				)}
 				{filesJSX}
