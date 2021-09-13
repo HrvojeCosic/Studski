@@ -13,6 +13,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	const [formFacultyList, setFormFacultyList] = useState([
 		<option key='defaultKey'></option>,
 	]);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const dispatch = useDispatch();
 
@@ -64,6 +65,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 	};
 
 	const submitPost = async () => {
+		setLoading(true);
 		const sid = Cookies.get('connect.sid');
 		//AUTHORIZE & SET postAuthor
 		await axios
@@ -82,6 +84,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 
 		if (!postTitle || !facultyArea || !facultyName || !files) {
 			setErrorMsg('Sva polja moraju biti ispunjena.');
+			setLoading(false);
 			return;
 		}
 
@@ -93,14 +96,16 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 			formData.append('files', files[i]); //form data doesn't support FileList object so it has to be done this way
 		}
 
-		axios
+		await axios
 			.post('http://localhost:8000/api/posts/submit', formData)
 			.then(res => {
 				dispatch(updateUserPosts('add post', res.data.newPost));
 				setErrorMsg(res.data.message);
+				setLoading(false);
 			})
 			.catch(err => {
 				setErrorMsg(err.response.data.error);
+				setLoading(false);
 				return;
 			});
 
@@ -152,8 +157,17 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 			<label htmlFor='actual-input' className='file-label'>
 				{filesTitle}
 			</label>
-			<button onClick={e => submitPost()}>Objavi</button>
-			<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>{errorMsg}</p>
+			<button
+				onClick={e => submitPost()}
+				className={loading ? 'loading' : 'none'}
+			>
+				{loading ? 'Učitavanje...' : 'Objavi'}
+			</button>
+			{loading ? (
+				''
+			) : (
+				<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>{errorMsg}</p>
+			)}
 		</div>
 	);
 };

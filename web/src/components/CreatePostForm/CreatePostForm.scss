@@ -72,8 +72,5 @@
 		color: var(--contrast-text-color);
 		cursor: pointer;
 		outline: none;
-		&:focus {
-			background-color: var(--secondary-bg-color);
-		}
 	}
 }
