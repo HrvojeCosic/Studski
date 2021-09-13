@@ -22,8 +22,8 @@ export const FacultyPostsPage: React.FC = () => {
 		let loadingTemplatePostList: Array<JSX.Element> = [];
 		for (let i = 0; i < 5; i++) {
 			loadingTemplatePostList.push(
-				<div>
-					<div key={i} className='post-container loading'>
+				<div key={i}>
+					<div className='post-container loading'>
 						<div className='post-main'>
 							<div className='post-upper-info'>
 								<p>{i}</p>
