@@ -13,32 +13,23 @@ interface LeaderboardUser {
 
 export const ProfileList: React.FC = () => {
 	const [userListJSX, setUserListJSX] = useState<Array<JSX.Element>>([]);
-	useEffect(() => {
-		//SET DUMMY USER LIST WHILE LOADING
-		let loadingTemplateUserListJSX: Array<JSX.Element> = [];
-		for (let i = 0; i < 15; i++) {
-			loadingTemplateUserListJSX.push(
-				<div className='profile-list-container ' key={i}>
-					<div className='loading'>
-						<p>a </p>
-						<p>a </p>
-					</div>
-				</div>
-			);
-		}
-		setUserListJSX(loadingTemplateUserListJSX);
+	const [limitReached, setLimitReached] = useState<boolean>(false);
 
-		axios.get('http://localhost:8000/api/users/getUserList').then(res => {
-			//TODO: LIMIT TO 15 USERS
-			const sortedUserList = res.data.userList.sort(
-				(a: LeaderboardUser, b: LeaderboardUser) => {
-					if (a.points > b.points) return -1;
-					else if (b.points > a.points) return 1;
-					else return 0;
-				}
-			);
-			setUserListJSX(
-				sortedUserList.map((user: LeaderboardUser) => {
+	const requestMoreUsers = () => {
+		axios
+			.get(`http://localhost:8000/api/users/requestUsers/${userListJSX.length}`)
+			.then(res => {
+				if (res.data.message) setLimitReached(true);
+
+				const sortedUserList = res.data.userList.sort(
+					(a: LeaderboardUser, b: LeaderboardUser) => {
+						if (a.points > b.points) return -1;
+						else if (b.points > a.points) return 1;
+						else return 0;
+					}
+				);
+
+				const responseUsersJSX = sortedUserList.map((user: LeaderboardUser) => {
 					return (
 						<Link
 							to={`/korisnik/${user.username}`}
@@ -53,15 +44,43 @@ export const ProfileList: React.FC = () => {
 							</div>
 						</Link>
 					);
-				})
+				});
+
+				const updatedUserList = [...userListJSX, ...responseUsersJSX];
+				setUserListJSX(updatedUserList);
+			});
+	};
+
+	useEffect(() => {
+		//SET DUMMY USER LIST WHILE LOADING
+		let loadingTemplateUserListJSX: Array<JSX.Element> = [];
+		for (let i = 0; i < 10; i++) {
+			loadingTemplateUserListJSX.push(
+				<div className='profile-list-container ' key={i}>
+					<div className='loading'>
+						<p>a </p>
+						<p>a </p>
+					</div>
+				</div>
 			);
-		});
+		}
+		setUserListJSX(loadingTemplateUserListJSX);
+
+		requestMoreUsers();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
 		<div className='profile-list-container'>
 			<h1>Tablica</h1>
 			<div>{userListJSX}</div>
+			{!limitReached ? (
+				<p onClick={requestMoreUsers} style={{ cursor: 'pointer' }}>
+					Prikaži više
+				</p>
+			) : (
+				'Nema više korisnika za pokazati...'
+			)}
 		</div>
 	);
 };

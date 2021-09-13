@@ -7,5 +7,5 @@ const auth = require('../controllers/auth');
 router.post('/register', userController.createNewUser);
 router.post('/login', userController.logUserIn);
 router.post('/checkAuth', auth.checkAuth);
-router.get('/getUserList', userController.getUserList);
+router.get('/requestUsers/:currentNumber', userController.getUsers);
 module.exports = router;

@@ -52,6 +52,7 @@ export const LatestPosts = () => {
 		}
 		setLatestPostsJSX(loadingTemplatePostList);
 		requestMorePosts();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -60,13 +61,18 @@ export const LatestPosts = () => {
 			{latestPostsJSX}
 
 			{!limitReached ? (
-				<div
-					onClick={() => {
-						requestMorePosts();
-					}}
-					style={{ cursor: 'pointer' }}
-				>
-					{!loading ? <p>Prikaži više</p> : 'Pričekajte...'}
+				<div style={{ cursor: 'pointer' }}>
+					{!loading ? (
+						<p
+							onClick={() => {
+								requestMorePosts();
+							}}
+						>
+							Prikaži više
+						</p>
+					) : (
+						'Pričekajte...'
+					)}
 				</div>
 			) : (
 				'Nema više objava za pokazati...'
