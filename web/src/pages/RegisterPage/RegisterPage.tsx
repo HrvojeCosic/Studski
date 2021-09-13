@@ -9,11 +9,13 @@ export const RegisterPage: React.FC = () => {
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const [email, setEmail] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const history = useHistory();
 
 	const createUser = (event: React.MouseEvent<HTMLButtonElement>): void => {
 		event.preventDefault();
+		setLoading(true);
 		const newUser = {
 			username,
 			password,
@@ -24,10 +26,12 @@ export const RegisterPage: React.FC = () => {
 			.post('http://localhost:8000/api/users/register', newUser)
 			.then(() => {
 				setErrorMsg('');
+				setLoading(false);
 				history.push('/');
 			})
 			.catch(err => {
 				setErrorMsg(err.response.data.error);
+				setLoading(false);
 			});
 	};
 	return (
@@ -69,7 +73,7 @@ export const RegisterPage: React.FC = () => {
 					/>
 					<div className='links'>
 						<button onClick={createUser} className='sign-up-btn'>
-							Registriraj se
+							{loading ? 'Učitavanje...' : 'Registriraj se'}
 						</button>
 						<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>
 							{errorMsg}

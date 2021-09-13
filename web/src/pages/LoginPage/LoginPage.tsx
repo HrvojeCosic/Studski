@@ -9,12 +9,14 @@ export const LoginPage: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const login = (event: React.MouseEvent<HTMLButtonElement>): void => {
 		event.preventDefault();
+		setLoading(true);
 		const userCheck = {
 			username,
 			password,
@@ -28,10 +30,12 @@ export const LoginPage: React.FC = () => {
 				const { userPosts } = res.data;
 				setErrorMsg('');
 				dispatch(setUser(username, points, userPosts));
+				setLoading(false);
 				history.push('/');
 			})
 			.catch(err => {
 				setErrorMsg(err.response.data.error);
+				setLoading(false);
 			});
 	};
 	return (
@@ -55,7 +59,7 @@ export const LoginPage: React.FC = () => {
 							}}
 						/>
 						<button id='submit' onClick={login}>
-							Prijavi se
+							{loading ? 'Učitavanje...' : 'Prijavi se'}
 						</button>
 					</form>
 					<p className={errorMsg.length > 0 ? 'error-msg' : 'hide'}>
