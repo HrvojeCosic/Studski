@@ -13,6 +13,9 @@
 		border: 1px solid var(--border-color);
 		border-radius: 5px;
 		margin: 5px 0;
+		&:hover {
+			background: var(--primary-gradient);
+		}
 	}
 	p {
 		margin: 0;

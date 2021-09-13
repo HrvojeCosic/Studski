@@ -18,6 +18,9 @@ html {
 		border-radius: 3px;
 		word-wrap: break-word;
 		height: 71px;
+		&:hover {
+			background: var(--primary-gradient);
+		}
 		.post-upper-info {
 			display: flex;
 			gap: 20px;

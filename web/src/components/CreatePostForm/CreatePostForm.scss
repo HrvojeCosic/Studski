@@ -72,5 +72,8 @@
 		color: var(--contrast-text-color);
 		cursor: pointer;
 		outline: none;
+		&:hover {
+			background: var(--primary-gradient);
+		}
 	}
 }

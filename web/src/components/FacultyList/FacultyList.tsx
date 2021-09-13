@@ -56,7 +56,9 @@ export const FacultyList: React.FC<{ faculties: Array<Faculty> }> = ({
 		return (
 			<div
 				key={area}
-				onClick={() => changeSelectedArea(area)}
+				onClick={() => {
+					!loadingFaculties && changeSelectedArea(area); //DON'T ALLOW DUMMY FACULTY AREAS TO BE CLICKED
+				}}
 				className={loadingFaculties ? 'loading' : 'faculty-area'}
 			>
 				{area}
