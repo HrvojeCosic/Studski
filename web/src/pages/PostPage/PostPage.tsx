@@ -27,6 +27,7 @@ export const PostPage: React.FC = () => {
 	const [files, setFiles] = useState<Array<PostFile>>([]);
 	const [allowVote, setAllowVote] = useState<boolean>(true);
 	const [deletePrompt, setDeletePrompt] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false);
 	const [visitor, setVisitor] = useState<string>('');
 	const params: PostParams = useParams();
 
@@ -34,6 +35,7 @@ export const PostPage: React.FC = () => {
 	const history = useHistory();
 
 	useEffect(() => {
+		setLoading(true);
 		const cancelTokenSource = axios.CancelToken.source();
 		const sid = Cookies.get('connect.sid');
 		axios
@@ -49,9 +51,11 @@ export const PostPage: React.FC = () => {
 			.then(res => {
 				setPost(res.data.post);
 				setFiles(res.data.files);
+				setLoading(false);
 			})
 			.catch(err => {
 				alert(err.response.data.error);
+				setLoading(false);
 				history.push('/');
 			});
 
@@ -187,7 +191,7 @@ export const PostPage: React.FC = () => {
 	return (
 		<div className='main-postpage-container'>
 			<NavBar />
-			<div className='post'>
+			<div className={loading ? 'post loading' : 'post'}>
 				<div className='upper-info'>
 					<p className='post-title'>{post.title}</p>
 					{visitor === post.author ? (
@@ -226,15 +230,17 @@ export const PostPage: React.FC = () => {
 						{post.faculty}
 					</Link>
 				</div>
-				<div>
-					<p className='post-date'>Objavljeno {post.createdAt}</p>
-					<p>Kolegijalnost: {post.points}</p>
-					{allowVote && post.author !== visitor ? (
-						<div onClick={voteForPost}>
-							<p className={voted ? 'voted' : 'non-voted'}>KORISNO?</p>
-						</div>
-					) : null}
-				</div>
+				{!loading && (
+					<div>
+						<p className='post-date'>Objavljeno {post.createdAt}</p>
+						<p>Kolegijalnost: {post.points}</p>
+						{allowVote && post.author !== visitor ? (
+							<div onClick={voteForPost}>
+								<p className={voted ? 'voted' : 'non-voted'}>KORISNO?</p>
+							</div>
+						) : null}
+					</div>
+				)}
 				{filesJSX}
 			</div>
 		</div>
