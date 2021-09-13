@@ -18,6 +18,11 @@
   margin: 5px 0;
 }
 
+.profile-list-container .featured-profile:hover,
+.profile-list-container .loading:hover {
+  background: var(--primary-gradient);
+}
+
 .profile-list-container p {
   margin: 0;
   padding: 5px;

@@ -27,6 +27,11 @@
   padding: 30px;
 }
 
+.main-container .faculty-areas-container .faculty-area:hover,
+.main-container .faculty-areas-container .loading:hover {
+  background: var(--primary-gradient);
+}
+
 .main-container .faculties-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -41,13 +46,17 @@
 .main-container .faculties-container .link {
   width: 100%;
   background-color: var(--secondary-bg-color);
-  border: 1px solid black;
+  border: 1px solid var(--border-color);
   border-radius: 3px;
   padding: 10px;
   margin: 10px;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+}
+
+.main-container .faculties-container .link:hover {
+  background: var(--primary-gradient);
 }
 
 .main-container .faculties-container .exit-btn {

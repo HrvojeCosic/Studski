@@ -24,6 +24,11 @@ html {
   border: 1px solid var(--border-color);
   border-radius: 3px;
   word-wrap: break-word;
+  height: 71px;
+}
+
+.posts-page-container .post-container:hover {
+  background: var(--primary-gradient);
 }
 
 .posts-page-container .post-container .post-upper-info {

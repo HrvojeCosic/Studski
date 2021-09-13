@@ -10,6 +10,10 @@
   margin: 8px 0;
 }
 
+.latest-posts-container .latest-post:hover {
+  background: var(--primary-gradient);
+}
+
 .latest-posts-container h1 {
   margin: 0 0 5px 0;
 }
