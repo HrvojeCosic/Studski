@@ -14,7 +14,12 @@ const { Sequelize } = require('./db');
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true })); //TODO(?): allow production frontend origin
+const corsOrigin =
+	process.env.NODE_ENV === 'production'
+		? process.env.PROD_CORS_URL
+		: process.env.DEV_CORS_URL;
+app.use(cors({ origin: corsOrigin, credentials: true }));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
