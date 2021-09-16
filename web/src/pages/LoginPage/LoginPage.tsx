@@ -22,7 +22,7 @@ export const LoginPage: React.FC = () => {
 			password,
 		};
 		axios
-			.post('http://localhost:8000/api/users/login', userCheck, {
+			.post('/users/login', userCheck, {
 				withCredentials: true,
 			})
 			.then(res => {

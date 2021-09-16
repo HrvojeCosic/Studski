@@ -42,7 +42,7 @@ export const UserProfilePage: React.FC = () => {
 		setPostsJSX(loadingTemplatePostList);
 
 		axios
-			.get(`http://localhost:8000/api/posts/getUserPosts/${params.username}`)
+			.get(`/posts/getUserPosts/${params.username}`)
 			.then(res => {
 				setPostsJSX(
 					res.data.posts.map((post: Post) => {

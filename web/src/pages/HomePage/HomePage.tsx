@@ -21,7 +21,7 @@ export const HomePage: React.FC = () => {
 		//FIND USER
 		const sid = Cookies.get('connect.sid');
 		axios
-			.post('http://localhost:8000/api/users/checkAuth', sid, {
+			.post('/users/checkAuth', sid, {
 				withCredentials: true,
 			})
 			.catch(err => {

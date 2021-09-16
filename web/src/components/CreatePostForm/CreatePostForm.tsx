@@ -69,7 +69,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		const sid = Cookies.get('connect.sid');
 		//AUTHORIZE & SET postAuthor
 		await axios
-			.post('http://localhost:8000/api/users/checkAuth', sid, {
+			.post('/users/checkAuth', sid, {
 				withCredentials: true,
 			})
 			.then(res => {
@@ -97,7 +97,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		}
 
 		await axios
-			.post('http://localhost:8000/api/posts/submit', formData)
+			.post('/posts/submit', formData)
 			.then(res => {
 				dispatch(updateUserPosts('add post', res.data.newPost));
 				setErrorMsg(res.data.message);

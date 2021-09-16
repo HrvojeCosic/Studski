@@ -39,7 +39,7 @@ export const PostPage: React.FC = () => {
 		const cancelTokenSource = axios.CancelToken.source();
 		const sid = Cookies.get('connect.sid');
 		axios
-			.post('http://localhost:8000/api/users/checkAuth', sid, {
+			.post('/users/checkAuth', sid, {
 				withCredentials: true,
 			})
 			.then(res => {
@@ -47,7 +47,7 @@ export const PostPage: React.FC = () => {
 			});
 
 		axios
-			.get(`http://localhost:8000/api/posts/getPost/${params.postID}`)
+			.get(`/posts/getPost/${params.postID}`)
 			.then(res => {
 				setPost(res.data.post);
 				setFiles(res.data.files);
@@ -64,14 +64,10 @@ export const PostPage: React.FC = () => {
 		if (!user) setAllowVote(false);
 		else if (user) username = JSON.parse(user).username;
 
-		axios
-			.get(
-				`http://localhost:8000/api/posts/checkVoted/${username}/${params.postID}`
-			)
-			.then(res => {
-				if (res.data.message === 'already voted') setVoted(true);
-				else if (res.data.message === 'has not voted') setVoted(false);
-			});
+		axios.get(`/posts/checkVoted/${username}/${params.postID}`).then(res => {
+			if (res.data.message === 'already voted') setVoted(true);
+			else if (res.data.message === 'has not voted') setVoted(false);
+		});
 
 		return () => {
 			cancelTokenSource.cancel('component unmounted, requests cancelled');
@@ -87,7 +83,7 @@ export const PostPage: React.FC = () => {
 		if (user) voter = JSON.parse(user).username;
 
 		axios
-			.patch('http://localhost:8000/api/posts/voteForPost', {
+			.patch('/posts/voteForPost', {
 				postID,
 				postAuthor,
 				voter,
@@ -106,18 +102,17 @@ export const PostPage: React.FC = () => {
 	};
 
 	const downloadFile = (fileName: string) => {
+		//TODO: PUT A CORRECT LINK
 		window.open(`http://localhost:8000/api/posts/downloadFile/${fileName}`);
 	};
 
 	const deletePost = () => {
-		axios
-			.delete(`http://localhost:8000/api/posts/deletePost/${params.postID}`)
-			.then(res => {
-				dispatch(
-					updateUserPosts('delete post', undefined, undefined, res.data.post)
-				);
-				history.push('/');
-			});
+		axios.delete(`/posts/deletePost/${params.postID}`).then(res => {
+			dispatch(
+				updateUserPosts('delete post', undefined, undefined, res.data.post)
+			);
+			history.push('/');
+		});
 	};
 
 	const filesJSX = files.map(file => {

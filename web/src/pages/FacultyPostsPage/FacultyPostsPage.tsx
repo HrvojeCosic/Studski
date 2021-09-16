@@ -42,9 +42,7 @@ export const FacultyPostsPage: React.FC = () => {
 		setPostsJSX(loadingTemplatePostList);
 
 		axios
-			.get(
-				`http://localhost:8000/api/posts/getFacultyPosts/${params.facultyName}`
-			)
+			.get(`/posts/getFacultyPosts/${params.facultyName}`)
 			.then(res => {
 				setPostsJSX(
 					res.data.posts.map((post: Post) => {

@@ -16,39 +16,37 @@ export const ProfileList: React.FC = () => {
 	const [limitReached, setLimitReached] = useState<boolean>(false);
 
 	const requestMoreUsers = () => {
-		axios
-			.get(`http://localhost:8000/api/users/requestUsers/${userListJSX.length}`)
-			.then(res => {
-				if (res.data.message) setLimitReached(true);
+		axios.get(`/users/requestUsers/${userListJSX.length}`).then(res => {
+			if (res.data.message) setLimitReached(true);
 
-				const sortedUserList = res.data.userList.sort(
-					(a: LeaderboardUser, b: LeaderboardUser) => {
-						if (a.points > b.points) return -1;
-						else if (b.points > a.points) return 1;
-						else return 0;
-					}
+			const sortedUserList = res.data.userList.sort(
+				(a: LeaderboardUser, b: LeaderboardUser) => {
+					if (a.points > b.points) return -1;
+					else if (b.points > a.points) return 1;
+					else return 0;
+				}
+			);
+
+			const responseUsersJSX = sortedUserList.map((user: LeaderboardUser) => {
+				return (
+					<Link
+						to={`/korisnik/${user.username}`}
+						className='profile-list-container'
+						key={user.username}
+					>
+						<div className='featured-profile' key={user.username}>
+							<p>
+								{user.username} {user.faculty ? '- ' + user.faculty : ''}
+							</p>
+							<p>Kolegijalnost: {user.points}</p>
+						</div>
+					</Link>
 				);
-
-				const responseUsersJSX = sortedUserList.map((user: LeaderboardUser) => {
-					return (
-						<Link
-							to={`/korisnik/${user.username}`}
-							className='profile-list-container'
-							key={user.username}
-						>
-							<div className='featured-profile' key={user.username}>
-								<p>
-									{user.username} {user.faculty ? '- ' + user.faculty : ''}
-								</p>
-								<p>Kolegijalnost: {user.points}</p>
-							</div>
-						</Link>
-					);
-				});
-
-				const updatedUserList = [...userListJSX, ...responseUsersJSX];
-				setUserListJSX(updatedUserList);
 			});
+
+			const updatedUserList = [...userListJSX, ...responseUsersJSX];
+			setUserListJSX(updatedUserList);
+		});
 	};
 
 	useEffect(() => {

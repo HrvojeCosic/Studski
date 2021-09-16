@@ -23,7 +23,7 @@ export const RegisterPage: React.FC = () => {
 			email,
 		};
 		axios
-			.post('http://localhost:8000/api/users/register', newUser)
+			.post('/users/register', newUser)
 			.then(() => {
 				setErrorMsg('');
 				setLoading(false);
