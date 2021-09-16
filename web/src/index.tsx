@@ -6,8 +6,15 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import allReducers from './reducers';
 import { User } from './reducers/user';
+import axios from 'axios';
 
 export const store = createStore(allReducers);
+
+const baseURL: string | undefined =
+	process.env.NODE_ENV === 'production'
+		? process.env.REACT_APP_PROD_URL
+		: process.env.REACT_APP_DEV_URL;
+axios.defaults.baseURL = baseURL;
 
 //Main state type
 export interface State {
