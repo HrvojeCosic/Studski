@@ -27,7 +27,7 @@ export const NavBar: React.FC<{
 			<Link to='/' className='link'>
 				<div className='branding'>
 					<img src={logo} alt='logo-img' />
-					<h1>StudentHub</h1>
+					<h1>Studski</h1>
 				</div>
 			</Link>
 			{loggedInUser.sid.length === 0 ? (
