@@ -10,7 +10,6 @@ require('dotenv').config();
 
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
-const { Sequelize } = require('./db');
 
 const app = express();
 
@@ -28,21 +27,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //SESSION SETUP
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-app.use(
-	session({
-		secret: process.env.SESSION_SECRET,
-		resave: false,
-		saveUninitialized: false,
-		store: new SequelizeStore({
-			db: db /*sequelize*/,
-		}),
-		cookie: {
-			httpOnly: false,
-			expires: false,
-			maxAge: 1 * 12 * 4 * 7 * 24 * 60 * 60 * 1000, //about a year
-		},
-	})
-);
+const sessConfig = {
+	secret: process.env.SESSION_SECRET,
+	resave: false,
+	saveUninitialized: false,
+	store: new SequelizeStore({
+		db: db /*sequelize*/,
+	}),
+	cookie: {
+		httpOnly: false,
+		maxAge: 1 * 12 * 4 * 7 * 24 * 60 * 60 * 1000, //about a year
+	},
+};
+app.use(session(sessConfig));
+if (process.env.NODE_ENV === 'production') {
+	app.set('trust proxy', 1);
+	sessConfig.cookie.secure = true;
+}
 
 app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
