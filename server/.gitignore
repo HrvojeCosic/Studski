@@ -1,2 +1,4 @@
 *.env
 fileUploads
+public
+Procfile

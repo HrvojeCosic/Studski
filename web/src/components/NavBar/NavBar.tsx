@@ -32,7 +32,6 @@ export const NavBar: React.FC<{
 			</Link>
 			{loggedInUser.sid.length === 0 ? (
 				<div className='header-btns'>
-					<div className='mode-toggle-btn' />
 					<Link to='/prijava' className='link'>
 						<div className='log-in-btn'>Prijavi se</div>
 					</Link>
@@ -42,7 +41,6 @@ export const NavBar: React.FC<{
 				</div>
 			) : (
 				<div className='header-btns'>
-					<div className='mode-toggle-btn' />
 					{location.pathname === '/' && (
 						<div className='link' onClick={toggleShowPostForm}>
 							Objavi materijal

@@ -102,8 +102,11 @@ export const PostPage: React.FC = () => {
 	};
 
 	const downloadFile = (fileName: string) => {
-		//TODO: PUT A CORRECT LINK
-		window.open(`http://localhost:8000/api/posts/downloadFile/${fileName}`);
+		const domain =
+			process.env.NODE_ENV === 'production'
+				? process.env.REACT_APP_PROD_URL
+				: process.env.REACT_APP_DEV_URL;
+		window.open(`${domain}/posts/downloadFile/${fileName}`);
 	};
 
 	const deletePost = () => {
