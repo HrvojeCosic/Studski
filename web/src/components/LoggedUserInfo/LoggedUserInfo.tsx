@@ -51,9 +51,9 @@ export const LoggedUserInfo: React.FC = () => {
 			) : (
 				<div>
 					<div className='logged-user-main'>
-						<a href={`/korisnik/${username}`}>
+						<Link to={`/korisnik/${username}`}>
 							<h3>{username}</h3>
-						</a>
+						</Link>
 						<div className='user-numbers'>
 							<p>Kolegijalnost: {points}</p>
 							<p>Broj objava: {posts.length}</p>
@@ -64,7 +64,9 @@ export const LoggedUserInfo: React.FC = () => {
 							<h3 className='announce-text'>Zadnje objave:</h3>
 						)}
 						{userPosts}
-						{limit === 5 && <a href={`/korisnik/${username}`}>Prikaži sve</a>}
+						{limit === 5 && (
+							<Link to={`/korisnik/${username}`}>Prikaži sve</Link>
+						)}
 					</div>
 				</div>
 			)}

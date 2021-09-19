@@ -23,7 +23,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 //SESSION SETUP
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -47,6 +46,11 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('*', (req, res) => {
+	res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
 
 db.authenticate()
 	.then(async () => {
