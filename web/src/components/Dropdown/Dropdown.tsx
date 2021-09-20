@@ -44,6 +44,9 @@ export const Dropdown: React.FC<{ show: boolean }> = show => {
 			<Link to='/' className='link'>
 				Tablica (uskoro)
 			</Link>
+			<Link to='/' className='link'>
+				Objavi materijal (uskoro)
+			</Link>
 		</div>
 	);
 };

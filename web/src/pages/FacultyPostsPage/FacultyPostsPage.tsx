@@ -81,7 +81,8 @@ export const FacultyPostsPage: React.FC = () => {
 				alert(err.response.data.error);
 				history.push('/');
 			});
-	}, [params.facultyName, history]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [params.facultyName, history, dispatch]);
 
 	return (
 		<div className='posts-page-container'>

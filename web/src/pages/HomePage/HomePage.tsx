@@ -57,7 +57,8 @@ export const HomePage: React.FC = () => {
 			.then(json => {
 				setFaculties(json);
 			});
-	}, []);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch]);
 	return (
 		<div>
 			<NavBar toggleShowPostForm={toggleShowPostForm} />

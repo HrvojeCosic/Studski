@@ -81,7 +81,8 @@ export const UserProfilePage: React.FC = () => {
 				alert(err.response.data.error);
 				history.push('/');
 			});
-	}, [params.username, history]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [params.username, history, dispatch]);
 
 	return (
 		<div className='posts-page-container'>

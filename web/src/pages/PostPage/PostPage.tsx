@@ -80,7 +80,8 @@ export const PostPage: React.FC = () => {
 		return () => {
 			cancelTokenSource.cancel('component unmounted, requests cancelled');
 		};
-	}, [params.postID, history]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [params.postID, history, dispatch]);
 
 	const voteForPost = () => {
 		const postID = params.postID;
