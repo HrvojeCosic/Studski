@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NavBar.scss';
 import logo from '../../design-tokens/images/7wnfJt.png';
 import { Link, useLocation } from 'react-router-dom';
@@ -12,6 +12,8 @@ let loggedInUser: User;
 export const NavBar: React.FC<{
 	toggleShowPostForm?: any;
 }> = ({ toggleShowPostForm }) => {
+	const [burger, setBurger] = useState<boolean>(true);
+
 	loggedInUser = getUser();
 	useSelector(state => state);
 
@@ -24,6 +26,14 @@ export const NavBar: React.FC<{
 
 	return (
 		<div className='header'>
+			<div
+				className='dropdown'
+				onClick={() => {
+					setBurger(!burger);
+				}}
+			>
+				<div className={burger ? 'dropdown-burger' : 'dropdown-exit'}></div>
+			</div>
 			<Link to='/' className='link'>
 				<div className='branding'>
 					<img src={logo} alt='logo-img' />

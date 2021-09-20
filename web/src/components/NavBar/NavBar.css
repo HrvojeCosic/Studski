@@ -42,6 +42,10 @@
   cursor: pointer;
 }
 
+.header .dropdown {
+  display: none;
+}
+
 .header-btns {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -72,11 +76,63 @@
           justify-content: right;
 }
 
-.header-btns .mode-toggle-btn {
-  background: url("../../design-tokens/images/toggle-mode-icon.png") no-repeat;
-  background-size: 40px;
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
+@media only screen and (max-width: 700px) {
+  .header h1 {
+    display: none;
+  }
+  .header .header-btns {
+    display: none;
+  }
+  .header .dropdown {
+    cursor: pointer;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 50px;
+    width: 50px;
+  }
+  .header .dropdown .dropdown-burger, .header .dropdown .dropdown-exit {
+    height: 4px;
+    width: 30px;
+    background-color: var(--logo-color);
+    border-radius: 5px;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  .header .dropdown .dropdown-burger::before, .header .dropdown .dropdown-exit::before, .header .dropdown .dropdown-burger::after, .header .dropdown .dropdown-exit::after {
+    content: '';
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    background-color: var(--logo-color);
+    border-radius: 5px;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  .header .dropdown .dropdown-burger::before, .header .dropdown .dropdown-exit::before {
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  .header .dropdown .dropdown-burger::after, .header .dropdown .dropdown-exit::after {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+  .header .dropdown .dropdown-exit {
+    -webkit-transform: rotate(50deg);
+            transform: rotate(50deg);
+  }
+  .header .dropdown .dropdown-exit::before {
+    background-color: transparent;
+  }
+  .header .dropdown .dropdown-exit::after {
+    -webkit-transform: rotate(80deg);
+            transform: rotate(80deg);
+  }
 }
 /*# sourceMappingURL=NavBar.css.map */
