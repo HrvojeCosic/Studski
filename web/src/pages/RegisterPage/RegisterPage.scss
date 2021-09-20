@@ -48,6 +48,8 @@
 		background-color: var(--logo-color);
 		text-decoration: none;
 		outline: none;
+		border: 1px solid var(--border-color);
+		transition: 0.2s linear;
 		&:focus {
 			border: 1px solid var(--border-color);
 		}
@@ -69,5 +71,33 @@
 		padding: 20px;
 		border: 1px solid var(--border-color);
 		border-radius: 8px;
+	}
+}
+
+@media only screen and (max-width: 650px) {
+	.sign-up-page-container {
+		h2 {
+			font-size: 30px;
+		}
+		padding: 0px;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		input,
+		.sign-up-btn {
+			width: 300px;
+		}
+	}
+}
+
+@media only screen and (max-width: 350px) {
+	.sign-up-page-container {
+		h2 {
+			font-size: 25px;
+		}
+		input,
+		.sign-up-btn {
+			width: 250px;
+		}
 	}
 }

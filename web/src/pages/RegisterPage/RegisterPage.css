@@ -67,6 +67,9 @@
   background-color: var(--logo-color);
   text-decoration: none;
   outline: none;
+  border: 1px solid var(--border-color);
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
 }
 
 .sign-up-page-container .sign-up-btn:focus {
@@ -93,5 +96,35 @@
   padding: 20px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
+}
+
+@media only screen and (max-width: 650px) {
+  .sign-up-page-container {
+    padding: 0px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: absolute;
+  }
+  .sign-up-page-container h2 {
+    font-size: 30px;
+  }
+  .sign-up-page-container input,
+  .sign-up-page-container .sign-up-btn {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .sign-up-page-container h2 {
+    font-size: 25px;
+  }
+  .sign-up-page-container input,
+  .sign-up-page-container .sign-up-btn {
+    width: 250px;
+  }
 }
 /*# sourceMappingURL=RegisterPage.css.map */
