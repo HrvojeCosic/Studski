@@ -26,7 +26,7 @@ export const HomePage: React.FC = () => {
 	};
 
 	useEffect(() => {
-		burger && dispatch(toggleBurger());
+		if (burger) dispatch(toggleBurger());
 
 		//FIND USER
 		const sid = Cookies.get('connect.sid');

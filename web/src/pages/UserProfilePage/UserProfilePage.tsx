@@ -26,7 +26,7 @@ export const UserProfilePage: React.FC = () => {
 	const { burger } = store.getState().renderState;
 
 	useEffect(() => {
-		burger && dispatch(toggleBurger());
+		if (burger) dispatch(toggleBurger());
 
 		//SET DUMMY POST LIST WHILE LOADING
 		let loadingTemplatePostList: Array<JSX.Element> = [];

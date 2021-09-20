@@ -157,10 +157,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 			<label htmlFor='actual-input' className='file-label'>
 				{filesTitle}
 			</label>
-			<button
-				onClick={e => submitPost()}
-				className={loading ? 'loading' : 'none'}
-			>
+			<button onClick={e => submitPost()} className={loading ? 'loading' : ''}>
 				{loading ? 'Učitavanje...' : 'Objavi'}
 			</button>
 			{loading ? (

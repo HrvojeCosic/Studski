@@ -26,7 +26,7 @@ export const FacultyPostsPage: React.FC = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		burger && dispatch(toggleBurger());
+		if (burger) dispatch(toggleBurger());
 
 		//SET DUMMY POST LIST WHILE LOADING
 		let loadingTemplatePostList: Array<JSX.Element> = [];

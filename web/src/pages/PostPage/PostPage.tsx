@@ -41,7 +41,7 @@ export const PostPage: React.FC = () => {
 	useSelector(state => state);
 
 	useEffect(() => {
-		burger && dispatch(toggleBurger());
+		if (burger) dispatch(toggleBurger());
 
 		setLoading(true);
 		const cancelTokenSource = axios.CancelToken.source();
