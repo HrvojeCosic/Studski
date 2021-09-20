@@ -36,7 +36,9 @@ export const ProfileList: React.FC = () => {
 							key={user.username}
 						>
 							<div className='featured-profile' key={user.username}>
-								<p className='profile-number'>{index + 1}</p>
+								<p className='profile-number'>
+									{userListJSX.length + index + 1}
+								</p>
 								<div className='user-info'>
 									<p>
 										{user.username} {user.faculty ? '- ' + user.faculty : ''}

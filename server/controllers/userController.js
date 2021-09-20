@@ -119,7 +119,7 @@ module.exports.getUsers = async (req, res) => {
 	const currentNumber = parseInt(req.params.currentNumber);
 	let userList = [];
 
-	const users = await User.findAll();
+	const users = await User.findAll({ order: [['points', 'DESC']] });
 	for (let i = currentNumber; i < currentNumber + 10; i++) {
 		if (users[i]) {
 			let userFaculty = '';
