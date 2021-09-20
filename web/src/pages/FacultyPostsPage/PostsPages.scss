@@ -8,6 +8,10 @@ html {
 	font-family: var(--main-font-family);
 	font-weight: 300;
 	color: var(--contrast-text-color);
+	h1 {
+		font-weight: 400;
+		text-align: center;
+	}
 	.post-container {
 		display: flex;
 		justify-content: space-between;

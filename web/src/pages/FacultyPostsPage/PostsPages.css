@@ -11,6 +11,11 @@ html {
   color: var(--contrast-text-color);
 }
 
+.posts-page-container h1 {
+  font-weight: 400;
+  text-align: center;
+}
+
 .posts-page-container .post-container {
   display: -webkit-box;
   display: -ms-flexbox;

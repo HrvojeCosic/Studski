@@ -21,6 +21,7 @@
 
 .logged-user-info-container .logged-user-main h3 {
   margin: 0;
+  font-weight: 500;
 }
 
 .logged-user-info-container .logged-user-main .user-numbers {
@@ -36,6 +37,7 @@
 
 .logged-user-info-container .announce-text {
   margin: 10px 0 0 0;
+  font-weight: 400;
 }
 
 .logged-user-info-container .user-post {
