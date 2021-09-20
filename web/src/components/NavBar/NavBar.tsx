@@ -6,20 +6,22 @@ import { removeUser } from '../../actions/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { User } from '../../reducers/user';
 import { getUser } from '../LoggedUserInfo/LoggedUserInfo';
+import { toggleBurger } from '../../actions/render';
+import { store } from '../..';
 
 let loggedInUser: User;
 
 export const NavBar: React.FC<{
 	toggleShowPostForm?: any;
 }> = ({ toggleShowPostForm }) => {
-	const [burger, setBurger] = useState<boolean>(true);
-
 	loggedInUser = getUser();
 	useSelector(state => state);
 
 	const location = useLocation();
-
 	const dispatch = useDispatch();
+
+	const { burger } = store.getState().renderState;
+
 	const logOut = () => {
 		dispatch(removeUser());
 	};
@@ -29,7 +31,7 @@ export const NavBar: React.FC<{
 			<div
 				className='dropdown'
 				onClick={() => {
-					setBurger(!burger);
+					dispatch(toggleBurger());
 				}}
 			>
 				<div className={burger ? 'dropdown-burger' : 'dropdown-exit'}></div>
