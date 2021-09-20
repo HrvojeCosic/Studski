@@ -39,6 +39,9 @@
 			border-radius: 2px;
 			width: 5ch;
 			cursor: pointer;
+			&:hover {
+				background: var(--primary-gradient);
+			}
 		}
 		.middle-upper-info {
 			display: flex;

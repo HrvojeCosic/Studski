@@ -55,6 +55,11 @@
   cursor: pointer;
 }
 
+.main-postpage-container .post .delete-post-yes:hover,
+.main-postpage-container .post .delete-post-no:hover {
+  background: var(--primary-gradient);
+}
+
 .main-postpage-container .post .middle-upper-info {
   display: -webkit-box;
   display: -ms-flexbox;
