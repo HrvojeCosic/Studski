@@ -7,7 +7,11 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { updateUserPosts } from '../../actions/user';
 import { NavBar } from '../../components/NavBar/NavBar';
+import { store } from '../..';
+import { Dropdown } from '../../components/Dropdown/Dropdown';
+import { useSelector } from 'react-redux';
 import './PostPage.scss';
+import { toggleBurger } from '../../actions/render';
 
 interface PostParams {
 	postID: string;
@@ -33,8 +37,12 @@ export const PostPage: React.FC = () => {
 
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const { burger } = store.getState().renderState;
+	useSelector(state => state);
 
 	useEffect(() => {
+		burger && dispatch(toggleBurger());
+
 		setLoading(true);
 		const cancelTokenSource = axios.CancelToken.source();
 		const sid = Cookies.get('connect.sid');
@@ -189,7 +197,11 @@ export const PostPage: React.FC = () => {
 	return (
 		<div className='main-postpage-container'>
 			<NavBar />
-			<div className={loading ? 'post loading' : 'post'}>
+			<Dropdown show={burger ? true : false} />
+			<div
+				className={loading ? 'post loading' : 'post'}
+				style={burger ? { display: 'none' } : {}}
+			>
 				<div className='upper-info'>
 					<p className='post-title'>{post.title}</p>
 					{visitor === post.author && (

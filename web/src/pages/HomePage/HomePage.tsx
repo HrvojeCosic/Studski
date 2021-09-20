@@ -7,10 +7,18 @@ import { NavBar } from '../../components/NavBar/NavBar';
 import { ProfileList } from '../../components/ProfileList/ProfileList';
 import './HomePage.scss';
 import { CreatePostForm } from '../../components/CreatePostForm/CreatePostForm';
+import { store } from '../..';
+import { Dropdown } from '../../components/Dropdown/Dropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleBurger } from '../../actions/render';
 
 export const HomePage: React.FC = () => {
 	const [showForm, setShowForm] = useState(false);
 	const [faculties, setFaculties] = useState<Array<Faculty>>([]);
+
+	const dispatch = useDispatch();
+	const { burger } = store.getState().renderState;
+	useSelector(state => state);
 
 	//NavBar prop:
 	const toggleShowPostForm = () => {
@@ -18,6 +26,8 @@ export const HomePage: React.FC = () => {
 	};
 
 	useEffect(() => {
+		burger && dispatch(toggleBurger());
+
 		//FIND USER
 		const sid = Cookies.get('connect.sid');
 		axios
@@ -51,7 +61,8 @@ export const HomePage: React.FC = () => {
 	return (
 		<div>
 			<NavBar toggleShowPostForm={toggleShowPostForm} />
-			<div className='home-page-body'>
+			<Dropdown show={burger ? true : false} />
+			<div className='home-page-body' style={burger ? { display: 'none' } : {}}>
 				<ProfileList />
 				<FacultyList faculties={faculties} />
 				{showForm ? (

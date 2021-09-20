@@ -4,8 +4,12 @@ import { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Post } from '../../reducers/user';
-import '../FacultyPostsPage/PostsPages.scss'; //same style as FacultyPostPage
 import { NavBar } from '../../components/NavBar/NavBar';
+import { store } from '../..';
+import { Dropdown } from '../../components/Dropdown/Dropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import '../FacultyPostsPage/PostsPages.scss'; //same style as FacultyPostPage
+import { toggleBurger } from '../../actions/render';
 
 interface UserParams {
 	username: string;
@@ -16,8 +20,14 @@ export const UserProfilePage: React.FC = () => {
 	const params: UserParams = useParams();
 
 	const history = useHistory();
+	const dispatch = useDispatch();
+
+	useSelector(state => state);
+	const { burger } = store.getState().renderState;
 
 	useEffect(() => {
+		burger && dispatch(toggleBurger());
+
 		//SET DUMMY POST LIST WHILE LOADING
 		let loadingTemplatePostList: Array<JSX.Element> = [];
 		for (let i = 0; i < 5; i++) {
@@ -76,8 +86,9 @@ export const UserProfilePage: React.FC = () => {
 	return (
 		<div className='posts-page-container'>
 			<NavBar />
-			<h1>{params.username}</h1>
-			{postsJSX}
+			<Dropdown show={burger ? true : false} />
+			<h1 style={burger ? { display: 'none' } : {}}>{params.username}</h1>
+			{!burger && postsJSX}
 		</div>
 	);
 };

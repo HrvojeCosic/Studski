@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './NavBar.scss';
 import logo from '../../design-tokens/images/7wnfJt.png';
 import { Link, useLocation } from 'react-router-dom';
@@ -34,7 +34,7 @@ export const NavBar: React.FC<{
 					dispatch(toggleBurger());
 				}}
 			>
-				<div className={burger ? 'dropdown-burger' : 'dropdown-exit'}></div>
+				<div className={!burger ? 'dropdown-burger' : 'dropdown-exit'}></div>
 			</div>
 			<Link to='/' className='link'>
 				<div className='branding'>

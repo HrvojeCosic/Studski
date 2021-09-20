@@ -1,7 +1,7 @@
 .home-page-body {
 	display: flex;
 	gap: 30px;
-	min-height: 100vh;
+	min-height: calc(100vh - 60px); //60px for NavBar
 	justify-content: space-between;
 	background-color: var(--primary-bg-color);
 	h1 {

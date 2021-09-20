@@ -3,7 +3,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 30px;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
