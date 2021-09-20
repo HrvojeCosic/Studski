@@ -8,6 +8,7 @@
 	}
 	.featured-profile,
 	.loading {
+		display: flex;
 		width: 100%;
 		background-color: var(--secondary-bg-color);
 		border: 1px solid var(--border-color);
@@ -15,6 +16,14 @@
 		margin: 5px 0;
 		&:hover {
 			background: var(--primary-gradient);
+		}
+		.user-info {
+			display: flex;
+			flex-direction: column;
+		}
+		.profile-number {
+			font-size: 40px;
+			font-weight: 400;
 		}
 	}
 	p {

@@ -27,22 +27,27 @@ export const ProfileList: React.FC = () => {
 				}
 			);
 
-			const responseUsersJSX = sortedUserList.map((user: LeaderboardUser) => {
-				return (
-					<Link
-						to={`/korisnik/${user.username}`}
-						className='profile-list-container'
-						key={user.username}
-					>
-						<div className='featured-profile' key={user.username}>
-							<p>
-								{user.username} {user.faculty ? '- ' + user.faculty : ''}
-							</p>
-							<p>Kolegijalnost: {user.points}</p>
-						</div>
-					</Link>
-				);
-			});
+			const responseUsersJSX = sortedUserList.map(
+				(user: LeaderboardUser, index: number) => {
+					return (
+						<Link
+							to={`/korisnik/${user.username}`}
+							className='profile-list-container'
+							key={user.username}
+						>
+							<div className='featured-profile' key={user.username}>
+								<p className='profile-number'>{index + 1}</p>
+								<div className='user-info'>
+									<p>
+										{user.username} {user.faculty ? '- ' + user.faculty : ''}
+									</p>
+									<p>Kolegijalnost: {user.points}</p>
+								</div>
+							</div>
+						</Link>
+					);
+				}
+			);
 
 			const updatedUserList = [...userListJSX, ...responseUsersJSX];
 			setUserListJSX(updatedUserList);
@@ -56,6 +61,7 @@ export const ProfileList: React.FC = () => {
 			loadingTemplateUserListJSX.push(
 				<div className='profile-list-container ' key={i}>
 					<div className='loading'>
+						<p className='profile-number'>{i + 1}</p>
 						<p>a </p>
 						<p>a </p>
 					</div>
