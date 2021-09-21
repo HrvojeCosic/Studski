@@ -12,6 +12,9 @@ html {
 		font-weight: 400;
 		text-align: center;
 	}
+	.loading {
+		height: 71px;
+	}
 	.post-container {
 		display: flex;
 		justify-content: space-between;
@@ -20,7 +23,6 @@ html {
 		background-color: var(--secondary-bg-color);
 		border-radius: 3px;
 		word-wrap: break-word;
-		height: 71px;
 		&:hover {
 			background: var(--primary-gradient);
 		}
