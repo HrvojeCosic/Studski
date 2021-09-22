@@ -14,7 +14,7 @@ Studski is a platform made to allow students attending Croatian universities to 
 </a>
 <table align="center">
   <td width="50%">
-    <img src="https://github.com/HrvojeCosic/Studski/blob/preview/mobilepreview-gif.gif?raw=true" height=500 align="left">
+    <img src="https://github.com/HrvojeCosic/Studski/blob/preview/mobilepreview.gif?raw=true" height=500 align="left">
     <img src="https://github.com/HrvojeCosic/Studski/blob/preview/postpreview.gif?raw=true" height=500 align="right">
   </td>
 </table> 
