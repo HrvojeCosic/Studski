@@ -15,6 +15,8 @@ import { toggleBurger } from '../../actions/render';
 export const HomePage: React.FC = () => {
 	const [showForm, setShowForm] = useState(false);
 	const [faculties, setFaculties] = useState<Array<Faculty>>([]);
+	const [componentToShow, setComponentToShow] = useState<string>('');
+	const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
 	const dispatch = useDispatch();
 	const { burger } = store.getState().renderState;
@@ -23,6 +25,10 @@ export const HomePage: React.FC = () => {
 	//NavBar prop:
 	const toggleShowPostForm = () => {
 		setShowForm(!showForm);
+	};
+
+	const trackResize = () => {
+		setWindowWidth(window.innerWidth);
 	};
 
 	useEffect(() => {
@@ -57,21 +63,53 @@ export const HomePage: React.FC = () => {
 			.then(json => {
 				setFaculties(json);
 			});
+
+		window.addEventListener('resize', trackResize);
+		return () => window.removeEventListener('resize', trackResize);
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch]);
+	}, [dispatch, componentToShow]);
+
+	const showComponent = () => {
+		if (componentToShow === 'FacultyList' && windowWidth < 700) {
+			return <FacultyList faculties={faculties} />;
+		} else if (componentToShow === 'ProfileList' && windowWidth < 700) {
+			return <ProfileList />;
+		} else if (componentToShow === 'CreatePostForm' && windowWidth < 700) {
+			return <CreatePostForm faculties={faculties} />;
+		} else if (componentToShow === '') {
+			return (
+				<div
+					className='home-page-body'
+					style={burger ? { display: 'none' } : {}}
+				>
+					<div style={windowWidth < 700 ? { display: 'none' } : {}}>
+						<ProfileList />
+					</div>
+
+					<FacultyList faculties={faculties} />
+
+					{showForm ? (
+						<CreatePostForm faculties={faculties} />
+					) : (
+						<LoggedUserInfo />
+					)}
+				</div>
+			);
+		} else {
+			setComponentToShow('');
+		}
+	};
 	return (
 		<div>
 			<NavBar toggleShowPostForm={toggleShowPostForm} />
-			<Dropdown show={burger ? true : false} />
-			<div className='home-page-body' style={burger ? { display: 'none' } : {}}>
-				<ProfileList />
-				<FacultyList faculties={faculties} />
-				{showForm ? (
-					<CreatePostForm faculties={faculties} />
-				) : (
-					<LoggedUserInfo />
-				)}
-			</div>
+			<Dropdown
+				show={burger ? true : false}
+				changeComponentToShow={(component: string) => {
+					setComponentToShow(component);
+				}}
+			/>
+			{showComponent()}
 		</div>
 	);
 };

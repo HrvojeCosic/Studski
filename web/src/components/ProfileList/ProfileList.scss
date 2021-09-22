@@ -34,9 +34,8 @@
 		min-height: 0;
 	}
 }
-
 @media only screen and (max-width: 700px) {
 	.profile-list-container {
-		display: none;
+		margin: 0 auto;
 	}
 }

@@ -5,12 +5,20 @@ import { removeUser } from '../../actions/user';
 import { getUser } from '../LoggedUserInfo/LoggedUserInfo';
 import './Dropdown.scss';
 
-export const Dropdown: React.FC<{ show: boolean }> = show => {
+interface DropdownProps {
+	show: boolean;
+	changeComponentToShow?: (component: string) => any;
+}
+
+export const Dropdown: React.FC<DropdownProps> = ({
+	show,
+	changeComponentToShow,
+}) => {
 	const loggedInUser = getUser();
 	const dispatch = useDispatch();
 
 	return (
-		<div className={show.show ? 'dropdown-container' : 'none'}>
+		<div className={show ? 'dropdown-container' : 'none'}>
 			{loggedInUser.sid.length === 0 ? (
 				<div>
 					<Link to='/prijava' className='link'>
@@ -38,14 +46,32 @@ export const Dropdown: React.FC<{ show: boolean }> = show => {
 				</div>
 			)}
 
-			<Link to='/' className='link'>
-				Najnovije objave (uskoro)
+			<Link
+				to='/'
+				className='link'
+				onClick={() =>
+					changeComponentToShow && changeComponentToShow('FacultyList')
+				}
+			>
+				Fakulteti
 			</Link>
-			<Link to='/' className='link'>
-				Tablica (uskoro)
+			<Link
+				to='/'
+				className='link'
+				onClick={() =>
+					changeComponentToShow && changeComponentToShow('ProfileList')
+				}
+			>
+				Tablica
 			</Link>
-			<Link to='/' className='link'>
-				Objavi materijal (uskoro)
+			<Link
+				to='/'
+				className='link'
+				onClick={() =>
+					changeComponentToShow && changeComponentToShow('CreatePostForm')
+				}
+			>
+				Objavi materijal
 			</Link>
 		</div>
 	);
