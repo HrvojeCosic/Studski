@@ -109,7 +109,7 @@ export const HomePage: React.FC = () => {
 					setComponentToShow(component);
 				}}
 			/>
-			{showComponent()}
+			{!burger && showComponent()}
 		</div>
 	);
 };
