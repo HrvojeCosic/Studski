@@ -14,6 +14,7 @@ let loggedInUser: User;
 export const NavBar: React.FC<{
 	toggleShowPostForm?: any;
 }> = ({ toggleShowPostForm }) => {
+	//TODO: do it through backend (checkAuth?) instead through store/localstorage
 	loggedInUser = getUser();
 	useSelector(state => state);
 
