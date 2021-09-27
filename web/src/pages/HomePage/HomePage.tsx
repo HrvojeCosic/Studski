@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import { Faculty, FacultyList } from '../../components/FacultyList/FacultyList';
 import { LoggedUserInfo } from '../../components/LoggedUserInfo/LoggedUserInfo';
 import { NavBar } from '../../components/NavBar/NavBar';
 import { ProfileList } from '../../components/ProfileList/ProfileList';
-import './HomePage.scss';
 import { CreatePostForm } from '../../components/CreatePostForm/CreatePostForm';
 import { store } from '../..';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleBurger } from '../../actions/render';
-import { setUser } from '../../actions/user';
+import useAuth from '../../hooks/useAuth';
+import './HomePage.scss';
 
 export const HomePage: React.FC = () => {
 	const [showForm, setShowForm] = useState<boolean>(false);
@@ -23,33 +21,14 @@ export const HomePage: React.FC = () => {
 	const { burger } = store.getState().renderState;
 	useSelector(state => state);
 
-	//NavBar prop:
-	const toggleShowPostForm = () => {
-		setShowForm(!showForm);
-	};
-
 	const trackResize = () => {
 		setWindowWidth(window.innerWidth);
 	};
 
+	useAuth();
 	useEffect(() => {
 		if (burger) dispatch(toggleBurger());
 
-		//FIND USER
-		const sid = Cookies.get('connect.sid');
-		axios
-			.post('/users/checkAuth', sid, {
-				withCredentials: true,
-			})
-			.then(res => {
-				const { username, points, posts } = res.data.user;
-				dispatch(setUser(username, points, posts, true));
-			})
-			.catch(() => {
-				dispatch(setUser('', 0, [], true));
-			});
-
-		//SET DUMMY FACULTY LIST WHILE LOADING
 		let loadingTemplateFacultyList: Array<Faculty> = [];
 		for (let i = 1; i < 19; i++) {
 			loadingTemplateFacultyList.push({
@@ -60,7 +39,6 @@ export const HomePage: React.FC = () => {
 		}
 		setFaculties(loadingTemplateFacultyList);
 
-		//GET FACULTIES
 		fetch('faculties.json')
 			.then(res => {
 				return res.json();
@@ -72,8 +50,8 @@ export const HomePage: React.FC = () => {
 		window.addEventListener('resize', trackResize);
 		return () => window.removeEventListener('resize', trackResize);
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch, componentToShow]);
+		//eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [componentToShow, dispatch]);
 
 	const showComponent = () => {
 		if (componentToShow === 'FacultyList' && windowWidth < 700) {
@@ -101,13 +79,15 @@ export const HomePage: React.FC = () => {
 					)}
 				</div>
 			);
-		} else {
-			setComponentToShow('');
-		}
+		} else setComponentToShow('');
 	};
 	return (
 		<div>
-			<NavBar toggleShowPostForm={toggleShowPostForm} />
+			<NavBar
+				toggleShowPostForm={() => {
+					setShowForm(!showForm);
+				}}
+			/>
 			<Dropdown
 				show={burger ? true : false}
 				changeComponentToShow={(component: string) => {

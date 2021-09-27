@@ -4,22 +4,17 @@ import { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Post } from '../../reducers/user';
-import './PostsPages.scss';
 import { NavBar } from '../../components/NavBar/NavBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { store } from '../..';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { toggleBurger } from '../../actions/render';
-import Cookies from 'js-cookie';
-import { setUser } from '../../actions/user';
-
-interface FacultyParams {
-	facultyName: string;
-}
+import useAuth from '../../hooks/useAuth';
+import './PostsPages.scss';
 
 export const FacultyPostsPage: React.FC = () => {
 	const [postsJSX, setPostsJSX] = useState<Array<JSX.Element>>([]);
-	const params: FacultyParams = useParams();
+	const params: { facultyName: string } = useParams();
 
 	const { burger } = store.getState().renderState;
 	useSelector(state => state);
@@ -27,21 +22,9 @@ export const FacultyPostsPage: React.FC = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
+	useAuth();
 	useEffect(() => {
 		if (burger) dispatch(toggleBurger());
-
-		const sid = Cookies.get('connect.sid');
-		axios
-			.post('/users/checkAuth', sid, {
-				withCredentials: true,
-			})
-			.then(res => {
-				const { username, points, posts } = res.data.user;
-				dispatch(setUser(username, points, posts, true));
-			})
-			.catch(() => {
-				dispatch(setUser('', 0, [], true));
-			});
 
 		//SET DUMMY POST LIST WHILE LOADING
 		let loadingTemplatePostList: Array<JSX.Element> = [];

@@ -10,8 +10,7 @@ import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import '../FacultyPostsPage/PostsPages.scss'; //same style as FacultyPostPage
 import { toggleBurger } from '../../actions/render';
-import Cookies from 'js-cookie';
-import { setUser } from '../../actions/user';
+import useAuth from '../../hooks/useAuth';
 
 interface UserParams {
 	username: string;
@@ -27,21 +26,10 @@ export const UserProfilePage: React.FC = () => {
 	useSelector(state => state);
 	const { burger } = store.getState().renderState;
 
+	useAuth();
+
 	useEffect(() => {
 		if (burger) dispatch(toggleBurger());
-
-		const sid = Cookies.get('connect.sid');
-		axios
-			.post('/users/checkAuth', sid, {
-				withCredentials: true,
-			})
-			.then(res => {
-				const { username, points, posts } = res.data.user;
-				dispatch(setUser(username, points, posts, true));
-			})
-			.catch(() => {
-				dispatch(setUser('', 0, [], true));
-			});
 
 		//SET DUMMY POST LIST WHILE LOADING
 		let loadingTemplatePostList: Array<JSX.Element> = [];

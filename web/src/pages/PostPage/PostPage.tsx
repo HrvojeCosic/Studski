@@ -1,18 +1,18 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { setUser, updateUserPosts } from '../../actions/user';
+import { updateUserPosts } from '../../actions/user';
 import { NavBar } from '../../components/NavBar/NavBar';
 import { store } from '../..';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { useSelector } from 'react-redux';
-import './PostPage.scss';
 import { toggleBurger } from '../../actions/render';
 import { User } from '../../reducers/user';
+import useAuth from '../../hooks/useAuth';
+import './PostPage.scss';
 
 interface PostParams {
 	postID: string;
@@ -40,29 +40,23 @@ export const PostPage: React.FC = () => {
 	const { burger } = store.getState().renderState;
 	useSelector(state => state);
 
+	useAuth();
+
+	useEffect(() => {
+		const { username } = store.getState().userState;
+		if (username) {
+			axios.get(`/posts/checkVoted/${username}/${params.postID}`).then(res => {
+				if (res.data.message === 'already voted') setVoted(true);
+				else if (res.data.message === 'has not voted') setVoted(false);
+			});
+		}
+	}, [params.postID]);
+
 	useEffect(() => {
 		if (burger) dispatch(toggleBurger());
 
 		setLoading(true);
 		const cancelTokenSource = axios.CancelToken.source();
-		const sid = Cookies.get('connect.sid');
-		axios
-			.post('/users/checkAuth', sid, {
-				withCredentials: true,
-			})
-			.then(res => {
-				const { username, points, posts } = res.data.user;
-				dispatch(setUser(username, points, posts, true));
-				axios
-					.get(`/posts/checkVoted/${username}/${params.postID}`)
-					.then(res => {
-						if (res.data.message === 'already voted') setVoted(true);
-						else if (res.data.message === 'has not voted') setVoted(false);
-					});
-			})
-			.catch(() => {
-				dispatch(setUser('', 0, [], true));
-			});
 
 		axios
 			.get(`/posts/getPost/${params.postID}`)
@@ -81,7 +75,7 @@ export const PostPage: React.FC = () => {
 			cancelTokenSource.cancel('component unmounted, requests cancelled');
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [params.postID, history, dispatch]);
+	}, [history, dispatch]);
 
 	const voteForPost = () => {
 		const postID = params.postID;
