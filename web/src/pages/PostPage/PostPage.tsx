@@ -12,7 +12,7 @@ import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { useSelector } from 'react-redux';
 import './PostPage.scss';
 import { toggleBurger } from '../../actions/render';
-import { initialUserState, User } from '../../reducers/user';
+import { User } from '../../reducers/user';
 
 interface PostParams {
 	postID: string;
@@ -33,7 +33,6 @@ export const PostPage: React.FC = () => {
 	const [allowVote, setAllowVote] = useState<boolean>(true);
 	const [deletePrompt, setDeletePrompt] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
-	const [visitor, setVisitor] = useState<User>(initialUserState);
 	const params: PostParams = useParams();
 
 	const dispatch = useDispatch();
@@ -54,7 +53,12 @@ export const PostPage: React.FC = () => {
 			.then(res => {
 				const { username, points, posts } = res.data.user;
 				dispatch(setUser(username, points, posts, true));
-				setVisitor(res.data.user);
+				axios
+					.get(`/posts/checkVoted/${username}/${params.postID}`)
+					.then(res => {
+						if (res.data.message === 'already voted') setVoted(true);
+						else if (res.data.message === 'has not voted') setVoted(false);
+					});
 			})
 			.catch(() => {
 				dispatch(setUser('', 0, [], true));
@@ -71,16 +75,6 @@ export const PostPage: React.FC = () => {
 				alert(err.response.data.error);
 				setLoading(false);
 				history.push('/');
-			})
-			.then(() => {});
-
-		if (visitor.username === '') setAllowVote(false);
-
-		axios
-			.get(`/posts/checkVoted/${visitor.username}/${params.postID}`)
-			.then(res => {
-				if (res.data.message === 'already voted') setVoted(true);
-				else if (res.data.message === 'has not voted') setVoted(false);
 			});
 
 		return () => {
@@ -93,8 +87,7 @@ export const PostPage: React.FC = () => {
 		const postID = params.postID;
 		const postAuthor = post.author;
 
-		const visitor: User = store.getState().userState;
-		const voter = visitor.username;
+		const voter = user.username;
 
 		axios
 			.patch('/posts/voteForPost', {
@@ -200,6 +193,8 @@ export const PostPage: React.FC = () => {
 		);
 	});
 
+	const user: User = store.getState().userState;
+	if (!user.username && user.loaded) setAllowVote(false);
 	return (
 		<div className='main-postpage-container'>
 			<NavBar />
@@ -210,7 +205,7 @@ export const PostPage: React.FC = () => {
 			>
 				<div className='upper-info'>
 					<p className='post-title'>{post.title}</p>
-					{visitor.username === post.author && (
+					{user.username === post.author && (
 						<img
 							src='../../icons/otherIcons/delete-item.png'
 							alt=''
@@ -250,7 +245,7 @@ export const PostPage: React.FC = () => {
 					<div>
 						<p className='post-date'>Objavljeno {post.createdAt}</p>
 						<p>Kolegijalnost: {post.points}</p>
-						{allowVote && post.author !== visitor.username && (
+						{allowVote && post.author !== user.username && (
 							<div onClick={voteForPost}>
 								<p className={voted ? 'voted' : 'non-voted'}>KORISNO?</p>
 							</div>
