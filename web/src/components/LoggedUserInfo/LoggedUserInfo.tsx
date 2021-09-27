@@ -1,27 +1,14 @@
 import React from 'react';
-import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
-import { State } from '../../index';
+import { State, store } from '../../index';
 import './LoggedUserInfo.scss';
 import { Link } from 'react-router-dom';
 import { LatestPosts } from '../LatestPosts/LatestPosts';
-
-export const getUser = () => {
-	let sid = Cookies.get('connect.sid');
-	if (!sid) sid = '';
-
-	const stringifiedCurrentUser = localStorage.getItem('currentUser');
-	if (!stringifiedCurrentUser) {
-		return { username: '', points: 0, posts: [], sid };
-	}
-
-	let currentUser = JSON.parse(stringifiedCurrentUser);
-	currentUser.sid = sid;
-	return currentUser;
-};
+import { User } from '../../reducers/user';
 
 export const LoggedUserInfo: React.FC = () => {
-	const { username, points, posts } = getUser();
+	const user: User = store.getState().userState;
+	const { username, posts, points } = user;
 	useSelector((state: State) => state);
 
 	let userPosts = [];

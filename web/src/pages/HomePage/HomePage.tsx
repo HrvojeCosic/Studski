@@ -11,6 +11,7 @@ import { store } from '../..';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleBurger } from '../../actions/render';
+import { setUser } from '../../actions/user';
 
 export const HomePage: React.FC = () => {
 	const [showForm, setShowForm] = useState(false);
@@ -39,6 +40,10 @@ export const HomePage: React.FC = () => {
 		axios
 			.post('/users/checkAuth', sid, {
 				withCredentials: true,
+			})
+			.then(res => {
+				const { username, points, posts } = res.data.user;
+				dispatch(setUser(username, points, posts));
 			})
 			.catch(err => {
 				console.log('Korisnik nije prijavljen');

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { store } from '../..';
 import { removeUser } from '../../actions/user';
-import { getUser } from '../LoggedUserInfo/LoggedUserInfo';
+import { User } from '../../reducers/user';
 import './Dropdown.scss';
 
 interface DropdownProps {
@@ -14,12 +15,13 @@ export const Dropdown: React.FC<DropdownProps> = ({
 	show,
 	changeComponentToShow,
 }) => {
-	const loggedInUser = getUser();
+	const loggedInUser: User = store.getState().userState;
+
 	const dispatch = useDispatch();
 
 	return (
 		<div className={show ? 'dropdown-container' : 'none'}>
-			{loggedInUser.sid.length === 0 ? (
+			{loggedInUser.username.length === 0 ? (
 				<div>
 					<Link to='/prijava' className='link'>
 						Prijavi se

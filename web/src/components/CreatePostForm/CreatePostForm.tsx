@@ -17,13 +17,13 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 
 	const dispatch = useDispatch();
 
-	const [postTitle, setPostTitle] = useState('');
-	const [facultyArea, setFacultyArea] = useState('');
-	const [facultyName, setFacultyName] = useState('');
-	const [errorMsg, setErrorMsg] = useState('');
+	const [postTitle, setPostTitle] = useState<string>('');
+	const [postAuthor, setPostAuthor] = useState<string>('');
+	const [facultyArea, setFacultyArea] = useState<string>('');
+	const [facultyName, setFacultyName] = useState<string>('');
+	const [errorMsg, setErrorMsg] = useState<string>('');
 	const [files, setFiles] = useState<any>(null);
 	const [filesTitle, setFilesTitle] = useState<any>('Nema odabranih datoteka');
-	let postAuthor = '';
 
 	const facultyAreasSet = new Set(
 		faculties.map(faculty => {
@@ -73,7 +73,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 				withCredentials: true,
 			})
 			.then(res => {
-				postAuthor = res.data.message;
+				setPostAuthor(res.data.user.username);
 			})
 			.catch(err => {
 				setErrorMsg(err.response.data.error);
@@ -112,7 +112,7 @@ export const CreatePostForm: React.FC<{ faculties: Array<Faculty> }> = ({
 		setPostTitle('');
 		setFacultyArea('');
 		setFacultyName('');
-		postAuthor = '';
+		setPostAuthor('');
 		setFiles(null);
 		setFilesTitle('Nema odabranih datoteka');
 	};

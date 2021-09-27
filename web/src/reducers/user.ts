@@ -25,7 +25,7 @@ interface UserAction {
 	};
 }
 
-const initialUserState = {
+export const initialUserState = {
 	username: '',
 	points: 0,
 	posts: [],
@@ -38,7 +38,7 @@ const userReducer = (state: User = initialUserState, action: UserAction) => {
 			const { username, points, posts } = action.payload;
 			return { username, points, posts };
 		case 'REMOVE_USER':
-			return action.payload.user;
+			return action.payload;
 		case 'UPDATE_POSTS':
 			return action.payload.currentUser;
 		default:

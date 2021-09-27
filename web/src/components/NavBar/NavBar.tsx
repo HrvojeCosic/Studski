@@ -5,17 +5,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { removeUser } from '../../actions/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { User } from '../../reducers/user';
-import { getUser } from '../LoggedUserInfo/LoggedUserInfo';
 import { toggleBurger } from '../../actions/render';
 import { store } from '../..';
-
-let loggedInUser: User;
 
 export const NavBar: React.FC<{
 	toggleShowPostForm?: any;
 }> = ({ toggleShowPostForm }) => {
-	//TODO: do it through backend (checkAuth?) instead through store/localstorage
-	loggedInUser = getUser();
+	let loggedInUser: User = store.getState().userState;
 	useSelector(state => state);
 
 	const location = useLocation();
@@ -43,7 +39,7 @@ export const NavBar: React.FC<{
 					<h1>Studski</h1>
 				</div>
 			</Link>
-			{loggedInUser.sid.length === 0 ? (
+			{loggedInUser.username.length === 0 ? (
 				<div className='header-btns'>
 					<Link to='/prijava' className='link'>
 						<div className='log-in-btn'>Prijavi se</div>

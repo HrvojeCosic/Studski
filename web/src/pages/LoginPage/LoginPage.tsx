@@ -34,7 +34,7 @@ export const LoginPage: React.FC = () => {
 				history.push('/');
 			})
 			.catch(err => {
-				setErrorMsg(err.response.data.error);
+				// setErrorMsg(err.response.data.error);
 				setLoading(false);
 			});
 	};

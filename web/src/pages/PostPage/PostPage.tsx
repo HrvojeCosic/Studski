@@ -12,6 +12,7 @@ import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { useSelector } from 'react-redux';
 import './PostPage.scss';
 import { toggleBurger } from '../../actions/render';
+import { initialUserState, User } from '../../reducers/user';
 
 interface PostParams {
 	postID: string;
@@ -32,7 +33,7 @@ export const PostPage: React.FC = () => {
 	const [allowVote, setAllowVote] = useState<boolean>(true);
 	const [deletePrompt, setDeletePrompt] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
-	const [visitor, setVisitor] = useState<string>('');
+	const [visitor, setVisitor] = useState<User>(initialUserState);
 	const params: PostParams = useParams();
 
 	const dispatch = useDispatch();
@@ -51,7 +52,7 @@ export const PostPage: React.FC = () => {
 				withCredentials: true,
 			})
 			.then(res => {
-				setVisitor(res.data.message);
+				setVisitor(res.data.user);
 			});
 
 		axios
@@ -67,15 +68,14 @@ export const PostPage: React.FC = () => {
 				history.push('/');
 			});
 
-		const user = localStorage.getItem('currentUser');
-		let username;
-		if (!user) setAllowVote(false);
-		else if (user) username = JSON.parse(user).username;
+		if (visitor.username === '') setAllowVote(false);
 
-		axios.get(`/posts/checkVoted/${username}/${params.postID}`).then(res => {
-			if (res.data.message === 'already voted') setVoted(true);
-			else if (res.data.message === 'has not voted') setVoted(false);
-		});
+		axios
+			.get(`/posts/checkVoted/${visitor.username}/${params.postID}`)
+			.then(res => {
+				if (res.data.message === 'already voted') setVoted(true);
+				else if (res.data.message === 'has not voted') setVoted(false);
+			});
 
 		return () => {
 			cancelTokenSource.cancel('component unmounted, requests cancelled');
@@ -87,9 +87,8 @@ export const PostPage: React.FC = () => {
 		const postID = params.postID;
 		const postAuthor = post.author;
 
-		const user = localStorage.getItem('currentUser');
-		let voter = '';
-		if (user) voter = JSON.parse(user).username;
+		const visitor: User = store.getState().userState;
+		const voter = visitor.username;
 
 		axios
 			.patch('/posts/voteForPost', {
@@ -205,7 +204,7 @@ export const PostPage: React.FC = () => {
 			>
 				<div className='upper-info'>
 					<p className='post-title'>{post.title}</p>
-					{visitor === post.author && (
+					{visitor.username === post.author && (
 						<img
 							src='../../icons/otherIcons/delete-item.png'
 							alt=''
@@ -245,7 +244,7 @@ export const PostPage: React.FC = () => {
 					<div>
 						<p className='post-date'>Objavljeno {post.createdAt}</p>
 						<p>Kolegijalnost: {post.points}</p>
-						{allowVote && post.author !== visitor && (
+						{allowVote && post.author !== visitor.username && (
 							<div onClick={voteForPost}>
 								<p className={voted ? 'voted' : 'non-voted'}>KORISNO?</p>
 							</div>

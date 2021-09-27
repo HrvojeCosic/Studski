@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { store } from '..';
 import { Post, User } from '../reducers/user';
 
 interface SetUserAction {
@@ -10,10 +11,6 @@ export const setUser = (
 	points: number,
 	posts: Array<Post>
 ): SetUserAction => {
-	localStorage.setItem(
-		'currentUser',
-		JSON.stringify({ username, points, posts })
-	);
 	return {
 		type: 'SET_USER',
 		payload: { username, points, posts },
@@ -21,10 +18,9 @@ export const setUser = (
 };
 export const removeUser = () => {
 	Cookies.remove('connect.sid');
-	localStorage.removeItem('currentUser');
 	return {
 		type: 'REMOVE_USER',
-		payload: { user: '' },
+		payload: { username: '', posts: [], points: null },
 	};
 };
 export const updateUserPosts = (
@@ -33,8 +29,7 @@ export const updateUserPosts = (
 	updatedPost?: Post,
 	deletedPost?: Post
 ) => {
-	const currentUserStringified = localStorage.getItem('currentUser') || '{}';
-	const currentUser: User = JSON.parse(currentUserStringified);
+	const currentUser: User = store.getState().userState;
 
 	if (updateType === 'add post' && newPost) {
 		currentUser.posts.push(newPost);
@@ -46,8 +41,6 @@ export const updateUserPosts = (
 		);
 		currentUser.posts = newPostsArray;
 	}
-
-	localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
 	return {
 		type: 'UPDATE_POSTS',
