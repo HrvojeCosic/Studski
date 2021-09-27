@@ -8,7 +8,7 @@ import { User } from '../../reducers/user';
 
 export const LoggedUserInfo: React.FC = () => {
 	const user: User = store.getState().userState;
-	const { username, posts, points } = user;
+	const { username, posts, points, loaded } = user;
 	useSelector((state: State) => state);
 
 	let userPosts = [];
@@ -31,9 +31,24 @@ export const LoggedUserInfo: React.FC = () => {
 		}
 	} else userPosts = [];
 
+	if (user.loaded === false) {
+		for (let i = 0; i < 5; i++) {
+			userPosts.push(
+				<div key={i}>
+					<div className='user-post loading'>
+						<p>x</p>
+						<p>x</p>
+						<p>x</p>
+						<p>x</p>
+					</div>
+				</div>
+			);
+		}
+	}
+
 	return (
 		<div className='logged-user-info-container'>
-			{!username ? (
+			{!username && loaded ? (
 				<LatestPosts />
 			) : (
 				<div>
@@ -41,13 +56,15 @@ export const LoggedUserInfo: React.FC = () => {
 						<Link to={`/korisnik/${username}`}>
 							<h3>{username}</h3>
 						</Link>
-						<div className='user-numbers'>
-							<p>Kolegijalnost: {points}</p>
-							<p>Broj objava: {posts.length}</p>
-						</div>
+						{loaded && (
+							<div className='user-numbers'>
+								<p>Kolegijalnost: {points}</p>
+								<p>Broj objava: {posts.length}</p>
+							</div>
+						)}
 					</div>
 					<div className='logged-user-list'>
-						{userPosts.length > 0 && (
+						{userPosts.length > 0 && loaded && (
 							<h3 className='announce-text'>Zadnje objave:</h3>
 						)}
 						{userPosts}

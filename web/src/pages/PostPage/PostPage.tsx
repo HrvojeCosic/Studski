@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { updateUserPosts } from '../../actions/user';
+import { setUser, updateUserPosts } from '../../actions/user';
 import { NavBar } from '../../components/NavBar/NavBar';
 import { store } from '../..';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
@@ -52,7 +52,12 @@ export const PostPage: React.FC = () => {
 				withCredentials: true,
 			})
 			.then(res => {
+				const { username, points, posts } = res.data.user;
+				dispatch(setUser(username, points, posts, true));
 				setVisitor(res.data.user);
+			})
+			.catch(() => {
+				dispatch(setUser('', 0, [], true));
 			});
 
 		axios
@@ -66,7 +71,8 @@ export const PostPage: React.FC = () => {
 				alert(err.response.data.error);
 				setLoading(false);
 				history.push('/');
-			});
+			})
+			.then(() => {});
 
 		if (visitor.username === '') setAllowVote(false);
 

@@ -29,12 +29,12 @@ export const LoginPage: React.FC = () => {
 				const { username, points } = res.data.userInfo;
 				const { userPosts } = res.data;
 				setErrorMsg('');
-				dispatch(setUser(username, points, userPosts));
+				dispatch(setUser(username, points, userPosts, true));
 				setLoading(false);
 				history.push('/');
 			})
 			.catch(err => {
-				// setErrorMsg(err.response.data.error);
+				setErrorMsg(err.response.data.error);
 				setLoading(false);
 			});
 	};

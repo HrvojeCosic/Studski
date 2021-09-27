@@ -14,7 +14,7 @@ import { toggleBurger } from '../../actions/render';
 import { setUser } from '../../actions/user';
 
 export const HomePage: React.FC = () => {
-	const [showForm, setShowForm] = useState(false);
+	const [showForm, setShowForm] = useState<boolean>(false);
 	const [faculties, setFaculties] = useState<Array<Faculty>>([]);
 	const [componentToShow, setComponentToShow] = useState<string>('');
 	const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
@@ -43,10 +43,10 @@ export const HomePage: React.FC = () => {
 			})
 			.then(res => {
 				const { username, points, posts } = res.data.user;
-				dispatch(setUser(username, points, posts));
+				dispatch(setUser(username, points, posts, true));
 			})
-			.catch(err => {
-				console.log('Korisnik nije prijavljen');
+			.catch(() => {
+				dispatch(setUser('', 0, [], true));
 			});
 
 		//SET DUMMY FACULTY LIST WHILE LOADING

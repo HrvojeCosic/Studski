@@ -12,6 +12,7 @@ export interface User {
 	points: number;
 	posts: Array<Post>;
 	sid: string;
+	loaded: boolean;
 }
 
 interface UserAction {
@@ -22,6 +23,7 @@ interface UserAction {
 		username: string;
 		points: number;
 		posts: Post[];
+		loaded: boolean;
 	};
 }
 
@@ -30,13 +32,14 @@ export const initialUserState = {
 	points: 0,
 	posts: [],
 	sid: '',
+	loaded: false,
 };
 
 const userReducer = (state: User = initialUserState, action: UserAction) => {
 	switch (action.type) {
 		case 'SET_USER':
-			const { username, points, posts } = action.payload;
-			return { username, points, posts };
+			const { username, points, posts, loaded } = action.payload;
+			return { username, points, posts, loaded };
 		case 'REMOVE_USER':
 			return action.payload;
 		case 'UPDATE_POSTS':

@@ -9,18 +9,19 @@ interface SetUserAction {
 export const setUser = (
 	username: string,
 	points: number,
-	posts: Array<Post>
+	posts: Array<Post>,
+	loaded: boolean
 ): SetUserAction => {
 	return {
 		type: 'SET_USER',
-		payload: { username, points, posts },
+		payload: { username, points, posts, loaded },
 	};
 };
 export const removeUser = () => {
 	Cookies.remove('connect.sid');
 	return {
 		type: 'REMOVE_USER',
-		payload: { username: '', posts: [], points: null },
+		payload: { username: '', posts: [], points: null, loaded: true },
 	};
 };
 export const updateUserPosts = (

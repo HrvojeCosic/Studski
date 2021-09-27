@@ -16,6 +16,10 @@ html {
   text-align: center;
 }
 
+.posts-page-container .loading {
+  height: 71px;
+}
+
 .posts-page-container .post-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -28,7 +32,6 @@ html {
   background-color: var(--secondary-bg-color);
   border-radius: 3px;
   word-wrap: break-word;
-  height: 71px;
 }
 
 .posts-page-container .post-container:hover {
