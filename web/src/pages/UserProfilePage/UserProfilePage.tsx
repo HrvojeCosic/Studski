@@ -68,7 +68,6 @@ export const UserProfilePage: React.FC = () => {
 											<p>{post.faculty}</p>
 										</div>
 										<p className='post-title'>{post.title}</p>
-										<p>{post.fileName}</p>
 									</div>
 									<div className='post-side'>
 										<img src='../../icons/otherIcons/heart.png' alt='' />

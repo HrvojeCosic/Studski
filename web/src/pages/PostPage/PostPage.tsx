@@ -10,12 +10,18 @@ import { store } from '../..';
 import { Dropdown } from '../../components/Dropdown/Dropdown';
 import { useSelector } from 'react-redux';
 import { toggleBurger } from '../../actions/render';
-import { User } from '../../reducers/user';
+import { Post, User } from '../../reducers/user';
 import useAuth from '../../hooks/useAuth';
+import setImage from './setImage';
 import './PostPage.scss';
 
 interface PostParams {
 	postID: string;
+}
+
+interface PostVote {
+	voted: boolean;
+	allowVote: boolean;
 }
 
 interface PostFile {
@@ -26,13 +32,32 @@ interface PostFile {
 	updatedAt: string;
 }
 
+interface PostInfo extends Post {
+	files: Array<PostFile>;
+	loading: boolean;
+	deletePrompt: boolean;
+}
+
+const initialPostInfoState = {
+	author: '',
+	faculty: '',
+	title: '',
+	points: 0,
+	createdAt: new Date(),
+	id: 0,
+	files: [],
+	loading: true,
+	deletePrompt: false,
+};
+const initialVoteState = {
+	voted: false,
+	allowVote: false,
+};
+
 export const PostPage: React.FC = () => {
-	const [post, setPost] = useState<any>({}); //"any" BECAUSE OF createdAt PROPERTY IN Post TYPE‚
-	const [voted, setVoted] = useState<boolean>(false);
-	const [allowVote, setAllowVote] = useState<boolean>(true);
-	const [files, setFiles] = useState<Array<PostFile>>([]);
-	const [deletePrompt, setDeletePrompt] = useState<boolean>(false);
-	const [loading, setLoading] = useState<boolean>(false);
+	const [post, setPost] = useState<PostInfo>(initialPostInfoState);
+	const [vote, setVote] = useState<PostVote>(initialVoteState);
+
 	const params: PostParams = useParams();
 
 	const dispatch = useDispatch();
@@ -44,34 +69,32 @@ export const PostPage: React.FC = () => {
 	useAuth();
 
 	useEffect(() => {
-		const { username } = store.getState().userState;
+		const { username, loaded } = user;
 		if (username) {
-			setAllowVote(true);
 			axios.get(`/posts/checkVoted/${username}/${params.postID}`).then(res => {
-				if (res.data.message === 'already voted') setVoted(true);
-				else if (res.data.message === 'has not voted') setVoted(false);
+				if (res.data.message === 'already voted')
+					setVote({ voted: true, allowVote: true });
+				else if (res.data.message === 'has not voted')
+					setVote({ voted: false, allowVote: true });
 			});
-		} else {
-			setAllowVote(false);
+		} else if (!username && loaded) {
+			setVote({ voted: false, allowVote: false });
 		}
 	}, [params.postID, user]);
 
 	useEffect(() => {
 		if (burger) dispatch(toggleBurger());
 
-		setLoading(true);
 		const cancelTokenSource = axios.CancelToken.source();
 
 		axios
 			.get(`/posts/getPost/${params.postID}`)
 			.then(res => {
-				setPost(res.data.post);
-				setFiles(res.data.files);
-				setLoading(false);
+				const { post, files } = res.data;
+				setPost({ ...post, files, loading: false });
 			})
 			.catch(err => {
 				alert(err.response.data.error);
-				setLoading(false);
 				history.push('/');
 			});
 
@@ -83,10 +106,9 @@ export const PostPage: React.FC = () => {
 
 	const voteForPost = () => {
 		const postID = params.postID;
-		const postAuthor = post.author;
+		const postAuthor = post?.author;
 
 		const voter = user.username;
-
 		axios
 			.patch('/posts/voteForPost', {
 				postID,
@@ -95,12 +117,12 @@ export const PostPage: React.FC = () => {
 			})
 			.then(res => {
 				if (res.data.message === 'upvoted') {
-					post.points++;
-					setVoted(true);
+					if (post) post.points++;
+					setVote({ voted: true, allowVote: true });
 					dispatch(updateUserPosts('upvote post', undefined, post));
 				} else if (res.data.message === 'downvoted') {
-					post.points--;
-					setVoted(false);
+					if (post) post.points--;
+					setVote({ voted: false, allowVote: true });
 					dispatch(updateUserPosts('downvote post', undefined, post));
 				}
 			});
@@ -123,57 +145,9 @@ export const PostPage: React.FC = () => {
 		});
 	};
 
-	const filesJSX = files.map(file => {
+	const filesJSX = post?.files.map((file: PostFile) => {
 		const readableFileName = file.fileName.slice(0, -13); //Date.now() ADDS EXACTLY 13 CHARACTERS
-		let image;
-		const setImage = (src: string) => {
-			image = <img src={src} className='image' alt={'extension icon'} />;
-		};
-		switch (readableFileName.slice(-3)) {
-			case 'pdf':
-				setImage('../../icons/extensionIcons/pdf.png');
-				break;
-			case 'doc':
-			case 'docx':
-			case 'docm':
-			case 'rtf':
-			case 'dot':
-			case 'dotx':
-			case 'dotm':
-			case 'odt':
-				setImage('../../icons/extensionIcons/doc.png');
-				break;
-			case 'mht':
-			case 'mhtml':
-			case 'htm':
-			case 'html':
-				setImage('../../icons/extensionIcons/html.png');
-				break;
-			case 'css':
-				setImage('../../icons/extensionIcons/css.png');
-				break;
-			case 'jpg':
-			case 'jpeg':
-				setImage('../../icons/extensionIcons/jpg.png');
-				break;
-			case 'mp3':
-				setImage('../../icons/extensionIcons/mp3.png');
-				break;
-			case 'ppt':
-				setImage('../../icons/extensionIcons/ppt.png');
-				break;
-			case 'xls':
-				setImage('../../icons/extensionIcons/xls.png');
-				break;
-			case 'zip':
-				setImage('../../icons/extensionIcons/zip.png');
-				break;
-			case 'txt':
-				setImage('../../icons/extensionIcons/txt.png');
-				break;
-			default:
-				setImage('../../icons/extensionIcons/other.png');
-		}
+		const image = setImage(readableFileName);
 
 		return (
 			<div key={file.id}>
@@ -196,22 +170,23 @@ export const PostPage: React.FC = () => {
 			<NavBar />
 			<Dropdown show={burger ? true : false} />
 			<div
-				className={loading ? 'post loading' : 'post'}
+				className={post?.loading ? 'post loading' : 'post'}
 				style={burger ? { display: 'none' } : {}}
 			>
 				<div className='upper-info'>
-					<p className='post-title'>{post.title}</p>
-					{user.username === post.author && (
+					<p className={'post-title'}>{post?.title}</p>
+					{user.username === post?.author && !post?.loading && (
 						<img
 							src='../../icons/otherIcons/delete-item.png'
-							alt=''
+							alt='delete post button'
 							onClick={() => {
-								setDeletePrompt(true);
+								post.deletePrompt !== true &&
+									setPost({ ...post, deletePrompt: true });
 							}}
 						/>
 					)}
 				</div>
-				{deletePrompt && (
+				{post?.deletePrompt && (
 					<div>
 						<h3 style={{ fontWeight: 300 }}>
 							Jeste li sigurni da želite obrisati ovu objavu?
@@ -222,7 +197,7 @@ export const PostPage: React.FC = () => {
 						<div
 							className='delete-post-no'
 							onClick={() => {
-								setDeletePrompt(false);
+								setPost({ ...post, deletePrompt: false });
 							}}
 						>
 							NE
@@ -230,22 +205,26 @@ export const PostPage: React.FC = () => {
 					</div>
 				)}
 				<div className='middle-upper-info'>
-					<Link to={`/korisnik/${post.author}`} className='post-faculty'>
-						{post.author}
+					<Link to={`/korisnik/${post?.author}`} className='post-faculty'>
+						{post?.author}
 					</Link>
-					<Link to={`/fakultet/${post.faculty}`} className='post-faculty'>
-						{post.faculty}
+					<Link to={`/fakultet/${post?.faculty}`} className='post-faculty'>
+						{post?.faculty}
 					</Link>
 				</div>
-				{!loading && (
-					<div>
-						<p className='post-date'>Objavljeno {post.createdAt}</p>
-						<p>Kolegijalnost: {post.points}</p>
-						{allowVote && post.author !== user.username && (
-							<div onClick={voteForPost}>
-								<p className={voted ? 'voted' : 'non-voted'}>KORISNO?</p>
-							</div>
-						)}
+				{!post?.loading && (
+					<div className='middle-info'>
+						<div className='main'>
+							<p>Kolegijalnost: {post?.points}</p>
+							<p className='post-date'>Objavljeno {post?.createdAt}</p>
+						</div>
+						<div className='aside'>
+							{vote.allowVote && post?.author !== user.username && (
+								<div onClick={voteForPost}>
+									<p className={vote.voted ? 'voted' : 'non-voted'}>KORISNO?</p>
+								</div>
+							)}
+						</div>
 					</div>
 				)}
 				{filesJSX}

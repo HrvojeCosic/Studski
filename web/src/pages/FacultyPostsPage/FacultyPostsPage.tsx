@@ -63,7 +63,6 @@ export const FacultyPostsPage: React.FC = () => {
 											<p>{post.createdAt}</p>
 										</div>
 										<p className='post-title'>{post.title}</p>
-										<p>{post.fileName}</p>
 									</div>
 									<div className='post-side'>
 										<img src='../../icons/otherIcons/heart.png' alt='' />

@@ -78,6 +78,15 @@
   text-decoration: none;
 }
 
+.main-postpage-container .post .middle-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .main-postpage-container .post .downloadable {
   display: -webkit-box;
   display: -ms-flexbox;

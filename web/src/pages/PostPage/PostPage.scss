@@ -54,6 +54,10 @@
 				text-decoration: none;
 			}
 		}
+		.middle-info {
+			display: flex;
+			justify-content: space-between;
+		}
 		.downloadable {
 			display: flex;
 			align-items: center;
