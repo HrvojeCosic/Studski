@@ -29,8 +29,8 @@ interface PostFile {
 export const PostPage: React.FC = () => {
 	const [post, setPost] = useState<any>({}); //"any" BECAUSE OF createdAt PROPERTY IN Post TYPE‚
 	const [voted, setVoted] = useState<boolean>(false);
-	const [files, setFiles] = useState<Array<PostFile>>([]);
 	const [allowVote, setAllowVote] = useState<boolean>(true);
+	const [files, setFiles] = useState<Array<PostFile>>([]);
 	const [deletePrompt, setDeletePrompt] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 	const params: PostParams = useParams();
@@ -38,6 +38,7 @@ export const PostPage: React.FC = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { burger } = store.getState().renderState;
+	const user: User = store.getState().userState;
 	useSelector(state => state);
 
 	useAuth();
@@ -45,12 +46,15 @@ export const PostPage: React.FC = () => {
 	useEffect(() => {
 		const { username } = store.getState().userState;
 		if (username) {
+			setAllowVote(true);
 			axios.get(`/posts/checkVoted/${username}/${params.postID}`).then(res => {
 				if (res.data.message === 'already voted') setVoted(true);
 				else if (res.data.message === 'has not voted') setVoted(false);
 			});
+		} else {
+			setAllowVote(false);
 		}
-	}, [params.postID]);
+	}, [params.postID, user]);
 
 	useEffect(() => {
 		if (burger) dispatch(toggleBurger());
@@ -187,8 +191,6 @@ export const PostPage: React.FC = () => {
 		);
 	});
 
-	const user: User = store.getState().userState;
-	if (!user.username && user.loaded) setAllowVote(false);
 	return (
 		<div className='main-postpage-container'>
 			<NavBar />
